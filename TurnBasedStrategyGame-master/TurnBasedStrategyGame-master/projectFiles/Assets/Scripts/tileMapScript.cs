@@ -81,6 +81,10 @@ public class tileMapScript : MonoBehaviour
     public Material greenUIMat;
     public Material redUIMat;
     public Material blueUIMat;
+
+//FOR INSIDE CODE PURPOSE ONLY
+    private static List<GameObject> unitsToMove = new List<GameObject>();
+    private static int unitsSelecter = 0;
     private void Start()
     {
         //Get the battlemanager running
@@ -95,19 +99,21 @@ public class tileMapScript : MonoBehaviour
         //Check if there are any pre-existing units on the board
         setIfTileIsOccupied();
 
-
+        for (int i = 0; i < GMS.team1.transform.childCount; i++){
+            unitsToMove.Add(GMS.team1.transform.GetChild(i).gameObject);
+        }
     }
 
     private void Update()
     {
 
         //If input is left mouse down then select the unit
-        if (Input.GetMouseButtonDown(0))
-        {
+        
             if (selectedUnit == null)
             {
                 //mouseClickToSelectUnit();
-                mouseClickToSelectUnitV2();
+                //mouseClickToSelectUnitV2();
+                RandomSelectUnit();
 
             }
             //After a unit has been selected then if we get a mouse click, we need to check if the unit has entered the selection state (1) 'Selected'
@@ -139,27 +145,27 @@ public class tileMapScript : MonoBehaviour
                 finalizeOption();
             }
             
-        }
+        
         //Unselect unit with the right click
-        if (Input.GetMouseButtonDown(1))
-        {
-            if (selectedUnit != null)
-            {
-                if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0 && selectedUnit.GetComponent<UnitScript>().combatQueue.Count==0)
-                {
-                    if (selectedUnit.GetComponent<UnitScript>().unitMoveState != selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(3))
-                    {
-                        //unselectedSound.Play();
-                        selectedUnit.GetComponent<UnitScript>().setIdleAnimation();
-                        deselectUnit();
-                    }
-                }
-                else if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 1)
-                {
-                    selectedUnit.GetComponent<UnitScript>().visualMovementSpeed = 0.5f;
-                }
-            }
-        }
+        // if (Input.GetMouseButtonDown(1))
+        // {
+        //     if (selectedUnit != null)
+        //     {
+        //         if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0 && selectedUnit.GetComponent<UnitScript>().combatQueue.Count==0)
+        //         {
+        //             if (selectedUnit.GetComponent<UnitScript>().unitMoveState != selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(3))
+        //             {
+        //                 //unselectedSound.Play();
+        //                 selectedUnit.GetComponent<UnitScript>().setIdleAnimation();
+        //                 deselectUnit();
+        //             }
+        //         }
+        //         else if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 1)
+        //         {
+        //             selectedUnit.GetComponent<UnitScript>().visualMovementSpeed = 0.5f;
+        //         }
+        //     }
+        // }
        
         
     }
@@ -611,6 +617,34 @@ public class tileMapScript : MonoBehaviour
                    
                 }
             }
+        }
+        
+}
+
+    public void RandomSelectUnit()
+    {
+        
+        if (unitSelected == false && GMS.tileBeingDisplayed!=null)
+        {
+                GameObject tempSelectedUnit = unitsToMove[0];
+                Debug.Log(tempSelectedUnit.name);
+                if (tempSelectedUnit.GetComponent<UnitScript>().unitMoveState == null) Debug.Log("ini");
+                tempSelectedUnit.GetComponent<UnitScript>().getMovementStateEnum(0);
+                if (tempSelectedUnit.GetComponent<UnitScript>().unitMoveState == tempSelectedUnit.GetComponent<UnitScript>().getMovementStateEnum(0)
+                               && tempSelectedUnit.GetComponent<UnitScript>().teamNum == GMS.currentTeam
+                               )
+                {
+                    disableHighlightUnitRange();
+                    //selectedSound.Play();
+                    selectedUnit = tempSelectedUnit;
+                    selectedUnit.GetComponent<UnitScript>().map = this;
+                    selectedUnit.GetComponent<UnitScript>().setMovementState(1);
+                    selectedUnit.GetComponent<UnitScript>().setSelectedAnimation();
+                    unitSelected = true;
+                    highlightUnitRange();
+                   
+                }
+            
         }
         
 }

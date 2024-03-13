@@ -4304,7 +4304,7 @@ MonoBehaviour:
   UIunitCanvas: {fileID: 1507325962}
   playerPhaseBlock: {fileID: 1438215311}
   numberOfTeams: 2
-  currentTeam: 0
+  currentTeam: 2
   unitsOnBoard: {fileID: 1045089602}
   team1: {fileID: 533756626}
   team2: {fileID: 1943374290}
