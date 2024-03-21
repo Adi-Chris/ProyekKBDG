@@ -749,8 +749,6 @@ public class tileMapScript : MonoBehaviour
     //Desc: highlights the units range options (this is the portion shown in the video)
     public void highlightUnitRange()
     {
-       
-       
         HashSet<Node> finalMovementHighlight = new HashSet<Node>();
         HashSet<Node> totalAttackableTiles = new HashSet<Node>();
         HashSet<Node> finalEnemyUnitsInMovementRange = new HashSet<Node>();
@@ -760,7 +758,8 @@ public class tileMapScript : MonoBehaviour
 
 
         Node unitInitialNode = graph[selectedUnit.GetComponent<UnitScript>().x, selectedUnit.GetComponent<UnitScript>().y];
-        finalMovementHighlight = getUnitMovementOptions();
+        string unitName = selectedUnit.GetComponent<UnitScript>().unitName;
+        finalMovementHighlight = string.Equals(unitName, "Skeleton Soldier") ? getSoldierMovementOptions() : string.Equals(unitName, "Giga Mungus") ? getMungusMovementOptions() : string.Equals(unitName, "Skeleton Archer Bald") ? getBaldMovementOptions() : getArcherMovementOptions();
         totalAttackableTiles = getUnitTotalAttackableTiles(finalMovementHighlight, attRange, unitInitialNode);
         //Debug.Log("There are this many available tiles for the unit: "+finalMovementHighlight.Count);
 
@@ -811,9 +810,64 @@ public class tileMapScript : MonoBehaviour
         }
     }
 
-    //In:  
-    //Out: HashSet<Node> of the tiles that can be reached by unit
-    //Desc: returns the hashSet of nodes that the unit can reach from its position
+
+    public HashSet<Node> getMungusMovementOptions()
+    {
+        float[,] cost = new float[mapSizeX, mapSizeY];
+        HashSet<Node> UIHighlight = new HashSet<Node>();
+        HashSet<Node> tempUIHighlight = new HashSet<Node>();
+        HashSet<Node> finalMovementHighlight = new HashSet<Node>();      
+        int moveSpeed = selectedUnit.GetComponent<UnitScript>().moveSpeed;
+        Node unitInitialNode = graph[selectedUnit.GetComponent<UnitScript>().x, selectedUnit.GetComponent<UnitScript>().y];
+
+        ///Set-up the initial costs for the neighbouring nodes
+        finalMovementHighlight.Add(unitInitialNode);
+        foreach (Node n in unitInitialNode.neighbours)
+        {
+            cost[n.x, n.y] = costToEnterTile(n.x, n.y);
+            //Debug.Log(cost[n.x, n.y]);
+            if (moveSpeed - cost[n.x, n.y] >= 0)
+            {
+                UIHighlight.Add(n);
+            }
+        }
+
+        finalMovementHighlight.UnionWith(UIHighlight);
+
+        while (UIHighlight.Count != 0)
+        {
+            foreach (Node n in UIHighlight)
+            {
+                foreach (Node neighbour in n.neighbours)
+                {
+                    if (Mathf.Abs(unitInitialNode.x - neighbour.x) < 2 && Mathf.Abs(unitInitialNode.y - neighbour.y) < 2) {
+                        if (!finalMovementHighlight.Contains(neighbour))
+                        {
+                            cost[neighbour.x, neighbour.y] = costToEnterTile(neighbour.x, neighbour.y) + cost[n.x, n.y];
+                            //Debug.Log(cost[neighbour.x, neighbour.y]);
+                            if (moveSpeed - cost[neighbour.x, neighbour.y] >= 0)
+                            {
+                                //Debug.Log(cost[neighbour.x, neighbour.y]);
+                                tempUIHighlight.Add(neighbour);
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            UIHighlight = tempUIHighlight;
+            finalMovementHighlight.UnionWith(UIHighlight);
+            tempUIHighlight = new HashSet<Node>();
+           
+        }
+
+        Debug.Log("The total amount of movable spaces for this unit is: " + finalMovementHighlight.Count);
+        Debug.Log("We have used the function to calculate it this time");
+        return finalMovementHighlight;
+    }
+
+
     public HashSet<Node> getUnitMovementOptions()
     {
         float[,] cost = new float[mapSizeX, mapSizeY];
@@ -862,11 +916,171 @@ public class tileMapScript : MonoBehaviour
             tempUIHighlight = new HashSet<Node>();
            
         }
+
         Debug.Log("The total amount of movable spaces for this unit is: " + finalMovementHighlight.Count);
         Debug.Log("We have used the function to calculate it this time");
         return finalMovementHighlight;
     }
 
+    public HashSet<Node> getBaldMovementOptions()
+    {
+        float[,] cost = new float[mapSizeX, mapSizeY];
+        HashSet<Node> seenUIHighlight = new HashSet<Node>();
+        HashSet<Node> tempUIHighlight = new HashSet<Node>();
+        HashSet<Node> finalMovementHighlight = new HashSet<Node>();      
+        int moveSpeed = selectedUnit.GetComponent<UnitScript>().moveSpeed;
+        Node unitInitialNode = graph[selectedUnit.GetComponent<UnitScript>().x, selectedUnit.GetComponent<UnitScript>().y];
+
+        ///Set-up the initial costs for the neighbouring nodes
+        finalMovementHighlight.Add(unitInitialNode);
+        
+        for (int i = 0; i < moveSpeed; i++)
+        {
+            foreach (Node t in finalMovementHighlight)
+            {
+                foreach (Node tn in t.neighbours)
+                {
+                    tempUIHighlight.Add(tn);
+                }
+            }
+            finalMovementHighlight = tempUIHighlight;
+            tempUIHighlight = new HashSet<Node>();
+            if (i < moveSpeed - 1)
+            {
+                seenUIHighlight.UnionWith(finalMovementHighlight);
+            }
+        }
+
+        finalMovementHighlight.ExceptWith(seenUIHighlight);
+        //finalMovementHighlight.Remove(unitInitialNode);
+
+        Debug.Log("The total amount of movable spaces for this unit is: " + finalMovementHighlight.Count);
+        Debug.Log("We have used the function to calculate it this time");
+        return finalMovementHighlight;
+    }
+
+    //In:  
+    //Out: HashSet<Node> of the tiles that can be reached by unit
+    //Desc: returns the hashSet of nodes that the unit can reach from its position
+    public HashSet<Node> getSoldierMovementOptions()
+    {
+        float[,] cost = new float[mapSizeX, mapSizeY];
+        HashSet<Node> UIHighlight = new HashSet<Node>();
+        HashSet<Node> tempUIHighlight = new HashSet<Node>();
+        HashSet<Node> finalMovementHighlight = new HashSet<Node>();      
+        int moveSpeed = selectedUnit.GetComponent<UnitScript>().moveSpeed;
+        Node unitInitialNode = graph[selectedUnit.GetComponent<UnitScript>().x, selectedUnit.GetComponent<UnitScript>().y];
+
+        finalMovementHighlight.Add(unitInitialNode);
+        foreach (Node n in unitInitialNode.neighbours)
+        {
+            if ((n.x == unitInitialNode.x+1 && n.y == unitInitialNode.y) ||
+                (n.x == unitInitialNode.x-1 && n.y == unitInitialNode.y) ||
+                (n.x == unitInitialNode.x && n.y == unitInitialNode.y+1) ||
+                (n.x == unitInitialNode.x && n.y == unitInitialNode.y-1)){
+                    cost[n.x, n.y] = costToEnterTile(n.x, n.y);
+                    //Debug.Log(cost[n.x, n.y]);
+                    if (moveSpeed - cost[n.x, n.y] >= 0)
+                    {
+                        UIHighlight.Add(n);
+                    }
+                }
+        }
+
+        finalMovementHighlight.UnionWith(UIHighlight);
+
+        while (UIHighlight.Count != 0)
+        {
+            foreach (Node n in UIHighlight)
+            {
+                foreach (Node neighbour in n.neighbours)
+                {
+                    if (neighbour.x == unitInitialNode.x || neighbour.y == unitInitialNode.y){
+                        if (!finalMovementHighlight.Contains(neighbour))
+                        {
+                            cost[neighbour.x, neighbour.y] = costToEnterTile(neighbour.x, neighbour.y) + cost[n.x, n.y];
+                            //Debug.Log(cost[neighbour.x, neighbour.y]);
+                            if (moveSpeed - cost[neighbour.x, neighbour.y] >= 0)
+                            {
+                                //Debug.Log(cost[neighbour.x, neighbour.y]);
+                                tempUIHighlight.Add(neighbour);
+                            }
+                        }
+                    }
+                }
+            }
+
+            UIHighlight = tempUIHighlight;
+            finalMovementHighlight.UnionWith(UIHighlight);
+            tempUIHighlight = new HashSet<Node>();
+           
+        }
+        Debug.Log("The total amount of movable spaces for this unit is: " + finalMovementHighlight.Count);
+        Debug.Log("We have used the function to calculate it this time");
+        return finalMovementHighlight;
+    }
+
+
+    public HashSet<Node> getArcherMovementOptions()
+    {
+        float[,] cost = new float[mapSizeX, mapSizeY];
+        HashSet<Node> UIHighlight = new HashSet<Node>();
+        HashSet<Node> tempUIHighlight = new HashSet<Node>();
+        HashSet<Node> finalMovementHighlight = new HashSet<Node>();      
+        int moveSpeed = selectedUnit.GetComponent<UnitScript>().moveSpeed;
+        Node unitInitialNode = graph[selectedUnit.GetComponent<UnitScript>().x, selectedUnit.GetComponent<UnitScript>().y];
+
+        ///Set-up the initial costs for the neighbouring nodes
+        finalMovementHighlight.Add(unitInitialNode);
+        foreach (Node n in unitInitialNode.neighbours)
+        {
+            cost[n.x, n.y] = costToEnterTile(n.x, n.y);
+            //Debug.Log(cost[n.x, n.y]);
+            if (moveSpeed - cost[n.x, n.y] >= 0)
+            {
+                UIHighlight.Add(n);
+            }
+        }
+
+        finalMovementHighlight.UnionWith(UIHighlight);
+
+        while (UIHighlight.Count != 0)
+        {
+            foreach (Node n in UIHighlight)
+            {
+                foreach (Node neighbour in n.neighbours)
+                {
+                    if (!finalMovementHighlight.Contains(neighbour))
+                    {
+                        cost[neighbour.x, neighbour.y] = costToEnterTile(neighbour.x, neighbour.y) + cost[n.x, n.y];
+                        //Debug.Log(cost[neighbour.x, neighbour.y]);
+                        if (moveSpeed - cost[neighbour.x, neighbour.y] >= 0)
+                        {
+                            //Debug.Log(cost[neighbour.x, neighbour.y]);
+                            tempUIHighlight.Add(neighbour);
+                        }
+                    }
+                }
+
+            }
+
+            UIHighlight = tempUIHighlight;
+            finalMovementHighlight.UnionWith(UIHighlight);
+            tempUIHighlight = new HashSet<Node>();
+           
+        }
+
+        HashSet<Node> resultMove = new HashSet<Node>();
+        foreach (Node e in finalMovementHighlight) {
+            if ((Mathf.Abs(unitInitialNode.x - e.x) == Mathf.Abs(unitInitialNode.y - e.y))){
+                resultMove.Add(e);
+            }
+        }
+
+        Debug.Log("The total amount of movable spaces for this unit is: " + finalMovementHighlight.Count);
+        Debug.Log("We have used the function to calculate it this time");
+        return resultMove;
+    }
     //In:  finalMovement highlight and totalAttackabletiles
     //Out: a hashSet of nodes that are the combination of the two inputs
     //Desc: returns the unioned hashSet
