@@ -5,7 +5,7 @@ using TMPro;
 
 public class gameManagerScript : MonoBehaviour
 {
-   
+
     //A lot of the UI does not need to be public, they just are currently if you need to make quick changes in the inspector
     //Changing them to private will not break anything, but you will need to re-enable them to show in the inspector
     [Header("UI GameObjects")]
@@ -23,14 +23,14 @@ public class gameManagerScript : MonoBehaviour
     public GameObject playerPhaseBlock;
     private Animator playerPhaseAnim;
     private TMP_Text playerPhaseText;
-   
+
     //Raycast for the update for unitHover info
     private Ray ray;
     private RaycastHit hit;
-   
+
     /// The number of teams is hard coded as 2, if there are changes in the future a few of the
     /// functions in this class need to be altered as well to update this change.
-   
+
     public int numberOfTeams = 2;
     public int currentTeam;
     public GameObject unitsOnBoard;
@@ -68,7 +68,12 @@ public class gameManagerScript : MonoBehaviour
     //This game object is to record the location of the 2 count path when it is reset to 0 this is used to remember what tile to disable
     public GameObject quadThatIsOneAwayFromUnit;
 
-   
+    // AI Stuff ~Adi
+    public bool AITurnStarted;
+    public int amountOfEnemyAI; // TODO: Ini perlu diupdate saat unit musuh terkalahkan
+    public int amountOfEnemyAIDoneMove;
+
+
     public void Start()
     {
         currentTeam = 0;
@@ -78,15 +83,39 @@ public class gameManagerScript : MonoBehaviour
         playerPhaseAnim = playerPhaseBlock.GetComponent<Animator>();
         playerPhaseText = playerPhaseBlock.GetComponentInChildren<TextMeshProUGUI>();
         unitPathToCursor = new List<Node>();
-        unitPathExists = false;       
-      
+        unitPathExists = false;
+
         TMS = GetComponent<tileMapScript>();
 
-        
+        // Set Amount of Enemy AI
+        amountOfEnemyAI = team2.transform.childCount;
+
+
     }
     //2019/10/17 there is a small blink between disable and re-enable for path, its a bit jarring, try to fix it later
     public void Update()
     {
+        // Custom ~Adi
+        // Untuk AInya
+        if (currentTeam == 1)
+        {
+            if (!AITurnStarted)
+            {
+                Debug.Log("Satuu");
+                AITurnStarted = true;
+                TMS.AITurn();
+            }
+
+            // if (TMS.selectedUnit.GetComponent<UnitScript>().unitMoveState == TMS.selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(2))
+            // {
+            //     TMS.finalizeOption();
+            //     Debug.Log("Finalized satuu");
+            // }
+            return;
+        }
+
+
+        // Untuk playernya
         //Always trying to see where the mouse is pointing
         ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit))
@@ -101,23 +130,23 @@ public class gameManagerScript : MonoBehaviour
                 if (TMS.selectedUnitMoveRange.Contains(TMS.graph[cursorX, cursorY]))
                 {
                     //Generate new path to cursor try to limit this to once per new cursor location or else its too many calculations
-                    
 
-                    
+
+
                     if (cursorX != TMS.selectedUnit.GetComponent<UnitScript>().x || cursorY != TMS.selectedUnit.GetComponent<UnitScript>().y)
                     {
-                        if (!unitPathExists&&TMS.selectedUnit.GetComponent<UnitScript>().movementQueue.Count==0)
+                        if (!unitPathExists && TMS.selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0)
                         {
-                           
+
                             unitPathToCursor = generateCursorRouteTo(cursorX, cursorY);
-                           
+
                             routeToX = cursorX;
                             routeToY = cursorY;
 
                             if (unitPathToCursor.Count != 0)
                             {
-                                                                                              
-                                for(int i = 0; i < unitPathToCursor.Count; i++)
+
+                                for (int i = 0; i < unitPathToCursor.Count; i++)
                                 {
                                     int nodeX = unitPathToCursor[i].x;
                                     int nodeY = unitPathToCursor[i].y;
@@ -127,29 +156,29 @@ public class gameManagerScript : MonoBehaviour
                                         GameObject quadToUpdate = TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY];
                                         quadToUpdate.GetComponent<Renderer>().material = UICursor;
                                     }
-                                    else if (i!=0 && (i+1)!=unitPathToCursor.Count)
+                                    else if (i != 0 && (i + 1) != unitPathToCursor.Count)
                                     {
                                         //This is used to set the indicator for tiles excluding the first/last tile
-                                        setCorrectRouteWithInputAndOutput(nodeX, nodeY,i);
+                                        setCorrectRouteWithInputAndOutput(nodeX, nodeY, i);
                                     }
-                                    else if (i == unitPathToCursor.Count-1)
+                                    else if (i == unitPathToCursor.Count - 1)
                                     {
                                         //This is used to set the indicator for the final tile;
                                         setCorrectRouteFinalTile(nodeX, nodeY, i);
                                     }
-                                    
+
                                     TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY].GetComponent<Renderer>().enabled = true;
-                                   
+
                                 }
-                                    
+
                             }
                             unitPathExists = true;
-                          
+
                         }
-                        
+
                         else if (routeToX != cursorX || routeToY != cursorY)
                         {
-                           
+
                             if (unitPathToCursor.Count != 0)
                             {
                                 for (int i = 0; i < unitPathToCursor.Count; i++)
@@ -160,29 +189,29 @@ public class gameManagerScript : MonoBehaviour
                                     TMS.quadOnMapForUnitMovementDisplay[nodeX, nodeY].GetComponent<Renderer>().enabled = false;
                                 }
                             }
-                            
+
                             unitPathExists = false;
                         }
                     }
-                    else if(cursorX == TMS.selectedUnit.GetComponent<UnitScript>().x && cursorY == TMS.selectedUnit.GetComponent<UnitScript>().y)
+                    else if (cursorX == TMS.selectedUnit.GetComponent<UnitScript>().x && cursorY == TMS.selectedUnit.GetComponent<UnitScript>().y)
                     {
-                        
+
                         TMS.disableUnitUIRoute();
                         unitPathExists = false;
                     }
-                    
-                }               
+
+                }
             }
-        
+
         }
-        
+
     }
     //In: 
     //Out: void
     //Desc: sets the current player Text in the UI
     public void setCurrentTeamUI()
     {
-        currentTeamUI.SetText("Current Player is : Player " + (currentTeam+1).ToString());
+        currentTeamUI.SetText("Current Player is : Player " + (currentTeam + 1).ToString());
     }
 
     //In: 
@@ -196,7 +225,7 @@ public class gameManagerScript : MonoBehaviour
         {
             currentTeam = 0;
         }
-        
+
     }
 
     //In: int i, the index for each team
@@ -232,7 +261,7 @@ public class gameManagerScript : MonoBehaviour
     //Desc: ends the turn and plays the animation
     public void endTurn()
     {
-        
+
         if (TMS.selectedUnit == null)
         {
             switchCurrentPlayer();
@@ -240,6 +269,7 @@ public class gameManagerScript : MonoBehaviour
             {
                 playerPhaseAnim.SetTrigger("slideLeftTrigger");
                 playerPhaseText.SetText("Player 2 Phase");
+                AITurnStarted = false;
             }
             else if (currentTeam == 0)
             {
@@ -258,7 +288,7 @@ public class gameManagerScript : MonoBehaviour
     {
         //  Debug.Log(team1.transform.childCount);
         //  Debug.Log(team2.transform.childCount);
-        StartCoroutine(checkIfUnitsRemainCoroutine(unit,enemy));
+        StartCoroutine(checkIfUnitsRemainCoroutine(unit, enemy));
     }
 
 
@@ -267,7 +297,7 @@ public class gameManagerScript : MonoBehaviour
     //Desc: updates the cursor for the UI
     public void cursorUIUpdate()
     {
-       //If we are mousing over a tile, highlight it
+        //If we are mousing over a tile, highlight it
         if (hit.transform.CompareTag("Tile"))
         {
             if (tileBeingDisplayed == null)
@@ -278,7 +308,7 @@ public class gameManagerScript : MonoBehaviour
                 cursorY = selectedYTile;
                 TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
                 tileBeingDisplayed = hit.transform.gameObject;
-                
+
             }
             else if (tileBeingDisplayed != hit.transform.gameObject)
             {
@@ -292,7 +322,7 @@ public class gameManagerScript : MonoBehaviour
                 cursorY = selectedYTile;
                 TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
                 tileBeingDisplayed = hit.transform.gameObject;
-                
+
             }
 
         }
@@ -323,9 +353,9 @@ public class gameManagerScript : MonoBehaviour
                     cursorY = selectedYTile;
                     TMS.quadOnMapCursor[selectedXTile, selectedYTile].GetComponent<MeshRenderer>().enabled = true;
                     tileBeingDisplayed = hit.transform.parent.GetComponent<UnitScript>().tileBeingOccupied;
-                   
+
                 }
-               
+
             }
         }
         //We aren't pointing at anything no cursor.
@@ -356,7 +386,7 @@ public class gameManagerScript : MonoBehaviour
                 UIunitMoveSpeed.SetText(highlightedUnitScript.moveSpeed.ToString());
                 UIunitName.SetText(highlightedUnitScript.unitName);
                 UIunitSprite.sprite = highlightedUnitScript.unitSprite;
-                
+
             }
             else if (hit.transform.CompareTag("Tile"))
             {
@@ -406,10 +436,10 @@ public class gameManagerScript : MonoBehaviour
     //Desc: When the current team is active, the healthbars are blue, and the other team is red
     public void teamHealthbarColorUpdate()
     {
-        for(int i = 0; i < numberOfTeams; i++)
+        for (int i = 0; i < numberOfTeams; i++)
         {
             GameObject team = returnTeam(i);
-            if(team == returnTeam(currentTeam))
+            if (team == returnTeam(currentTeam))
             {
                 foreach (Transform unit in team.transform)
                 {
@@ -424,8 +454,8 @@ public class gameManagerScript : MonoBehaviour
                 }
             }
         }
-       
-        
+
+
     }
     //In: x and y location to go to
     //Out: list of nodes to traverse
@@ -437,7 +467,7 @@ public class gameManagerScript : MonoBehaviour
         {
             Debug.Log("clicked the same tile that the unit is standing on");
             currentPathForUnitRoute = new List<Node>();
-            
+
 
             return currentPathForUnitRoute;
         }
@@ -538,13 +568,13 @@ public class gameManagerScript : MonoBehaviour
     {
         quadToReset.GetComponent<Renderer>().material = UICursor;
         quadToReset.transform.eulerAngles = new Vector3(90, 0, 0);
-        
+
     }
 
     //In: Vector2 cursorPos the location we change, Vector3 the rotation that we will rotate the quad
     //Out: void
     //Desc: the quad is rotated approriately
-    public void UIunitRouteArrowDisplay(Vector2 cursorPos,Vector3 arrowRotationVector)
+    public void UIunitRouteArrowDisplay(Vector2 cursorPos, Vector3 arrowRotationVector)
     {
         GameObject quadToManipulate = TMS.quadOnMapForUnitMovementDisplay[(int)cursorPos.x, (int)cursorPos.y];
         quadToManipulate.transform.eulerAngles = arrowRotationVector;
@@ -558,9 +588,9 @@ public class gameManagerScript : MonoBehaviour
     public Vector2 directionBetween(Vector2 currentVector, Vector2 nextVector)
     {
 
-        
+
         Vector2 vectorDirection = (nextVector - currentVector).normalized;
-       
+
         if (vectorDirection == Vector2.right)
         {
             return Vector2.right;
@@ -587,7 +617,7 @@ public class gameManagerScript : MonoBehaviour
     //In: two nodes that are being checked and int i is the position in the path ie i=0 is the first thing in the list
     //Out: void
     //Desc: orients the quads to display proper information
-    public void setCorrectRouteWithInputAndOutput(int nodeX,int nodeY,int i)
+    public void setCorrectRouteWithInputAndOutput(int nodeX, int nodeY, int i)
     {
         Vector2 previousTile = new Vector2(unitPathToCursor[i - 1].x + 1, unitPathToCursor[i - 1].y + 1);
         Vector2 currentTile = new Vector2(unitPathToCursor[i].x + 1, unitPathToCursor[i].y + 1);
@@ -704,7 +734,7 @@ public class gameManagerScript : MonoBehaviour
     //In: two nodes that are being checked and int i is the position in the path ie i=0 is the first thing in the list
     //Out: void
     //Desc: orients the quad for the final node in list to display proper information
-    public void setCorrectRouteFinalTile(int nodeX,int nodeY,int i)
+    public void setCorrectRouteFinalTile(int nodeX, int nodeY, int i)
     {
         Vector2 previousTile = new Vector2(unitPathToCursor[i - 1].x + 1, unitPathToCursor[i - 1].y + 1);
         Vector2 currentTile = new Vector2(unitPathToCursor[i].x + 1, unitPathToCursor[i].y + 1);
@@ -754,7 +784,7 @@ public class gameManagerScript : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        
+
         while (enemy.GetComponent<UnitScript>().combatQueue.Count != 0)
         {
             yield return new WaitForEndOfFrame();
@@ -763,15 +793,15 @@ public class gameManagerScript : MonoBehaviour
         {
             displayWinnerUI.enabled = true;
             displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 2 has won!");
-           
-            
+
+
         }
         else if (team2.transform.childCount == 0)
         {
             displayWinnerUI.enabled = true;
             displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 1 has won!");
 
-          
+
         }
 
 
@@ -781,7 +811,7 @@ public class gameManagerScript : MonoBehaviour
     //In: 
     //Out: void
     //Desc: set the player winning
-    
+
     public void win()
     {
         displayWinnerUI.enabled = true;
@@ -789,6 +819,9 @@ public class gameManagerScript : MonoBehaviour
 
     }
 
-  
-   
+
+
+
+
+
 }

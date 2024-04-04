@@ -100,7 +100,7 @@ public class UnitScript : MonoBehaviour
         currentHealthPoints = maxHealthPoints;
         hitPointsText.SetText(currentHealthPoints.ToString());
         
-     
+        map = GameObject.Find("gameManager").GetComponent<tileMapScript>();
     }
 
     public void LateUpdate()
@@ -261,7 +261,6 @@ public class UnitScript : MonoBehaviour
         path.RemoveAt(0);
         while (path.Count != 0)
         {
-            
             Vector3 endPos = map.tileCoordToWorldCoord(path[0].x, path[0].y);
             objectToMove.transform.position = Vector3.Lerp(transform.position, endPos, visualMovementSpeed);
             if ((transform.position - endPos).sqrMagnitude < 0.001)
