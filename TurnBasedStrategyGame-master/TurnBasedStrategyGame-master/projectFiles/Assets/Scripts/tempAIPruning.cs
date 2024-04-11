@@ -2,6 +2,7 @@
 // Write, Edit and Run your C# code using C# Online Compiler
 
 using System;
+using System.Collections.Generic;
 
 public class HelloWorld
 {
@@ -33,7 +34,7 @@ public class HelloWorld
     public bool isAttResSame(int[][][][] a, int[][][][] b){
         for (int i=0;i<a.Length;i++){
                 for (int j=0;j<a[i].Length;j++){
-                    if (a[i][j][1].Length!=0{
+                    if (a[i][j][1].Length!=0){
                         int x=a[i][j][1][0];
                         int y=a[i][j][1][1];
                         
@@ -51,7 +52,7 @@ public class HelloWorld
             
         for (int i=0;i<b.Length;i++){
                 for (int j=0;j<b[i].Length;j++){
-                    if (b[i][j][1].Length!=0{
+                    if (b[i][j][1].Length!=0){
                         return false;
                     }
                 }

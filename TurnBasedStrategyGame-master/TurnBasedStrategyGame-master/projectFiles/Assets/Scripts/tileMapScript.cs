@@ -138,6 +138,7 @@ public class tileMapScript : MonoBehaviour
             else if (selectedUnit.GetComponent<UnitScript>().unitMoveState == selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(2))
             {
                 finalizeOption();
+                GMS.endTurn();
             }
 
         }
@@ -1523,6 +1524,7 @@ public class tileMapScript : MonoBehaviour
 
         // Finalize Option
         finalizeOption(x, y);
+        GMS.endTurn();
     }
 
     // Gerakan musuh
@@ -1542,6 +1544,7 @@ public class tileMapScript : MonoBehaviour
         GMS.amountOfEnemyAIDoneMove = 0;
         // for (int i = 0; i < GMS.team2.transform.childCount; i++)
         // {
+            int idx_r = Random.Range(0, GMS.team2.transform.childCount); //punya david buat random milih unit ai
             selectedUnit = GMS.team2.transform.GetChild(5).gameObject; // TODO: DISINI HARUS MILIH GetChild() keberapa. Kalau (5) ini yang musuh index ke 5
 
             int targetTileX = 0;
