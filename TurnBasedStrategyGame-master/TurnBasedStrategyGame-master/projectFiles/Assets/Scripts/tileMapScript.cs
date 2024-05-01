@@ -1350,10 +1350,6 @@ public class tileMapScript : MonoBehaviour
         Node nodeToCheck = graph[clickedTileX, clickedTileY];
         //var unitScript = selectedUnit.GetComponent<UnitScript>();
 
-        // TODO: NGEBUG DISINI, TIDAK MASUK IFNYA YANG TIER 1
-        // Masalahnya adalah, selectedUnitMoveRangenya malah seperti player 1?
-        // selectedUnitMoveRangenya?
-        // YES! Masalahnya adalah, selectedUnitMoveRange tidak diupdate ke milik AI ketika sedang turnnya AI. Sehingga, AI malah hanya bisa gerak sesuai lokasi gerak unitnya human yang terakhir dijalankan.
         Debug.Log("SelectedUnitMoveRange");
         List<Node> temp = selectedUnitMoveRange.ToList();
         for (int i = 0; i < temp.Count; i++) {
@@ -1575,8 +1571,8 @@ public class tileMapScript : MonoBehaviour
                 Node nodeToCheck = graph[targetTileX, targetTileY];
 
                 mouseClickToSelectUnitV2(targetTileX, targetTileY, selectedUnit);
-                // TODO: Ini gak jalan di turn kedua/ketiga AInya
-                // TODO: Edit: Ini malah gak jalan habis pull dari david
+                
+                
                 if (selectTileToMoveTo(targetTileX, targetTileY))
                 {
                     Debug.Log("tes2");
