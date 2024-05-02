@@ -778,6 +778,15 @@ public class gameManagerScript : MonoBehaviour
     //In: two units that last fought
     //Out: void
     //Desc: waits until all the animations and stuff are finished before calling the game
+
+    private bool ifGigaMungusRemain(GameObject units){
+        for (int i = 0; i < units.transform.childCount; i++){
+            if (string.Equals(units.transform.GetChild(i).transform.GetComponent<UnitScript>().unitName, "Giga Mungus")) {
+                return false;
+            }
+        }
+        return true ;
+    }
     public IEnumerator checkIfUnitsRemainCoroutine(GameObject unit, GameObject enemy)
     {
         while (unit.GetComponent<UnitScript>().combatQueue.Count != 0)
@@ -789,14 +798,43 @@ public class gameManagerScript : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        if (team1.transform.childCount == 0)
+        if (ifGigaMungusRemain(team1))
         {
             displayWinnerUI.enabled = true;
             displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 2 has won!");
 
 
         }
-        else if (team2.transform.childCount == 0)
+        else if (ifGigaMungusRemain(team2))
+        {
+            displayWinnerUI.enabled = true;
+            displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 1 has won!");
+
+
+        }
+
+
+    }
+
+        public IEnumerator checkIfUnitsRemainCoroutine222(GameObject unit, GameObject enemy)
+    {
+        while (unit.GetComponent<UnitScript>().combatQueue.Count != 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        while (enemy.GetComponent<UnitScript>().combatQueue.Count != 0)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        if (ifGigaMungusRemain(team1))
+        {
+            displayWinnerUI.enabled = true;
+            displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 2 has won!");
+
+
+        }
+        else if (ifGigaMungusRemain(team2))
         {
             displayWinnerUI.enabled = true;
             displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 1 has won!");

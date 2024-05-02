@@ -956,7 +956,7 @@ public class tileMapScript : MonoBehaviour
         }
 
         finalMovementHighlight.ExceptWith(seenUIHighlight);
-        //finalMovementHighlight.Remove(unitInitialNode);
+        finalMovementHighlight.Add(unitInitialNode);
 
         Debug.Log("The total amount of movable spaces for this unit is: " + finalMovementHighlight.Count);
         Debug.Log("We have used the function to calculate it this time");
