@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Ini punya sean ngitung fitness
 public class tempFitnessFunction : MonoBehaviour
 {
     //Sean
