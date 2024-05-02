@@ -763,7 +763,7 @@ public class tileMapScript : MonoBehaviour
 
         Node unitInitialNode = graph[selectedUnit.GetComponent<UnitScript>().x, selectedUnit.GetComponent<UnitScript>().y];
         string unitName = selectedUnit.GetComponent<UnitScript>().unitName;
-        finalMovementHighlight = string.Equals(unitName, "Skeleton Soldier") ? getSoldierMovementOptions() : string.Equals(unitName, "Giga Mungus") ? getMungusMovementOptions() : string.Equals(unitName, "Skeleton Archer Bald") ? getBaldMovementOptions() : getArcherMovementOptions();
+        finalMovementHighlight = string.Equals(unitName, "Skeleton Soldier") ? getSoldierMovementOptions() : string.Equals(unitName, "Giga Mungus") ? getMungusMovementOptions() : string.Equals(unitName, "Skeleton Archer Bald") ? getBaldMovementOptions() : string.Equals(unitName, "Skeleton Archer") ? getArcherMovementOptions() : getUnitMovementOptions();
         totalAttackableTiles = getUnitTotalAttackableTiles(finalMovementHighlight, attRange, unitInitialNode);
         //Debug.Log("There are this many available tiles for the unit: "+finalMovementHighlight.Count);
 
@@ -1290,7 +1290,7 @@ public class tileMapScript : MonoBehaviour
         Debug.Log("All animations done playing");
 
         deselectUnit();
-
+        GMS.endTurn();
 
     }
 

@@ -1287,7 +1287,7 @@ PrefabInstance:
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
-      value: toonSkeleSoldier (3)
+      value: toonSkeleSoldier !!!!
       objectReference: {fileID: 0}
     - target: {fileID: 43821925479923861, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
@@ -1363,6 +1363,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitName
+      value: tes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
@@ -5244,7 +5249,7 @@ PrefabInstance:
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
-      value: toonSkeleSoldier
+      value: toonSkeleSoldier !!!
       objectReference: {fileID: 0}
     - target: {fileID: 43821925479923861, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
@@ -5320,6 +5325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitName
+      value: tes
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
