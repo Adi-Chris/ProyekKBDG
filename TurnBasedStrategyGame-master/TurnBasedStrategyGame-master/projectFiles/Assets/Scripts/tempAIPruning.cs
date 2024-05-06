@@ -4,12 +4,8 @@
 using System;
 using System.Collections.Generic;
 
-public class HelloWorld
+public class tempPruning
 {
-    public static void Main(string[] args)
-    {
-        Console.WriteLine ("Try programiz.pro");
-    }
     
     public bool isPrune(List<int[][][][]> states, int[][][][] cur_state){
         foreach (int[][][][] s in states){

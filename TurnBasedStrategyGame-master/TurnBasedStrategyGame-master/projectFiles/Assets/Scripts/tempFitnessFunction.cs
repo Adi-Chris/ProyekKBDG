@@ -78,4 +78,9 @@ public class tempFitnessFunction : MonoBehaviour
     {
         
     }
+
+    public void Evaluate ()
+    {
+
+    }
 }
