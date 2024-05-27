@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System.Text;
 
 public class gameManagerScript : MonoBehaviour
 {
@@ -261,7 +262,7 @@ public class gameManagerScript : MonoBehaviour
     //Desc: ends the turn and plays the animation
     public void endTurn()
     {
-
+        boardToState();
         if (TMS.selectedUnit == null)
         {
             switchCurrentPlayer();
@@ -279,6 +280,72 @@ public class gameManagerScript : MonoBehaviour
             teamHealthbarColorUpdate();
             setCurrentTeamUI();
         }
+    }
+
+    private void boardToState(){
+        int[,,,] state = new int[10, 10, 2, 2];
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                state[i, j, 0, 0] = 0;
+            }
+        }
+
+        for (int i = 0; i < team1.transform.childCount; i++){
+            GameObject tile = team1.transform.GetChild(i).transform.gameObject;
+            int x = (int) tile.GetComponent<UnitScript>().x;
+            int y = (int) tile.GetComponent<UnitScript>().y;
+
+            int int_type = intType(tile.GetComponent<UnitScript>().unitName);
+
+            state[x, y, 0, 0] = int_type;
+        }
+
+        for (int i = 0; i < team2.transform.childCount; i++){
+            GameObject tile = team2.transform.GetChild(i).transform.gameObject;
+            int x = (int) tile.GetComponent<UnitScript>().x;
+            int y = (int) tile.GetComponent<UnitScript>().y;
+
+            int int_type = intType(tile.GetComponent<UnitScript>().unitName);
+
+            state[x, y, 0, 0] = int_type*-1;
+        }
+
+        //return state
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("[\n");
+        for (int i = 0; i < 10; i++)
+        {
+            Debug.Log("cek loop 1");
+            sb.Append("[");
+            for (int j = 0; j < 10; j++){
+                Debug.Log("i: " + i + " , j: " + j);
+                sb.Append("[[" + state[i, j, 0, 0] + "],[]]\t");
+            }
+            sb.Append("]\n");
+        }
+        sb.Append("\n]");
+        Debug.Log("BOARDDD:");
+        Debug.Log(sb.ToString());
+    }
+
+    private int intType(string type){
+        switch (type){
+                case "Skeleton Soldier":
+                   return 1;
+                
+                case "Skeleton Archer":
+                    return 2;
+                
+                case "Giga Mungus":
+                    return 3;
+
+                case "Skeleton Archer Bald":
+                    return 4;
+
+                default:
+                    return 0;
+                }
     }
 
     //In: attacking unit and receiving unit

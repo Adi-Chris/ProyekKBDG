@@ -95,13 +95,10 @@ public class tileMapScript : MonoBehaviour
         generateMapVisuals();
         //Check if there are any pre-existing units on the board
         setIfTileIsOccupied();
-
-
     }
 
     private void Update()
     {
-
         //If input is left mouse down then select the unit
         if (Input.GetMouseButtonDown(0))
         {
@@ -142,6 +139,7 @@ public class tileMapScript : MonoBehaviour
             }
 
         }
+
         //Unselect unit with the right click
         if (Input.GetMouseButtonDown(1))
         {
@@ -162,10 +160,7 @@ public class tileMapScript : MonoBehaviour
                 }
             }
         }
-
-
     }
-
     //This is from quill18Create's tutorial
     //You can find it by searching for grid based movement on youtube, he goes into explaining how everything works
     //The map layouts a bit different
