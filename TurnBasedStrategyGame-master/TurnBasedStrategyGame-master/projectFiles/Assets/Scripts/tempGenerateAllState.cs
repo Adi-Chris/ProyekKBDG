@@ -251,7 +251,7 @@ public class tempGenerateAllState : MonoBehaviour
                 // Bawah kanan
                 AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, 1, startState);
                 // Bawah
-                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, -1, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, 1, startState);
                 // Bawah kiri
                 AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, 1, startState);
                 // Kiri
@@ -315,7 +315,7 @@ public class tempGenerateAllState : MonoBehaviour
         Queue<Tuple<int, int, int>> queue = new Queue<Tuple<int, int, int>>();
 
         // Mark the current node as visited and enqueue it
-        visited[startPosY, startPosX] = true;
+        visited[startPosX, startPosY] = true;
         queue.Enqueue(new Tuple<int, int, int>(startPosX, startPosY, 0));
         tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(startPosX, startPosY));
 
@@ -344,13 +344,13 @@ public class tempGenerateAllState : MonoBehaviour
                 // Atas
                 if (currentY - 1 >= 0)
                 {
-                    if (visited[currentY - 1, currentX] == false)
+                    if (visited[currentX, currentY - 1] == false)
                     {
-                        if (map[currentY - 1][currentX] != 0)
+                        if (map[currentX][currentY - 1] != 0)
                         {
                             if (startState[currentY - 1][currentX][0][0] >= 0)
                             {
-                                visited[currentY - 1, currentX] = true;
+                                visited[currentX, currentY - 1] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX, currentY - 1, currentMovementUsed + 1));
                                 tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY - 1));
                             }
@@ -362,13 +362,13 @@ public class tempGenerateAllState : MonoBehaviour
                 // Bawah
                 if (currentY + 1 < map.Length)
                 {
-                    if (visited[currentY + 1, currentX] == false)
+                    if (visited[currentX, currentY + 1] == false)
                     {
-                        if (map[currentY + 1][currentX] != 0)
+                        if (map[currentX][currentY + 1] != 0)
                         {
                             if (startState[currentY + 1][currentX][0][0] >= 0)
                             {
-                                visited[currentY + 1, currentX] = true;
+                                visited[currentX, currentY + 1] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX, currentY + 1, currentMovementUsed + 1));
                                 tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY + 1));
                             }
@@ -379,13 +379,13 @@ public class tempGenerateAllState : MonoBehaviour
                 // Kiri
                 if (currentX - 1 >= 0)
                 {
-                    if (visited[currentY, currentX - 1] == false)
+                    if (visited[currentX - 1, currentY] == false)
                     {
-                        if (map[currentY][currentX - 1] != 0)
+                        if (map[currentX - 1][currentY] != 0)
                         {
                             if (startState[currentY][currentX - 1][0][0] >= 0)
                             {
-                                visited[currentY, currentX - 1] = true;
+                                visited[currentX - 1, currentY] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX - 1, currentY, currentMovementUsed + 1));
                                 tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX - 1, currentY));
                             }
@@ -398,13 +398,13 @@ public class tempGenerateAllState : MonoBehaviour
                 // Asumsi mapnya persegi/square
                 if (currentX + 1 < map[0].Length)
                 {
-                    if (visited[currentY, currentX + 1] == false)
+                    if (visited[currentX + 1, currentY] == false)
                     {
-                        if (map[currentY][currentX + 1] != 0)
+                        if (map[currentX + 1][currentY] != 0)
                         {
                             if (startState[currentY][currentX + 1][0][0] >= 0)
                             {
-                                visited[currentY, currentX + 1] = true;
+                                visited[currentX + 1, currentY] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX + 1, currentY, currentMovementUsed + 1));
                                 tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX + 1, currentY));
                             }
