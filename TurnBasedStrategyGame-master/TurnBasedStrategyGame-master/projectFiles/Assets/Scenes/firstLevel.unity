@@ -5144,7 +5144,7 @@ MonoBehaviour:
     tileVisualPrefab: {fileID: 1958045316526608337, guid: 54e6a54cbeb9ede45a94f8ddbb219b83,
       type: 3}
     unitOnTile: {fileID: 0}
-    movementCost: 1
+    movementCost: 2
     isWalkable: 1
   - name: tileMountain
     tileVisualPrefab: {fileID: 9141360980964042975, guid: 115057bd6b195a549b01bf5a7cf54459,

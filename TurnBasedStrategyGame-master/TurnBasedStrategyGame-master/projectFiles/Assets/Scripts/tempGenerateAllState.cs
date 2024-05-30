@@ -29,12 +29,13 @@ public class tempGenerateAllState : MonoBehaviour
 
     private void Start()
     {
-        generateMap();
+        // generateMap(); // Tidak bisa dipakai karena startState sekarang terlalu kecil
+        generateMap3By3();
 
         // generatePossibleMovement(0, 0, startState);
 
 
-        generateAllState(startState, map, 1);
+        generateAllState(startState, map, 3);
     }
 
     public List<int[][][][]> generateAllState(int[][][][] startState, int[][] map, int startUnitAmount)
@@ -53,7 +54,7 @@ public class tempGenerateAllState : MonoBehaviour
         for (int i = 0; i < startState.Length; i++)
         {
             // Jika sudah digenerate semua, break
-            if (unitAlreadyGenerated > startUnitAmount)
+            if (unitAlreadyGenerated >= startUnitAmount)
             {
                 break;
             }
@@ -62,7 +63,7 @@ public class tempGenerateAllState : MonoBehaviour
             for (int j = 0; j < startState[i].Length; j++)
             {
                 // Jika sudah digenerate semua, break
-                if (unitAlreadyGenerated > startUnitAmount)
+                if (unitAlreadyGenerated >= startUnitAmount)
                 {
                     break;
                 }
@@ -205,12 +206,85 @@ public class tempGenerateAllState : MonoBehaviour
                 break;
             case 2:
                 // Archer
+                currentUnitMoveSpeed = 8;
+
+                // Add possible tile
+                // Tile ini sendiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, 0, startState, true);
+                // Atas kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, -1, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -2, -2, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -3, -3, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -4, -4, startState);
+                // Atas kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, -1, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 2, -2, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 3, -3, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 4, -4, startState);
+                // Bawah kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, 1, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -2, 2, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -3, 3, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -4, 4, startState);
+                // Bawah kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, 1, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 2, 2, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 3, 3, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 4, 4, startState);
                 break;
             case 3:
                 // GigaMungus
+                currentUnitMoveSpeed = 2;
+
+                // Add possible tile
+                // Tile ini sendiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, 0, startState, true);
+                // Atas kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, -1, startState);
+                // Atas
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, -1, startState);
+                // Atas kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, -1, startState);
+                // Kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, 0, startState);
+                // Bawah kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, 1, startState);
+                // Bawah
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, -1, startState);
+                // Bawah kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, 1, startState);
+                // Kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, 0, startState);
+
                 break;
             case 4:
                 // BaldArcher
+                currentUnitMoveSpeed = 3;
+
+                // Add possible tile
+                // Tile ini sendiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, 0, startState, true);
+                // Kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -3, 0, startState);
+                // Atas kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -2, -1, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, -2, startState);
+                // Atas
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, 3, startState);
+                // Atas kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, -2, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 2, -1, startState);
+                // Kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 3, 0, startState);
+                // Bawah kanan
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 2, 1, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 1, 2, startState);
+                // Bawah
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, 0, 3, startState);
+                // Bawah kiri
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -1, 2, startState);
+                AddMovementPatternTiles(movementPatternIndex, startPosX, startPosY, -2, 1, startState);
+
                 break;
             default:
                 Debug.LogError("Unit Code Not Found!");
@@ -285,7 +359,7 @@ public class tempGenerateAllState : MonoBehaviour
 
                 }
                 // Bawah
-                if (currentY + 1 > 0)
+                if (currentY + 1 < map.Length)
                 {
                     if (visited[currentY + 1, currentX] == false)
                     {
@@ -320,7 +394,8 @@ public class tempGenerateAllState : MonoBehaviour
 
                 }
                 // Kanan
-                if (currentX + 1 > 0)
+                // Asumsi mapnya persegi/square
+                if (currentX + 1 < map[0].Length)
                 {
                     if (visited[currentY, currentX + 1] == false)
                     {
@@ -414,12 +489,65 @@ public class tempGenerateAllState : MonoBehaviour
                 break;
             case 2:
                 // Archer
+                // Add possible tile
+                // Tile ini sendiri
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove);
+                // Atas
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, -2, stateAfterMove);
+                // Kanan Atas
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 1, -1, stateAfterMove);
+                // Kanan
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 2, 0, stateAfterMove);
+                // Kanan Bawah
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 1, 1, stateAfterMove);
+                // Bawah
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, 2, stateAfterMove);
+                // Kiri Bawah
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -1, 1, stateAfterMove);
+                // Kiri
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -2, 0, stateAfterMove);
+                // Kiri Atas
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -1, -1, stateAfterMove);
                 break;
             case 3:
                 // GigaMungus
+                // Add possible tile
+                // Tile ini sendiri
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove);
+                // Atas
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, -1, stateAfterMove);
+                // Bawah
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, 1, stateAfterMove);
+                // Kiri
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -1, 0, stateAfterMove);
+                // Kanan
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 1, 0, stateAfterMove);
                 break;
             case 4:
                 // BaldArcher
+                // Add possible tile
+                // Tile ini sendiri
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove);
+                // Kiri
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -3, 0, stateAfterMove);
+                // Kiri atas
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -2, 1, stateAfterMove);
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -1, 2, stateAfterMove);
+                // Atas
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, 3, stateAfterMove);
+                // Kanan atas
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 1, 2, stateAfterMove);
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 2, 1, stateAfterMove);
+                // Kanan
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 3, 0, stateAfterMove);
+                // Kanan bawah
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 2, -1, stateAfterMove);
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 1, -2, stateAfterMove);
+                // Bawah
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, 0, -3, stateAfterMove);
+                // Kiri bawah
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -1, -2, stateAfterMove);
+                AddAttackPatternTiles(attackPatternIndex, unitPosX, unitPosY, -2, -1, stateAfterMove);
                 break;
             default:
                 Debug.LogError("Unit Code Not Found! " + unitCode);
@@ -427,7 +555,7 @@ public class tempGenerateAllState : MonoBehaviour
         }
 
         // Output List contents
-        Debug.Log("Attack?");
+        Debug.Log("Attack");
         foreach (var tuple in attackPatternIndex)
         {
             Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
@@ -481,6 +609,7 @@ public class tempGenerateAllState : MonoBehaviour
     #endregion
 
     // Hanya untuk debug di code ini
+    // Ini map seperti gameplay
     void generateMap()
     {
         // Ini mirip generateMapInfo() di tileMapScript.cs
@@ -515,6 +644,28 @@ public class tempGenerateAllState : MonoBehaviour
 
         map[6][2] = 0;
         map[7][2] = 0;
+    }
+
+    // Ini map hanya untuk testing seperti di trello
+    void generateMap3By3()
+    {
+        // Ini mirip generateMapInfo() di tileMapScript.cs
+        map = new int[3][];
+
+        // Initialize each row with an array of length 10
+        for (int i = 0; i < 3; i++)
+        {
+            map[i] = new int[3];
+        }
+
+        // Initialize all grid cost as 1 (walkable)
+        for (int i = 0; i < map.Length; i++)
+        {
+            for (int j = 0; j < map[i].Length; j++)
+            {
+                map[i][j] = 1;
+            }
+        }
     }
 
     // Helper, Mengenerate 4d array kosongan
