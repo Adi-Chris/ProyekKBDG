@@ -262,7 +262,7 @@ public class gameManagerScript : MonoBehaviour
     //Desc: ends the turn and plays the animation
     public void endTurn()
     {
-        boardToState();
+        start_state = boardToState();
         if (TMS.selectedUnit == null)
         {
             switchCurrentPlayer();
@@ -282,7 +282,8 @@ public class gameManagerScript : MonoBehaviour
         }
     }
 
-    private void boardToState(){
+    public int[,,,] start_state = new int[10,10,2,2];
+    private int[,,,] boardToState(){
         int[,,,] state = new int[10, 10, 2, 2];
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
@@ -292,44 +293,48 @@ public class gameManagerScript : MonoBehaviour
 
         for (int i = 0; i < team1.transform.childCount; i++){
             GameObject tile = team1.transform.GetChild(i).transform.gameObject;
-            int x = (int) tile.GetComponent<UnitScript>().x;
-            int y = (int) tile.GetComponent<UnitScript>().y;
+            int x = 9 + (-1* (int) tile.GetComponent<UnitScript>().y);
+            int y = (int) tile.GetComponent<UnitScript>().x;
 
-            int int_type = intType(tile.GetComponent<UnitScript>().unitName);
-
-            state[x, y, 0, 0] = int_type;
-        }
-
-        for (int i = 0; i < team2.transform.childCount; i++){
-            GameObject tile = team2.transform.GetChild(i).transform.gameObject;
-            int x = (int) tile.GetComponent<UnitScript>().x;
-            int y = (int) tile.GetComponent<UnitScript>().y;
+            Debug.Log("item team1 ke-" + (i+1) + ": x(" + x + ") y(" + y + ")");
 
             int int_type = intType(tile.GetComponent<UnitScript>().unitName);
 
             state[x, y, 0, 0] = int_type*-1;
         }
 
+        for (int i = 0; i < team2.transform.childCount; i++){
+            GameObject tile = team2.transform.GetChild(i).transform.gameObject;
+            int x = 9 + (-1* (int) tile.GetComponent<UnitScript>().y);
+            int y = (int) tile.GetComponent<UnitScript>().x;
+
+            int int_type = intType(tile.GetComponent<UnitScript>().unitName);
+
+            state[x, y, 0, 0] = int_type;
+        }
+
         //return state
 
         StringBuilder sb = new StringBuilder();
-        sb.Append("[\n");
+        sb.Append("{\n");
         for (int i = 0; i < 10; i++)
         {
             Debug.Log("cek loop 1");
-            sb.Append("[");
+            sb.Append("{");
             for (int j = 0; j < 10; j++){
                 Debug.Log("i: " + i + " , j: " + j);
-                sb.Append("[[" + state[i, j, 0, 0] + "],[]]\t");
+                sb.Append("{{" + state[i, j, 0, 0] + "},{}}, \t");
             }
-            sb.Append("]\n");
+            sb.Append("}\n");
         }
-        sb.Append("\n]");
+        sb.Append("\n}");
         Debug.Log("BOARDDD:");
         Debug.Log(sb.ToString());
+
+        return state;
     }
 
-    private int intType(string type){
+    public int intType(string type){
         switch (type){
                 case "Skeleton Soldier":
                    return 1;

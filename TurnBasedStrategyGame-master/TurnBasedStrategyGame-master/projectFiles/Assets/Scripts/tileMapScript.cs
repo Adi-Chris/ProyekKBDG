@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System.Text;
+using static System.Collections.IEnumerable;
 
 public class tileMapScript : MonoBehaviour
 {
@@ -1526,8 +1528,120 @@ public class tileMapScript : MonoBehaviour
     Tidak nyerang
     Sudah selesai, end turn
     */
+
+    private int[,,,] tempState = new int[10,10,2,2];
+
+    private int indexAItoMove(int[,,,] newstate){
+        this.tempState = newstate;
+
+        int defaultIndex = -99;
+        
+        for (int i = 0; i < GMS.team2.transform.childCount; i++){
+            GameObject tile = GMS.team2.transform.GetChild(i).transform.gameObject;
+            int x = 9 + (-1* (int) tile.GetComponent<UnitScript>().y);
+            int y = (int) tile.GetComponent<UnitScript>().x;
+
+            int int_type = GMS.intType(tile.GetComponent<UnitScript>().unitName);
+
+            if (this.tempState[x,y,0,0] == int_type){
+                this.tempState[x,y,0,0] = 0;
+                Debug.Log("mau jadi 0: " + x + " ; " + y);
+            } else {
+                defaultIndex = i;
+            }
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{\n");
+        for (int i = 0; i < 10; i++)
+        {
+            sb.Append("{");
+            for (int j = 0; j < 10; j++){
+                sb.Append("{{" + this.tempState[i, j, 0, 0] + "},{}}, \t");
+            }
+            sb.Append("}\n");
+        }
+        sb.Append("\n}");
+        Debug.Log("BOARDDD Index AI to Move:");
+        Debug.Log(sb.ToString());
+
+        return defaultIndex;
+    }
+
+//     {                    SETELAH DIGANTI 0
+// {{{4},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{4},{}}, 	}
+// {{{0},{}}, 	{{3},{}}, 	{{0},{}}, 	{{2},{}}, 	{{0},{}}, 	{{1},{}}, 	{{2},{}}, 	{{0},{}}, 	{{3},{}}, 	{{0},{}}, 	}
+// {{{1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{1},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	}
+// {{{-4},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-4},{}}, 	}
+
+// }
+
+    private int[] AIMoveLoc(int index){
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{\n");
+        for (int i = 0; i < 10; i++)
+        {
+            sb.Append("{");
+            for (int j = 0; j < 10; j++){
+                sb.Append("{{" + this.tempState[i, j, 0, 0] + "},{}}, \t");
+            }
+            sb.Append("}\n");
+        }
+        sb.Append("\n}");
+        Debug.Log("BOARDDD AI Move Loc:");
+        Debug.Log(sb.ToString());
+
+        int[] res = new int[] {-99,-99};
+
+        if (index < 0) {
+            return res;
+        }
+
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                if (tempState[i, j, 0, 0] > 0 && tempState [i, j, 0, 0] < 5){
+                    res[0] = j; //x
+                    res[1] = i; //y
+                    return res;
+                }
+            }
+        }
+
+        res[0] = -4;
+        res[1] = -4;
+        return res;
+    }
+
+// {
+// {{{4},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{4},{}}, 	}
+// {{{0},{}}, 	{{3},{}}, 	{{0},{}}, 	{{2},{}}, 	{{0},{}}, 	{{1},{}}, 	{{2},{}}, 	{{0},{}}, 	{{3},{}}, 	{{0},{}}, 	}
+// {{{1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{1},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	}
+// {{{-4},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-4},{}}, 	}
+
+// }
+
+private int[,,,] test_state = new int[10,10,2,2] ;
     public void AITurn()
     {
+        int [,,,] test_state = GMS.start_state;
+        int tempX = 2;
+        int tempY = 4;
+
+        test_state[tempX, tempY, 0, 0] = 0;
+        test_state[tempX, tempY+1, 0, 0] = 1;
+
         Debug.Log("Current Team: " + GMS.currentTeam);
         Debug.Log("Tes");
         // Asumsi AI selalu di team 2, alias player 2
@@ -1535,42 +1649,35 @@ public class tileMapScript : MonoBehaviour
         GMS.amountOfEnemyAIDoneMove = 0;
         // for (int i = 0; i < GMS.team2.transform.childCount; i++)
         // {
-            int idx_r = Random.Range(0, GMS.team2.transform.childCount); //punya david buat random milih unit ai
-            selectedUnit = GMS.team2.transform.GetChild(5).gameObject; // TODO: DISINI HARUS MILIH GetChild() keberapa. Kalau (5) ini yang musuh index ke 5
+            int idx_r = indexAItoMove(test_state);
+            Debug.Log("idx r: " + idx_r);
+            selectedUnit = GMS.team2.transform.GetChild(idx_r).gameObject; // TODO: DISINI HARUS MILIH GetChild() keberapa. Kalau (5) ini yang musuh index ke 5
 
-            int targetTileX = 0;
-            int targetTileY = 0;
+            int[] locationIdx = AIMoveLoc(idx_r);
+
+            int targetTileX = locationIdx[0];
+            int targetTileY = 9 + (-1* locationIdx[1]);
+
+            Debug.Log("index selected unit: " + idx_r);
+
+            Debug.Log("Loc Now X: " + selectedUnit.GetComponent<UnitScript>().x);
+            Debug.Log("Loc Now Y: " + selectedUnit.GetComponent<UnitScript>().y);
+
+            Debug.Log("Target Tile X: " + targetTileX);
+            Debug.Log("Target Tile Y: " + targetTileY);
 
             //Move the unit
             if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0)
             {
-                Debug.Log("tes1");
-                if (selectedUnit.GetComponent<UnitScript>().x < 5)
-                {
-                    targetTileX = selectedUnit.GetComponent<UnitScript>().x + 1;
-                }
-                else
-                {
-                    targetTileX = selectedUnit.GetComponent<UnitScript>().x - 1;
-                }
-                if (selectedUnit.GetComponent<UnitScript>().y < 5)
-                {
-                    targetTileY = selectedUnit.GetComponent<UnitScript>().y + 0;
-                }
-                else
-                {
-                    targetTileY = selectedUnit.GetComponent<UnitScript>().y - 0;
-                }
-                Debug.Log("Target: " + targetTileX + ", " + targetTileY);
+                Debug.Log("heyyy taegetttt: " + targetTileX + ", " + targetTileY);
 
                 Node nodeToCheck = graph[targetTileX, targetTileY];
 
                 mouseClickToSelectUnitV2(targetTileX, targetTileY, selectedUnit);
                 
-                
                 if (selectTileToMoveTo(targetTileX, targetTileY))
                 {
-                    Debug.Log("tes2");
+                    Debug.Log("tesssssss");
                     //selectedSound.Play();
                     Debug.Log("movement path has been located");
                     unitSelectedPreviousX = selectedUnit.GetComponent<UnitScript>().x;
@@ -1581,23 +1688,14 @@ public class tileMapScript : MonoBehaviour
 
                     StartCoroutine(moveUnitAndFinalize(targetTileX, targetTileY)); //TODO: Bagian Coroutine ini, ngecall coroutine lain. Jadi harus dibuat 1 coroutine besar kayaknya
                     //The moveUnit function calls a function on the unitScriptm when the movement is completed the finalization is called from that script.
-
-
                 }
-                
-
-                
-
             }
-
             // //Finalize the movement
             // if (selectedUnit.GetComponent<UnitScript>().unitMoveState == selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(2))
             // {
             //     Debug.Log("tes3");
             //     finalizeOption(targetTileX, targetTileY);
             // }
-
-
         //}
         Debug.Log("Tes Akhir");
     }
