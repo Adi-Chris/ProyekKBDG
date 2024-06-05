@@ -49,7 +49,7 @@ public class tempGenerateAllState : MonoBehaviour
         // y menyatakan sumbu kebawah dari grid map
         // x menyatakan sumbu kekanan dari grid map
         // z menyatakan parameter tiap unit
-        // z[0]a[0] menyatakan tipe unit , z[0]a[0] dan z[0]a[1] berformat (b, c) yaitu posisi x dan y dari attack unit
+        // z[0]a[0] menyatakan tipe unit , z[1]a[0] dan z[1]a[1] berformat (b, c) yaitu posisi x dan y dari attack unit
         // AWAS!: Formatnya memang y,x,z,a untuk state! Jadi state [1][2] berarti x=2 dan y=1
 
         // Cari unit di seluruh startState [sumbu y]
@@ -752,7 +752,6 @@ public class tempGenerateAllState : MonoBehaviour
     }
     #endregion
 
-    // TODO: Here
     public List<int[][][][]> generateAllStateMin(int[][][][] startState, int[][] map, int startUnitAmount)
     {
         List<int[][][][]> successorStates = new List<int[][][][]>();
@@ -762,7 +761,7 @@ public class tempGenerateAllState : MonoBehaviour
         // y menyatakan sumbu kebawah dari grid map
         // x menyatakan sumbu kekanan dari grid map
         // z menyatakan parameter tiap unit
-        // z[0]a[0] menyatakan tipe unit , z[0]a[0] dan z[0]a[1] berformat (b, c) yaitu posisi x dan y dari attack unit
+        // z[0]a[0] menyatakan tipe unit , z[1]a[0] dan z[1]a[1] berformat (b, c) yaitu posisi x dan y dari attack unit
         // AWAS!: Formatnya memang y,x,z,a untuk state! Jadi state [1][2] berarti x=2 dan y=1
 
         // Cari unit di seluruh startState [sumbu y]
@@ -1538,6 +1537,8 @@ public class tempGenerateAllState : MonoBehaviour
                     anotherState[i][j][k] = new int[stateToCopy[i][j][k].Length];
                     Array.Copy(stateToCopy[i][j][k], anotherState[i][j][k], stateToCopy[i][j][k].Length);
                 }
+                // Reset attack location
+                // anotherState[i][j][1] = new int[] { }; // Reset attack unit
             }
         }
 
