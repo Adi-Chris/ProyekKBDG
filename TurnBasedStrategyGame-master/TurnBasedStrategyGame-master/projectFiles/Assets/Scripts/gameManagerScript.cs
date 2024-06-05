@@ -18,7 +18,7 @@ public class gameManagerScript : MonoBehaviour
     public TMP_Text UIunitAttackRange;
     public TMP_Text UIunitMoveSpeed;
     public TMP_Text UIunitName;
-    public UnityEngine.UI.Image UIunitSprite;
+    public UnityEngine.UI.Image UIunitSprite; 
 
     public Canvas UIunitCanvas;
     public GameObject playerPhaseBlock;
@@ -73,7 +73,6 @@ public class gameManagerScript : MonoBehaviour
     public bool AITurnStarted;
     public int amountOfEnemyAI; // TODO: Ini perlu diupdate saat unit musuh terkalahkan
     public int amountOfEnemyAIDoneMove;
-
 
     public void Start()
     {
@@ -282,35 +281,104 @@ public class gameManagerScript : MonoBehaviour
         }
     }
 
-    public int[,,,] start_state = new int[10,10,2,2];
-    private int[,,,] boardToState(){
-        int[,,,] state = new int[10, 10, 2, 2];
-        for (int i = 0; i < 10; i++){
-            for (int j = 0; j < 10; j++){
-                state[i, j, 0, 0] = 0;
+    //public int[,,,] start_state = new int[10,10,2,2];
+    //private int[,,,] boardToState()
+    //{
+    //    int[,,,] state = new int[10, 10, 2, 2];
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        for (int j = 0; j < 10; j++)
+    //        {
+    //            state[i, j, 0, 0] = 0;
+    //        }
+    //    }
+
+    //    for (int i = 0; i < team1.transform.childCount; i++)
+    //    {
+    //        GameObject tile = team1.transform.GetChild(i).transform.gameObject;
+    //        int x = 9 + (-1 * (int)tile.GetComponent<UnitScript>().y);
+    //        int y = (int)tile.GetComponent<UnitScript>().x;
+
+    //        Debug.Log("item team1 ke-" + (i + 1) + ": x(" + x + ") y(" + y + ")");
+
+    //        int int_type = intType(tile.GetComponent<UnitScript>().unitName);
+
+    //        state[x, y, 0, 0] = int_type * -1;
+    //    }
+
+    //    for (int i = 0; i < team2.transform.childCount; i++)
+    //    {
+    //        GameObject tile = team2.transform.GetChild(i).transform.gameObject;
+    //        int x = 9 + (-1 * (int)tile.GetComponent<UnitScript>().y);
+    //        int y = (int)tile.GetComponent<UnitScript>().x;
+
+    //        int int_type = intType(tile.GetComponent<UnitScript>().unitName);
+
+    //        state[x, y, 0, 0] = int_type;
+    //    }
+
+    //    //return state
+
+    //    StringBuilder sb = new StringBuilder();
+    //    sb.Append("{\n");
+    //    for (int i = 0; i < 10; i++)
+    //    {
+    //        Debug.Log("cek loop 1");
+    //        sb.Append("{");
+    //        for (int j = 0; j < 10; j++)
+    //        {
+    //            Debug.Log("i: " + i + " , j: " + j);
+    //            sb.Append("{{" + state[i, j, 0, 0] + "},{}}, \t");
+    //        }
+    //        sb.Append("}\n");
+    //    }
+    //    sb.Append("\n}");
+    //    Debug.Log("BOARDDD:");
+    //    Debug.Log(sb.ToString());
+
+    //    return state;
+    //}
+
+    public int[][][][] start_state = new int[10][][][];
+    private int[][][][] boardToState()
+    {
+        int[][][][] state = new int[10][][][];
+        for (int i = 0; i < 10; i++)
+        {
+            state[i] = new int[10][][];
+            for (int j = 0; j < 10; j++)
+            {
+                state[i][j] = new int[2][];
+                for (int k = 0; k < 2; k++)
+                {
+                    state[i][j][k] = new int[2];
+                    state[i][j][k][0] = 0;
+                }
             }
         }
 
-        for (int i = 0; i < team1.transform.childCount; i++){
-            GameObject tile = team1.transform.GetChild(i).transform.gameObject;
-            int x = 9 + (-1* (int) tile.GetComponent<UnitScript>().y);
-            int y = (int) tile.GetComponent<UnitScript>().x;
+        for (int i = 0; i < team1.transform.childCount; i++)
+        {
+            GameObject tile = team1.transform.GetChild(i).gameObject;
+            int x = 9 + (-1 * (int)tile.GetComponent<UnitScript>().y);
+            int y = (int)tile.GetComponent<UnitScript>().x;
 
-            Debug.Log("item team1 ke-" + (i+1) + ": x(" + x + ") y(" + y + ")");
+            Debug.Log("item team1 ke-" + (i + 1) + ": x(" + x + ") y(" + y + ")");
 
             int int_type = intType(tile.GetComponent<UnitScript>().unitName);
 
-            state[x, y, 0, 0] = int_type*-1;
+            state[x][y][0][0] = int_type * -1;
         }
 
-        for (int i = 0; i < team2.transform.childCount; i++){
-            GameObject tile = team2.transform.GetChild(i).transform.gameObject;
-            int x = 9 + (-1* (int) tile.GetComponent<UnitScript>().y);
-            int y = (int) tile.GetComponent<UnitScript>().x;
+        for (int i = 0; i < team2.transform.childCount; i++)
+        {
+            GameObject tile = team2.transform.GetChild(i).gameObject;
+            int x = 9 + (-1 * (int)tile.GetComponent<UnitScript>().y);
+            int y = (int)tile.GetComponent<UnitScript>().x;
 
             int int_type = intType(tile.GetComponent<UnitScript>().unitName);
 
-            state[x, y, 0, 0] = int_type;
+            state[x][y][0][0] = int_type;
         }
 
         //return state
@@ -321,9 +389,10 @@ public class gameManagerScript : MonoBehaviour
         {
             Debug.Log("cek loop 1");
             sb.Append("{");
-            for (int j = 0; j < 10; j++){
+            for (int j = 0; j < 10; j++)
+            {
                 Debug.Log("i: " + i + " , j: " + j);
-                sb.Append("{{" + state[i, j, 0, 0] + "},{}}, \t");
+                sb.Append("{{" + state[i][j][0][0] + "},{}}, \t");
             }
             sb.Append("}\n");
         }
@@ -333,7 +402,6 @@ public class gameManagerScript : MonoBehaviour
 
         return state;
     }
-
     public int intType(string type){
         switch (type){
                 case "Skeleton Soldier":
