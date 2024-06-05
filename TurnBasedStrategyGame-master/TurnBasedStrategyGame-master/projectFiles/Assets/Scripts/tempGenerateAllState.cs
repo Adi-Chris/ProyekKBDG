@@ -361,6 +361,7 @@ public class tempGenerateAllState : MonoBehaviour
                 // - Pengecekan didalam map atau tidak
                 // - Pengecekan belum visited
                 // - Pengecekan walkable tidak (map[y][x] apakah != 0)
+                // - Pengecekan harga walk bisa atau tidak (currentMovementUsed + map[y][x] <= currentUnitMoveSpeed)
                 // - Pengecekan tile kosong ATAU unit milik AI (yaitu state[y][x][0][0] >= 0) ATAU unit sudah mati (yaitu state[y][x][0][1] <= 0)
 
                 // Atas
@@ -370,11 +371,14 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY - 1] != 0)
                         {
-                            if (startState[currentY - 1][currentX][0][0] >= 0 || startState[currentY - 1][currentX][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX][currentY - 1] <= currentUnitMoveSpeed)
                             {
-                                visited[currentX, currentY - 1] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX, currentY - 1, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY - 1));
+                                if (startState[currentY - 1][currentX][0][0] >= 0 || startState[currentY - 1][currentX][0][1] <= 0)
+                                {
+                                    visited[currentX, currentY - 1] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX, currentY - 1, currentMovementUsed + map[currentX][currentY - 1]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY - 1));
+                                }
                             }
                         }
 
@@ -388,14 +392,16 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY + 1] != 0)
                         {
-                            if (startState[currentY + 1][currentX][0][0] >= 0 || startState[currentY + 1][currentX][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX][currentY + 1] <= currentUnitMoveSpeed)
                             {
-                                visited[currentX, currentY + 1] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX, currentY + 1, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY + 1));
+                                if (startState[currentY + 1][currentX][0][0] >= 0 || startState[currentY + 1][currentX][0][1] <= 0)
+                                {
+                                    visited[currentX, currentY + 1] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX, currentY + 1, currentMovementUsed + map[currentX][currentY + 1]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY + 1));
+                                }
                             }
                         }
-
                     }
                 }
                 // Kiri
@@ -405,16 +411,17 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX - 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX - 1][0][0] >= 0 || startState[currentY][currentX - 1][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX - 1][currentY] <= currentUnitMoveSpeed)
                             {
-                                visited[currentX - 1, currentY] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX - 1, currentY, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX - 1, currentY));
+                                if (startState[currentY][currentX - 1][0][0] >= 0 || startState[currentY][currentX - 1][0][1] <= 0)
+                                {
+                                    visited[currentX - 1, currentY] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX - 1, currentY, currentMovementUsed + map[currentX - 1][currentY]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX - 1, currentY));
+                                }
                             }
                         }
-
                     }
-
                 }
                 // Kanan
                 // Asumsi mapnya persegi/square
@@ -424,14 +431,16 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX + 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX + 1][0][0] >= 0 || startState[currentY][currentX + 1][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX + 1][currentY] <= currentUnitMoveSpeed)
                             {
-                                visited[currentX + 1, currentY] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX + 1, currentY, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX + 1, currentY));
+                                if (startState[currentY][currentX + 1][0][0] >= 0 || startState[currentY][currentX + 1][0][1] <= 0)
+                                {
+                                    visited[currentX + 1, currentY] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX + 1, currentY, currentMovementUsed + map[currentX + 1][currentY]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX + 1, currentY));
+                                }
                             }
                         }
-
                     }
 
                 }
@@ -1073,6 +1082,7 @@ public class tempGenerateAllState : MonoBehaviour
                 // - Pengecekan didalam map atau tidak
                 // - Pengecekan belum visited
                 // - Pengecekan walkable tidak (map[y][x] apakah != 0)
+                // - Pengecekan harga walk bisa atau tidak (currentMovementUsed + map[y][x] <= currentUnitMoveSpeed)
                 // - Pengecekan tile kosong ATAU unit milik Human (yaitu state[y][x][0][0] <= 0) ATAU unit sudah mati (yaitu state[y][x][0][1] <= 0)
 
                 // Atas
@@ -1082,17 +1092,17 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY - 1] != 0)
                         {
-                            if (startState[currentY - 1][currentX][0][0] <= 0 || startState[currentY - 1][currentX][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX][currentY - 1] <= currentUnitMoveSpeed)
                             {
-                                // TODO:
-                                visited[currentX, currentY - 1] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX, currentY - 1, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY - 1));
+                                if (startState[currentY - 1][currentX][0][0] <= 0 || startState[currentY - 1][currentX][0][1] <= 0)
+                                {
+                                    visited[currentX, currentY - 1] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX, currentY - 1, currentMovementUsed + map[currentX][currentY - 1]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY - 1));
+                                }
                             }
                         }
-
                     }
-
                 }
                 // Bawah
                 if (currentY + 1 < map.Length)
@@ -1101,14 +1111,16 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY + 1] != 0)
                         {
-                            if (startState[currentY + 1][currentX][0][0] <= 0 || startState[currentY + 1][currentX][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX][currentY + 1] <= currentUnitMoveSpeed)
                             {
-                                visited[currentX, currentY + 1] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX, currentY + 1, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY + 1));
+                                if (startState[currentY + 1][currentX][0][0] <= 0 || startState[currentY + 1][currentX][0][1] <= 0)
+                                {
+                                    visited[currentX, currentY + 1] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX, currentY + 1, currentMovementUsed + map[currentX][currentY + 1]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY + 1));
+                                }
                             }
                         }
-
                     }
                 }
                 // Kiri
@@ -1118,16 +1130,17 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX - 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX - 1][0][0] <= 0 || startState[currentY][currentX - 1][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX - 1][currentY] <= currentUnitMoveSpeed)
                             {
-                                visited[currentX - 1, currentY] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX - 1, currentY, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX - 1, currentY));
+                                if (startState[currentY][currentX - 1][0][0] <= 0 || startState[currentY][currentX - 1][0][1] <= 0)
+                                {
+                                    visited[currentX - 1, currentY] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX - 1, currentY, currentMovementUsed + map[currentX - 1][currentY]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX - 1, currentY));
+                                }
                             }
                         }
-
                     }
-
                 }
                 // Kanan
                 // Asumsi mapnya persegi/square
@@ -1137,16 +1150,17 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX + 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX + 1][0][0] <= 0 || startState[currentY][currentX + 1][0][1] <= 0)
+                            if (currentMovementUsed + map[currentX + 1][currentY] <= currentUnitMoveSpeed)
                             {
-                                visited[currentX + 1, currentY] = true;
-                                queue.Enqueue(new Tuple<int, int, int>(currentX + 1, currentY, currentMovementUsed + 1));
-                                tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX + 1, currentY));
+                                if (startState[currentY][currentX + 1][0][0] <= 0 || startState[currentY][currentX + 1][0][1] <= 0)
+                                {
+                                    visited[currentX + 1, currentY] = true;
+                                    queue.Enqueue(new Tuple<int, int, int>(currentX + 1, currentY, currentMovementUsed + map[currentX + 1][currentY]));
+                                    tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX + 1, currentY));
+                                }
                             }
                         }
-
                     }
-
                 }
             }
 
@@ -1273,7 +1287,6 @@ public class tempGenerateAllState : MonoBehaviour
         Debug.Log("~~");
 
         // Masukkan hasil ke successorStates
-        // TODO: Harusnya ini dimasukkan ke successorStates tiap kali logic attack berjalan. Cuman sementara gini dulu.
         foreach (var tuple in attackPatternIndex)
         {
             // Masukkan index attack ke state4d[y][x][1][0] dan state4d[y][x][1][1]
@@ -1494,6 +1507,10 @@ public class tempGenerateAllState : MonoBehaviour
                 map[i][j] = 1;
             }
         }
+
+        // Dibawah ini nyoba yang costnya lebih mahal
+        // map[1][1] = 8;
+        // map[2][1] = 8;
     }
 
     // Helper, Mengenerate 4d array kosongan
