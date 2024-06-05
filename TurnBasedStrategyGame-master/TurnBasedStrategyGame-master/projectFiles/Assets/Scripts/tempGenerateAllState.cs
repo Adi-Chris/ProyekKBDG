@@ -13,17 +13,17 @@ public class tempGenerateAllState : MonoBehaviour
     // Sementara dihardcode sesuai trello
     int[][][][] startState =
 {
-    new int[][][] { new int[][] { new int[] { 1 }, new int[] { } },
-                     new int[][] { new int[] { 2 }, new int[] { } },
-                     new int[][] { new int[] { 3 }, new int[] { } } },
-
-    new int[][][] { new int[][] { new int[] { 0 }, new int[] { } },
+    new int[][][] { new int[][] { new int[] { 1, 5, 3 }, new int[] { } },
                      new int[][] { new int[] { 0 }, new int[] { } },
                      new int[][] { new int[] { 0 }, new int[] { } } },
 
-    new int[][][] { new int[][] { new int[] { -1 }, new int[] { } },
-                     new int[][] { new int[] { -2 }, new int[] { } },
-                     new int[][] { new int[] { -3 }, new int[] { } } }
+    new int[][][] { new int[][] { new int[] { 0 }, new int[] { } },
+                     new int[][] { new int[] { 1, 0, 3 }, new int[] { } },
+                     new int[][] { new int[] { 0 }, new int[] { } } },
+
+    new int[][][] { new int[][] { new int[] { -2, 5, 3 }, new int[] { } },
+                     new int[][] { new int[] { 0 }, new int[] { } },
+                     new int[][] { new int[] { 0 }, new int[] { } } }
 };
 
 
@@ -74,59 +74,72 @@ public class tempGenerateAllState : MonoBehaviour
                 if (startState[i][j][0][0] > 0)
                 {
                     // Jika ada unit milik AI (karena unit > 0)
+                    unitAlreadyGenerated++;
 
-                    // Generate semua kemungkinan gerakan, berdasarkan unitnya
-                    HashSet<Tuple<int, int>> possibleMovement = generatePossibleMovementMax(j, i, startState);
-
-                    // cek tiap possible movement, bisa attack kemana aja, dan terjadi apa setelah attack. Masuk state baru
-                    foreach (Tuple<int, int> tuple in possibleMovement)
+                    // Cek apakah unit ini masih hidup (HP > 0)
+                    if (startState[i][j][0][1] > 0)
                     {
-                        int xMoveTo = tuple.Item1;
-                        int yMoveTo = tuple.Item2;
+                        // Generate semua kemungkinan gerakan, berdasarkan unitnya
+                        HashSet<Tuple<int, int>> possibleMovement = generatePossibleMovementMax(j, i, startState);
 
-                        // Copy start state
-                        int[][][][] stateAfterMove = generate4dState(startState);
-                        // Jika pergerakan bukan ke diri sendiri
-                        if (((yMoveTo == i) && (xMoveTo == j)) == false)
+                        // cek tiap possible movement, bisa attack kemana aja, dan terjadi apa setelah attack. Masuk state baru
+                        foreach (Tuple<int, int> tuple in possibleMovement)
                         {
-                            Debug.Log(xMoveTo + " " + yMoveTo);
-                            // Pindahkan unit ke tempat bergeraknya
-                            for (int k = 0; k < startState[i][j].Length; k++)
+                            int xMoveTo = tuple.Item1;
+                            int yMoveTo = tuple.Item2;
+
+                            // Copy start state
+                            int[][][][] stateAfterMove = generate4dState(startState);
+                            // Jika pergerakan bukan ke diri sendiri
+                            if (((yMoveTo == i) && (xMoveTo == j)) == false)
                             {
-                                // Create a new array and copy the elements from the original array
-                                stateAfterMove[yMoveTo][xMoveTo][k] = new int[startState[i][j][k].Length];
-                                Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[yMoveTo][xMoveTo][k].Length);
+                                Debug.Log(xMoveTo + " " + yMoveTo);
+                                // Pindahkan unit ke tempat bergeraknya
+                                for (int k = 0; k < startState[i][j].Length; k++)
+                                {
+                                    // Create a new array and copy the elements from the original array
+                                    stateAfterMove[yMoveTo][xMoveTo][k] = new int[startState[i][j][k].Length];
+                                    Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[yMoveTo][xMoveTo][k].Length);
+                                }
+                                // Pindahkan HP dan attack power
+                                stateAfterMove[yMoveTo][xMoveTo][0][1] = startState[i][j][0][1];
+                                stateAfterMove[yMoveTo][xMoveTo][0][2] = startState[i][j][0][2];
+
+                                // Kosongkan lokasi sebelumnya dari unit yang telah bergerak
+                                stateAfterMove[i][j][0][0] = 0; // Reset tipe unit
+                                stateAfterMove[i][j][0][1] = 0; // Reset HP
+                                stateAfterMove[i][j][0][2] = 0; // Reset Attack power
+                                stateAfterMove[i][j][1] = new int[] { }; // Reset attack unit
                             }
-                            // Kosongkan lokasi sebelumnya dari unit yang telah bergerak
-                            stateAfterMove[i][j][0][0] = 0; // Reset tipe unit
-                            stateAfterMove[i][j][1] = new int[] { }; // Reset attack unit
+
+                            // // Debug 
+                            // // sumbu y
+                            // for (int a = 0; a < stateAfterMove.Length; a++)
+                            // {
+                            //     string rowLog = "";
+                            //     // sumbu x
+                            //     for (int b = 0; b < stateAfterMove[a].Length; b++)
+                            //     {
+                            //         rowLog += "[(" + stateAfterMove[a][b][0][0] + ", " + "HP" + ") ";
+
+                            //         if (stateAfterMove[a][b][1].Length > 0) {
+
+                            //             rowLog += "(" + stateAfterMove[a][b][1][0] + ", ";
+                            //             rowLog += "(" + stateAfterMove[a][b][1][1] + ")]    ";
+                            //         } else {
+                            //             rowLog += "()]    ";
+                            //         }
+
+                            //     }
+                            //     Debug.Log(rowLog);
+                            // }
+
+
+                            generatePossibleAttackMax(xMoveTo, yMoveTo, stateAfterMove, successorStates);
                         }
-
-                        // // Debug 
-                        // // sumbu y
-                        // for (int a = 0; a < stateAfterMove.Length; a++)
-                        // {
-                        //     string rowLog = "";
-                        //     // sumbu x
-                        //     for (int b = 0; b < stateAfterMove[a].Length; b++)
-                        //     {
-                        //         rowLog += "[(" + stateAfterMove[a][b][0][0] + ", " + "HP" + ") ";
-
-                        //         if (stateAfterMove[a][b][1].Length > 0) {
-
-                        //             rowLog += "(" + stateAfterMove[a][b][1][0] + ", ";
-                        //             rowLog += "(" + stateAfterMove[a][b][1][1] + ")]    ";
-                        //         } else {
-                        //             rowLog += "()]    ";
-                        //         }
-
-                        //     }
-                        //     Debug.Log(rowLog);
-                        // }
-
-
-                        generatePossibleAttackMax(xMoveTo, yMoveTo, stateAfterMove, successorStates);
                     }
+
+
 
                 }
 
@@ -148,7 +161,15 @@ public class tempGenerateAllState : MonoBehaviour
                 // sumbu x
                 for (int b = 0; b < state[a].Length; b++)
                 {
-                    rowLog += "[(" + state[a][b][0][0] + ", " + "HP" + ") ";
+                    if (state[a][b][0][0] != 0)
+                    {
+                        rowLog += "[(" + state[a][b][0][0] + ", HP: " + state[a][b][0][1] + ", Atk:" + state[a][b][0][2] + ") ";
+                    }
+                    else
+                    {
+                        rowLog += "[(0, 0), ()]";
+                    }
+
 
                     if (state[a][b][1].Length > 0)
                     {
@@ -340,7 +361,7 @@ public class tempGenerateAllState : MonoBehaviour
                 // - Pengecekan didalam map atau tidak
                 // - Pengecekan belum visited
                 // - Pengecekan walkable tidak (map[y][x] apakah != 0)
-                // - Pengecekan tile kosong ATAU unit milik AI (yaitu state[y][x][0][0] >= 0)
+                // - Pengecekan tile kosong ATAU unit milik AI (yaitu state[y][x][0][0] >= 0) ATAU unit sudah mati (yaitu state[y][x][0][1] <= 0)
 
                 // Atas
                 if (currentY - 1 >= 0)
@@ -349,7 +370,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY - 1] != 0)
                         {
-                            if (startState[currentY - 1][currentX][0][0] >= 0)
+                            if (startState[currentY - 1][currentX][0][0] >= 0 || startState[currentY - 1][currentX][0][1] <= 0)
                             {
                                 visited[currentX, currentY - 1] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX, currentY - 1, currentMovementUsed + 1));
@@ -367,7 +388,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY + 1] != 0)
                         {
-                            if (startState[currentY + 1][currentX][0][0] >= 0)
+                            if (startState[currentY + 1][currentX][0][0] >= 0 || startState[currentY + 1][currentX][0][1] <= 0)
                             {
                                 visited[currentX, currentY + 1] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX, currentY + 1, currentMovementUsed + 1));
@@ -384,7 +405,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX - 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX - 1][0][0] >= 0)
+                            if (startState[currentY][currentX - 1][0][0] >= 0 || startState[currentY][currentX - 1][0][1] <= 0)
                             {
                                 visited[currentX - 1, currentY] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX - 1, currentY, currentMovementUsed + 1));
@@ -403,7 +424,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX + 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX + 1][0][0] >= 0)
+                            if (startState[currentY][currentX + 1][0][0] >= 0 || startState[currentY][currentX + 1][0][1] <= 0)
                             {
                                 visited[currentX + 1, currentY] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX + 1, currentY, currentMovementUsed + 1));
@@ -450,8 +471,8 @@ public class tempGenerateAllState : MonoBehaviour
             // Jika nextX dan nextY adalah walkable
             if (map[nextX][nextY] != 0)
             {
-                // Jika tidak ada unit di nextX dan nextY, atau merupakan diri sendiri
-                if (startState[nextY][nextX][0][0] == 0 || isSelf)
+                // Jika tidak ada unit di nextX dan nextY, atau merupakan diri sendiri, atau unit di nextX dan nextY sudah mati
+                if (startState[nextY][nextX][0][0] == 0 || isSelf || startState[nextY][nextX][0][1] <= 0)
                 {
                     possibleIndex.Add(new Tuple<int, int>(nextX, nextY)); // Add the tuple to the HashSet
                 }
@@ -564,14 +585,10 @@ public class tempGenerateAllState : MonoBehaviour
         }
         Debug.Log("~~");
 
-        // TODO: Buat logic attacknya
-        // Lakukan logic attack (Mengurangi nyawa, menambahkan attack index ke state), mengubah stateAfterMove
-
-
-        // Masukkan hasil ke successorStates
-        // TODO: Harusnya ini dimasukkan ke successorStates tiap kali logic attack berjalan. Cuman sementara gini dulu.
+        // Untuk semua attack pattern yang valid
         foreach (var tuple in attackPatternIndex)
         {
+            // Masukkan index attack ke state4d[y][x][1][0] dan state4d[y][x][1][1]
             int xAttackPos = tuple.Item1;
             int yAttackPos = tuple.Item2;
 
@@ -580,6 +597,127 @@ public class tempGenerateAllState : MonoBehaviour
             newSuccessorState[unitPosY][unitPosX][1][0] = xAttackPos;
             newSuccessorState[unitPosY][unitPosX][1][1] = yAttackPos;
 
+            // Menyerang = nyawa terserang - attack power penyerang
+            // Unit sekarang menyerang musuh
+            newSuccessorState[yAttackPos][xAttackPos][0][1] -= newSuccessorState[unitPosY][unitPosX][0][2];
+            int attackedUnitHP = newSuccessorState[yAttackPos][xAttackPos][0][1];
+
+            // Jika nyawa musuh belum mati, dan jika musuh bisa menyerang unit sekarang, maka musuh balas menyerang
+            if (attackedUnitHP > 0)
+            {
+                List<Tuple<int, int>> attackedUnitAttackPatternIndex;
+                attackedUnitAttackPatternIndex = new List<Tuple<int, int>>();
+                // Cek serangan musuh
+                // Cari tipe unit
+                int attackedUnitCode = newSuccessorState[yAttackPos][xAttackPos][0][0];
+
+                switch (attackedUnitCode)
+                {
+                    // Soldier
+                    case -1:
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -1, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 1, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 0, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 0, stateAfterMove);
+                        break;
+
+                    case -2:
+                        // Archer
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -2, stateAfterMove);
+                        // Kanan Atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, -1, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 2, 0, stateAfterMove);
+                        // Kanan Bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 1, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 2, stateAfterMove);
+                        // Kiri Bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 1, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -2, 0, stateAfterMove);
+                        // Kiri Atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, -1, stateAfterMove);
+                        break;
+
+                    case -3:
+                        // GigaMungus
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -1, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 1, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 0, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 0, stateAfterMove);
+                        break;
+
+                    case -4:
+                        // BaldArcher
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -3, 0, stateAfterMove);
+                        // Kiri atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -2, 1, stateAfterMove);
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 2, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 3, stateAfterMove);
+                        // Kanan atas
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 2, stateAfterMove);
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 2, 1, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 3, 0, stateAfterMove);
+                        // Kanan bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 2, -1, stateAfterMove);
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, -2, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -3, stateAfterMove);
+                        // Kiri bawah
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, -2, stateAfterMove);
+                        AddAttackPatternTilesMin(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -2, -1, stateAfterMove);
+                        break;
+
+                    default:
+                        Debug.LogError("Unit Code Not Found! " + attackedUnitCode);
+                        break;
+                }
+
+
+                // Cek apakah unit penyerang ada dalam attack pattern unit terserang
+                Tuple<int, int> attackingUnitPos = new Tuple<int, int>(unitPosX, unitPosY);
+                HashSet<Tuple<int, int>> attackedUnitAttackPatternIndexHash = new HashSet<Tuple<int, int>>(attackedUnitAttackPatternIndex);
+                HashSet<Tuple<int, int>> attackingUnitIndex = new HashSet<Tuple<int, int>>(new[] { attackingUnitPos });
+
+                attackingUnitIndex.IntersectWith(attackedUnitAttackPatternIndexHash);
+
+                // Jika hasil intersect ada isinya, maka attackedUnit bisa menyerang attackingUnit
+                if (attackingUnitIndex.Count > 0)
+                {
+                    // Unit terserang menyerang unit sekarang
+                    newSuccessorState[unitPosY][unitPosX][0][1] -= newSuccessorState[yAttackPos][xAttackPos][0][2];
+                }
+            }
+
+
+
+
+            // Masukkan hasil ke successorStates
             successorStates.Add(newSuccessorState);
         }
     }
@@ -603,13 +741,18 @@ public class tempGenerateAllState : MonoBehaviour
                 // Jika ada unit milik player di nextX dan nextY
                 if (startState[nextY][nextX][0][0] < 0)
                 {
-                    possibleIndex.Add(new Tuple<int, int>(nextX, nextY)); // Add the tuple to the List
+                    // Jika unit milik player itu belum mati
+                    if (startState[nextY][nextX][0][1] > 0)
+                    {
+                        possibleIndex.Add(new Tuple<int, int>(nextX, nextY)); // Add the tuple to the List
+                    }
                 }
             }
         }
     }
     #endregion
 
+    // TODO: Here
     public List<int[][][][]> generateAllStateMin(int[][][][] startState, int[][] map, int startUnitAmount)
     {
         List<int[][][][]> successorStates = new List<int[][][][]>();
@@ -644,59 +787,71 @@ public class tempGenerateAllState : MonoBehaviour
                 if (startState[i][j][0][0] < 0)
                 {
                     // Jika ada unit milik Human (karena unit < 0)
-
-                    // Generate semua kemungkinan gerakan, berdasarkan unitnya
-                    HashSet<Tuple<int, int>> possibleMovement = generatePossibleMovementMin(j, i, startState);
-
-                    // cek tiap possible movement, bisa attack kemana aja, dan terjadi apa setelah attack. Masuk state baru
-                    foreach (Tuple<int, int> tuple in possibleMovement)
+                    unitAlreadyGenerated++;
+                    // Cek apakah unit ini masih hidup (HP > 0)
+                    if (startState[i][j][0][1] > 0)
                     {
-                        int xMoveTo = tuple.Item1;
-                        int yMoveTo = tuple.Item2;
+                        // Generate semua kemungkinan gerakan, berdasarkan unitnya
+                        HashSet<Tuple<int, int>> possibleMovement = generatePossibleMovementMin(j, i, startState);
 
-                        // Copy start state
-                        int[][][][] stateAfterMove = generate4dState(startState);
-                        // Jika pergerakan bukan ke diri sendiri
-                        if (((yMoveTo == i) && (xMoveTo == j)) == false)
+                        // cek tiap possible movement, bisa attack kemana aja, dan terjadi apa setelah attack. Masuk state baru
+                        foreach (Tuple<int, int> tuple in possibleMovement)
                         {
-                            Debug.Log(xMoveTo + " " + yMoveTo);
-                            // Pindahkan unit ke tempat bergeraknya
-                            for (int k = 0; k < startState[i][j].Length; k++)
+                            int xMoveTo = tuple.Item1;
+                            int yMoveTo = tuple.Item2;
+
+                            // Copy start state
+                            int[][][][] stateAfterMove = generate4dState(startState);
+                            // Jika pergerakan bukan ke diri sendiri
+                            if (((yMoveTo == i) && (xMoveTo == j)) == false)
                             {
-                                // Create a new array and copy the elements from the original array
-                                stateAfterMove[yMoveTo][xMoveTo][k] = new int[startState[i][j][k].Length];
-                                Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[yMoveTo][xMoveTo][k].Length);
+                                Debug.Log(xMoveTo + " " + yMoveTo);
+                                // Pindahkan unit ke tempat bergeraknya
+                                for (int k = 0; k < startState[i][j].Length; k++)
+                                {
+                                    // Create a new array and copy the elements from the original array
+                                    stateAfterMove[yMoveTo][xMoveTo][k] = new int[startState[i][j][k].Length];
+                                    Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[yMoveTo][xMoveTo][k].Length);
+                                }
+                                // Pindahkan HP dan attack power
+                                stateAfterMove[yMoveTo][xMoveTo][0][1] = startState[i][j][0][1];
+                                stateAfterMove[yMoveTo][xMoveTo][0][2] = startState[i][j][0][2];
+                                // Kosongkan lokasi sebelumnya dari unit yang telah bergerak
+                                stateAfterMove[i][j][0][0] = 0; // Reset tipe unit
+                                stateAfterMove[i][j][0][1] = 0; // Reset HP
+                                stateAfterMove[i][j][0][2] = 0; // Reset Attack power
+                                stateAfterMove[i][j][1] = new int[] { }; // Reset attack unit
                             }
-                            // Kosongkan lokasi sebelumnya dari unit yang telah bergerak
-                            stateAfterMove[i][j][0][0] = 0; // Reset tipe unit
-                            stateAfterMove[i][j][1] = new int[] { }; // Reset attack unit
+
+                            // // Debug 
+                            // // sumbu y
+                            // for (int a = 0; a < stateAfterMove.Length; a++)
+                            // {
+                            //     string rowLog = "";
+                            //     // sumbu x
+                            //     for (int b = 0; b < stateAfterMove[a].Length; b++)
+                            //     {
+                            //         rowLog += "[(" + stateAfterMove[a][b][0][0] + ", " + "HP" + ") ";
+
+                            //         if (stateAfterMove[a][b][1].Length > 0) {
+
+                            //             rowLog += "(" + stateAfterMove[a][b][1][0] + ", ";
+                            //             rowLog += "(" + stateAfterMove[a][b][1][1] + ")]    ";
+                            //         } else {
+                            //             rowLog += "()]    ";
+                            //         }
+
+                            //     }
+                            //     Debug.Log(rowLog);
+                            // }
+
+
+                            generatePossibleAttackMin(xMoveTo, yMoveTo, stateAfterMove, successorStates);
                         }
 
-                        // // Debug 
-                        // // sumbu y
-                        // for (int a = 0; a < stateAfterMove.Length; a++)
-                        // {
-                        //     string rowLog = "";
-                        //     // sumbu x
-                        //     for (int b = 0; b < stateAfterMove[a].Length; b++)
-                        //     {
-                        //         rowLog += "[(" + stateAfterMove[a][b][0][0] + ", " + "HP" + ") ";
-
-                        //         if (stateAfterMove[a][b][1].Length > 0) {
-
-                        //             rowLog += "(" + stateAfterMove[a][b][1][0] + ", ";
-                        //             rowLog += "(" + stateAfterMove[a][b][1][1] + ")]    ";
-                        //         } else {
-                        //             rowLog += "()]    ";
-                        //         }
-
-                        //     }
-                        //     Debug.Log(rowLog);
-                        // }
-
-
-                        generatePossibleAttackMin(xMoveTo, yMoveTo, stateAfterMove, successorStates);
                     }
+
+
 
                 }
 
@@ -718,7 +873,15 @@ public class tempGenerateAllState : MonoBehaviour
                 // sumbu x
                 for (int b = 0; b < state[a].Length; b++)
                 {
-                    rowLog += "[(" + state[a][b][0][0] + ", " + "HP" + ") ";
+                    if (state[a][b][0][0] != 0)
+                    {
+                        rowLog += "[(" + state[a][b][0][0] + ", HP: " + state[a][b][0][1] + ", Atk:" + state[a][b][0][2] + ") ";
+                    }
+                    else
+                    {
+                        rowLog += "[(0, 0), ()]";
+                    }
+
 
                     if (state[a][b][1].Length > 0)
                     {
@@ -911,7 +1074,7 @@ public class tempGenerateAllState : MonoBehaviour
                 // - Pengecekan didalam map atau tidak
                 // - Pengecekan belum visited
                 // - Pengecekan walkable tidak (map[y][x] apakah != 0)
-                // - Pengecekan tile kosong ATAU unit milik Human (yaitu state[y][x][0][0] <= 0)
+                // - Pengecekan tile kosong ATAU unit milik Human (yaitu state[y][x][0][0] <= 0) ATAU unit sudah mati (yaitu state[y][x][0][1] <= 0)
 
                 // Atas
                 if (currentY - 1 >= 0)
@@ -920,8 +1083,9 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY - 1] != 0)
                         {
-                            if (startState[currentY - 1][currentX][0][0] <= 0)
+                            if (startState[currentY - 1][currentX][0][0] <= 0 || startState[currentY - 1][currentX][0][1] <= 0)
                             {
+                                // TODO:
                                 visited[currentX, currentY - 1] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX, currentY - 1, currentMovementUsed + 1));
                                 tilesInMoveSpeedRangeIndex.Add(new Tuple<int, int>(currentX, currentY - 1));
@@ -938,7 +1102,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX][currentY + 1] != 0)
                         {
-                            if (startState[currentY + 1][currentX][0][0] <= 0)
+                            if (startState[currentY + 1][currentX][0][0] <= 0 || startState[currentY + 1][currentX][0][1] <= 0)
                             {
                                 visited[currentX, currentY + 1] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX, currentY + 1, currentMovementUsed + 1));
@@ -955,7 +1119,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX - 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX - 1][0][0] <= 0)
+                            if (startState[currentY][currentX - 1][0][0] <= 0 || startState[currentY][currentX - 1][0][1] <= 0)
                             {
                                 visited[currentX - 1, currentY] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX - 1, currentY, currentMovementUsed + 1));
@@ -974,7 +1138,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         if (map[currentX + 1][currentY] != 0)
                         {
-                            if (startState[currentY][currentX + 1][0][0] <= 0)
+                            if (startState[currentY][currentX + 1][0][0] <= 0 || startState[currentY][currentX + 1][0][1] <= 0)
                             {
                                 visited[currentX + 1, currentY] = true;
                                 queue.Enqueue(new Tuple<int, int, int>(currentX + 1, currentY, currentMovementUsed + 1));
@@ -1109,14 +1273,11 @@ public class tempGenerateAllState : MonoBehaviour
         }
         Debug.Log("~~");
 
-        // TODO: Buat logic attacknya
-        // Lakukan logic attack (Mengurangi nyawa, menambahkan attack index ke state), mengubah stateAfterMove
-
-
         // Masukkan hasil ke successorStates
         // TODO: Harusnya ini dimasukkan ke successorStates tiap kali logic attack berjalan. Cuman sementara gini dulu.
         foreach (var tuple in attackPatternIndex)
         {
+            // Masukkan index attack ke state4d[y][x][1][0] dan state4d[y][x][1][1]
             int xAttackPos = tuple.Item1;
             int yAttackPos = tuple.Item2;
 
@@ -1124,6 +1285,122 @@ public class tempGenerateAllState : MonoBehaviour
             newSuccessorState[unitPosY][unitPosX][1] = new int[2];
             newSuccessorState[unitPosY][unitPosX][1][0] = xAttackPos;
             newSuccessorState[unitPosY][unitPosX][1][1] = yAttackPos;
+
+            // Menyerang = nyawa terserang - attack power penyerang
+            // Unit sekarang menyerang musuh
+            newSuccessorState[yAttackPos][xAttackPos][0][1] -= newSuccessorState[unitPosY][unitPosX][0][2];
+            int attackedUnitHP = newSuccessorState[yAttackPos][xAttackPos][0][1];
+
+            // Jika nyawa musuh belum mati, dan jika musuh bisa menyerang unit sekarang, maka musuh balas menyerang
+            if (attackedUnitHP > 0)
+            {
+                List<Tuple<int, int>> attackedUnitAttackPatternIndex;
+                attackedUnitAttackPatternIndex = new List<Tuple<int, int>>();
+                // Cek serangan musuh
+                // Cari tipe unit
+                int attackedUnitCode = newSuccessorState[yAttackPos][xAttackPos][0][0];
+                // Switch tipe unit
+                switch (attackedUnitCode)
+                {
+                    // Soldier
+                    case 1:
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -1, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 1, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 0, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 0, stateAfterMove);
+                        break;
+
+                    case 2:
+                        // Archer
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -2, stateAfterMove);
+                        // Kanan Atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, -1, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 2, 0, stateAfterMove);
+                        // Kanan Bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 1, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 2, stateAfterMove);
+                        // Kiri Bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 1, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -2, 0, stateAfterMove);
+                        // Kiri Atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, -1, stateAfterMove);
+                        break;
+
+                    case 3:
+                        // GigaMungus
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -1, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 1, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 0, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 0, stateAfterMove);
+                        break;
+
+                    case 4:
+                        // BaldArcher
+                        // Add possible tile
+                        // Tile ini sendiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 0, stateAfterMove);
+                        // Kiri
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -3, 0, stateAfterMove);
+                        // Kiri atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -2, 1, stateAfterMove);
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, 2, stateAfterMove);
+                        // Atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, 3, stateAfterMove);
+                        // Kanan atas
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, 2, stateAfterMove);
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 2, 1, stateAfterMove);
+                        // Kanan
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 3, 0, stateAfterMove);
+                        // Kanan bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 2, -1, stateAfterMove);
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 1, -2, stateAfterMove);
+                        // Bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, 0, -3, stateAfterMove);
+                        // Kiri bawah
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -1, -2, stateAfterMove);
+                        AddAttackPatternTilesMax(attackedUnitAttackPatternIndex, xAttackPos, yAttackPos, -2, -1, stateAfterMove);
+                        break;
+
+                    default:
+                        Debug.LogError("Unit Code Not Found! " + unitCode);
+                        break;
+                }
+
+                // Cek apakah unit penyerang ada dalam attack pattern unit terserang
+                Tuple<int, int> attackingUnitPos = new Tuple<int, int>(unitPosX, unitPosY);
+                HashSet<Tuple<int, int>> attackedUnitAttackPatternIndexHash = new HashSet<Tuple<int, int>>(attackedUnitAttackPatternIndex);
+                HashSet<Tuple<int, int>> attackingUnitIndex = new HashSet<Tuple<int, int>>(new[] { attackingUnitPos });
+
+                attackingUnitIndex.IntersectWith(attackedUnitAttackPatternIndexHash);
+
+                // Jika hasil intersect ada isinya, maka attackedUnit bisa menyerang attackingUnit
+                if (attackingUnitIndex.Count > 0)
+                {
+                    // Unit terserang menyerang unit sekarang
+                    newSuccessorState[unitPosY][unitPosX][0][1] -= newSuccessorState[yAttackPos][xAttackPos][0][2];
+                }
+            }
 
             successorStates.Add(newSuccessorState);
         }
@@ -1148,7 +1425,11 @@ public class tempGenerateAllState : MonoBehaviour
                 // Jika ada unit milik AI di nextX dan nextY
                 if (startState[nextY][nextX][0][0] > 0)
                 {
-                    possibleIndex.Add(new Tuple<int, int>(nextX, nextY)); // Add the tuple to the List
+                    // Jika unit milik AI itu belum mati
+                    if (startState[nextY][nextX][0][1] > 0)
+                    {
+                        possibleIndex.Add(new Tuple<int, int>(nextX, nextY)); // Add the tuple to the List
+                    }
                 }
             }
         }
