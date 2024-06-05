@@ -97,6 +97,9 @@ public class tileMapScript : MonoBehaviour
         generateMapVisuals();
         //Check if there are any pre-existing units on the board
         setIfTileIsOccupied();
+
+        // TODO: Testing
+        GridMovementCostTo2DArray();
     }
 
     private void Update()
@@ -1698,5 +1701,27 @@ private int[,,,] test_state = new int[10,10,2,2] ;
             // }
         //}
         Debug.Log("Tes Akhir");
+    }
+
+    public int[][] GridMovementCostTo2DArray() {
+        // Assume grid is 10x10
+        int[][] movementCostMap = new int[10][];
+        for (int i = 0; i < 10; i++) {
+            movementCostMap[i] = new int[10];
+        }
+
+        for (int i = 0; i < mapSizeX; i++) {
+            for (int j = 0; j < mapSizeY; j++) {
+                int y = 9 + (-1*j);
+                int x = i;
+
+                movementCostMap[x][y] = (int) tileTypes[tiles[i,j]].movementCost;
+            }
+        }
+        
+        
+        
+
+        return movementCostMap;
     }
 }
