@@ -95,24 +95,24 @@ public class gameManagerScript : MonoBehaviour
     //2019/10/17 there is a small blink between disable and re-enable for path, its a bit jarring, try to fix it later
     public void Update()
     {
-        // Custom ~Adi
-        // Untuk AInya
-        if (currentTeam == 1)
-        {
-            if (!AITurnStarted)
-            {
-                Debug.Log("Satuu");
-                AITurnStarted = true;
-                TMS.AITurn();
-            }
+        // // Custom ~Adi
+        // // Untuk AInya
+        // if (currentTeam == 1)
+        // {
+        //     if (!AITurnStarted)
+        //     {
+        //         Debug.Log("Satuu");
+        //         AITurnStarted = true;
+        //         TMS.AITurn();
+        //     }
 
-            // if (TMS.selectedUnit.GetComponent<UnitScript>().unitMoveState == TMS.selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(2))
-            // {
-            //     TMS.finalizeOption();
-            //     Debug.Log("Finalized satuu");
-            // }
-            return;
-        }
+        //     // if (TMS.selectedUnit.GetComponent<UnitScript>().unitMoveState == TMS.selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(2))
+        //     // {
+        //     //     TMS.finalizeOption();
+        //     //     Debug.Log("Finalized satuu");
+        //     // }
+        //     return;
+        // }
 
 
         // Untuk playernya

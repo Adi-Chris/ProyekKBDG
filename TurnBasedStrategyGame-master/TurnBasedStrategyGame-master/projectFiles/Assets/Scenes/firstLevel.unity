@@ -1367,7 +1367,7 @@ PrefabInstance:
     - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: unitName
-      value: tes
+      value: Skeleton Soldier
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
@@ -5334,7 +5334,7 @@ PrefabInstance:
     - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: unitName
-      value: tes
+      value: Skeleton Soldier
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
