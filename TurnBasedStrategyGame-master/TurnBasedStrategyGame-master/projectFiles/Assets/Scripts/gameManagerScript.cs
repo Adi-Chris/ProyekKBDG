@@ -74,6 +74,9 @@ public class gameManagerScript : MonoBehaviour
     public int amountOfEnemyAI; // TODO: Ini perlu diupdate saat unit musuh terkalahkan
     public int amountOfEnemyAIDoneMove;
 
+    //
+    tempGenerateAllState tempGenerateAllState;
+
     public void Start()
     {
         currentTeam = 0;
@@ -340,7 +343,7 @@ public class gameManagerScript : MonoBehaviour
     //}
 
     public int[][][][] start_state = new int[10][][][];
-    private int[][][][] boardToState()
+    public int[][][][] boardToState()
     {
         int[][][][] state = new int[10][][][];
         for (int i = 0; i < 10; i++)
@@ -996,10 +999,4 @@ public class gameManagerScript : MonoBehaviour
         displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Winner!");
 
     }
-
-
-
-
-
-
 }

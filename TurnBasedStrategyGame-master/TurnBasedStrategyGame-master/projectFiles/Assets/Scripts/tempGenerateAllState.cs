@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class tempGenerateAllState : MonoBehaviour
 {
-    int[][] map; // Mapnya ini nanti masukin ke Minimax aja, karena toh sama semua mapnya pasti
+    public int[][] map; // Mapnya ini nanti masukin ke Minimax aja, karena toh sama semua mapnya pasti
     // Jika nilainya 0, tidak walkable
     // Jika nilainya 1, berarti walkable
     // Map berformat [x][y]
