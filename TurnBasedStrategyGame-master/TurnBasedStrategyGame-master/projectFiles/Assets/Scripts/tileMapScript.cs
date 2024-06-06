@@ -84,8 +84,14 @@ public class tileMapScript : MonoBehaviour
     public Material greenUIMat;
     public Material redUIMat;
     public Material blueUIMat;
+
+    // State untuk testing
+    private int[][][][] test_state;
+    private int[][][][] tempState;
     private void Start()
     {
+        tempState = init4dState();
+        test_state = init4dState();
         //Get the battlemanager running
         //BMS = GetComponent<battleManagerScript>();
         //GMS = GetComponent<gameManagerScript>();
@@ -1532,9 +1538,9 @@ public class tileMapScript : MonoBehaviour
     Sudah selesai, end turn
     */
 
-    private int[,,,] tempState = new int[10,10,2,2];
+    
 
-    private int indexAItoMove(int[,,,] newstate){
+    private int indexAItoMove(int[][][][] newstate){
         this.tempState = newstate;
 
         int defaultIndex = -99;
@@ -1546,8 +1552,8 @@ public class tileMapScript : MonoBehaviour
 
             int int_type = GMS.intType(tile.GetComponent<UnitScript>().unitName);
 
-            if (this.tempState[x,y,0,0] == int_type){
-                this.tempState[x,y,0,0] = 0;
+            if (this.tempState[x][y][0][0] == int_type){
+                this.tempState[x][y][0][0] = 0;
                 Debug.Log("mau jadi 0: " + x + " ; " + y);
             } else {
                 defaultIndex = i;
@@ -1560,7 +1566,7 @@ public class tileMapScript : MonoBehaviour
         {
             sb.Append("{");
             for (int j = 0; j < 10; j++){
-                sb.Append("{{" + this.tempState[i, j, 0, 0] + "},{}}, \t");
+                sb.Append("{{" + this.tempState[i][j][0][0] + "},{}}, \t");
             }
             sb.Append("}\n");
         }
@@ -1592,7 +1598,7 @@ public class tileMapScript : MonoBehaviour
         {
             sb.Append("{");
             for (int j = 0; j < 10; j++){
-                sb.Append("{{" + this.tempState[i, j, 0, 0] + "},{}}, \t");
+                sb.Append("{{" + this.tempState[i][j][0][0] + "},{}}, \t");
             }
             sb.Append("}\n");
         }
@@ -1608,7 +1614,7 @@ public class tileMapScript : MonoBehaviour
 
         for (int i = 0; i < 10; i++){
             for (int j = 0; j < 10; j++){
-                if (tempState[i, j, 0, 0] > 0 && tempState [i, j, 0, 0] < 5){
+                if (tempState[i][j][0][0] > 0 && tempState [i][j][0][0] < 5){
                     res[0] = j; //x
                     res[1] = i; //y
                     return res;
@@ -1634,16 +1640,15 @@ public class tileMapScript : MonoBehaviour
 // {{{-4},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-4},{}}, 	}
 
 // }
-
-private int[,,,] test_state = new int[10,10,2,2] ;
+        
     public void AITurn()
     {
-        int [,,,] test_state = GMS.start_state;
+        int [][][][] test_state = GMS.start_state;
         int tempX = 2;
         int tempY = 4;
 
-        test_state[tempX, tempY, 0, 0] = 0;
-        test_state[tempX, tempY+1, 0, 0] = 1;
+        test_state[tempX][tempY][0][0] = 0;
+        test_state[tempX][tempY+1][0][0] = 1;
 
         Debug.Log("Current Team: " + GMS.currentTeam);
         Debug.Log("Tes");
@@ -1724,4 +1729,23 @@ private int[,,,] test_state = new int[10,10,2,2] ;
 
         return movementCostMap;
     }
+
+    // Helper function untuk initialize 4d state
+    private int[][][][] init4dState() {
+    int[][][][] state = new int[10][][][];
+    for (int i = 0; i < 10; i++)
+        {
+            state[i] = new int[10][][];
+            for (int j = 0; j < 10; j++)
+            {
+                state[i][j] = new int[2][];
+                for (int k = 0; k < 2; k++)
+                {
+                    state[i][j][k] = new int[2];
+                    state[i][j][k][0] = 0;
+                }
+            }
+        }
+    return state;
+}
 }
