@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Ini punya sean ngitung fitness
 public class tempFitnessFunction : MonoBehaviour
 {
     //Sean
-
-    public tileMapScript map;
-    public int EvaluatePosition(int player) //Team 1 atau Team 2
+    public tileMapScript MAP;
+    public gameManagerScript GMS;
+    public int EvaluatePosition(int[][][][] sourceArray)
     {
-        int playerUnits = 0;
-        int playerTotalHP = 0;
+        int AIUnits = 0;
+        int AITotalHP = 0;
         int opponentUnits = 0;
         int opponentTotalHP = 0;
+        int positionalAdvantage = 0;
 
         int[,] positionWeights = new int[10, 10]
         {
@@ -29,43 +29,44 @@ public class tempFitnessFunction : MonoBehaviour
             { 1, 2, 2, 2, 2, 2, 2, 2, 2, 1},
         };
 
+        int[][][][] destinationArray = new int[10][][][];
+
         for (int i = 0; i < 10; i++)
         {
-            for (int j = 0; j < 10; i=j++)
+            destinationArray[i] = new int[10][][];
+            for (int j = 0; j < 10; j++)
             {
-                if (map.tilesOnMap[i, j].gameObject.CompareTag("Tile"))
+                destinationArray[i][j] = new int[2][];
+                for (int k = 0; k < 2; k++)
                 {
-                    if (map.tilesOnMap[i, j].GetComponent<ClickableTileScript>().unitOnTile != null)
+                    destinationArray[i][j][k] = new int[2];
+                    for (int l = 0; l < 2; l++)
                     {
-                        /*if (unit = player)
-                         {
-                            playerUnits++;
-                            playerTotalHP++;
+                        destinationArray[i][j][k][l] = sourceArray[i][j][k][l];
+                        if (destinationArray[i][j][0][0] < 0)
+                        {
+                            AIUnits++;
+                            AITotalHP += destinationArray[i][j][0][1];
                             positionalAdvantage += positionWeights[i, j];
-                         }
-                          else
-                         {
+                        }
+                        else
+                        {
                             opponentUnits++;
-                            opponentTotalHP++;
+                            opponentTotalHP += destinationArray[i][j][0][1];
                             positionalAdvantage -= positionWeights[i, j];
-                         }
-                        */
+                        }
                     }
                 }
             }
         }
 
-        int playerScore = playerUnits * 10 + playerTotalHP;
+        int AIScore = AIUnits * 10 + AITotalHP;
         int opponentScore = opponentUnits * 10 + opponentTotalHP;
-        //int positionalScore = positionalAdvantage;
+        int positionalScore = positionalAdvantage;
         //int unitImportanceScore = jumlah total unit berdasarkan value
 
-        return playerScore - opponentScore; // + unitImportanceScore + positionalScore
+        return AIScore - opponentScore + positionalScore; // + unitImportanceScore
     }
-    
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -77,10 +78,5 @@ public class tempFitnessFunction : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void Evaluate ()
-    {
-
     }
 }
