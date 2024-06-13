@@ -88,6 +88,10 @@ public class tileMapScript : MonoBehaviour
     // State untuk testing
     private int[][][][] test_state;
     private int[][][][] tempState;
+
+    private int[][] map;
+
+    [SerializeField] tempTempMinimax tempMinMax;
     private void Start()
     {
         tempState = init4dState();
@@ -104,8 +108,7 @@ public class tileMapScript : MonoBehaviour
         //Check if there are any pre-existing units on the board
         setIfTileIsOccupied();
 
-        // TODO: Testing
-        GridMovementCostTo2DArray();
+        map = GridMovementCostTo2DArray();
     }
 
     private void Update()
@@ -1643,12 +1646,31 @@ public class tileMapScript : MonoBehaviour
         
     public void AITurn()
     {
-        int [][][][] test_state = GMS.start_state;
-        int tempX = 2;
-        int tempY = 4;
+        int [][][][] test_state = GMS.boardToState();
+        
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{\n");
+        for (int i = 0; i < 10; i++)
+        {
+            
+            sb.Append("{");
+            for (int j = 0; j < 10; j++)
+            {
+                
+                sb.Append("{{" + test_state[i][j][0][0] + "},{}}, \t");
+            }
+            sb.Append("}\n");
+        }
+        sb.Append("\n}");
+        Debug.Log("BOARDDD masuk minmax:");
+        Debug.Log(sb.ToString());
 
-        test_state[tempX][tempY][0][0] = 0;
-        test_state[tempX][tempY+1][0][0] = 1;
+        test_state = tempMinMax.MinimaxAlgorithm(GMS.boardToState(), 2, true, map, 10);
+        //int tempX = 2;
+        //int tempY = 4;
+
+        //test_state[tempX][tempY][0][0] = 0;
+        //test_state[tempX][tempY+1][0][0] = 1;
 
         Debug.Log("Current Team: " + GMS.currentTeam);
         Debug.Log("Tes");
@@ -1678,7 +1700,6 @@ public class tileMapScript : MonoBehaviour
             if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0)
             {
                 Debug.Log("heyyy taegetttt: " + targetTileX + ", " + targetTileY);
-
                 Node nodeToCheck = graph[targetTileX, targetTileY];
 
                 mouseClickToSelectUnitV2(targetTileX, targetTileY, selectedUnit);

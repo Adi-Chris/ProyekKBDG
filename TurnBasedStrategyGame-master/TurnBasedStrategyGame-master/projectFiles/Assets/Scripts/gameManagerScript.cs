@@ -77,8 +77,11 @@ public class gameManagerScript : MonoBehaviour
     //
     tempGenerateAllState tempGenerateAllState;
 
+    public int[][][][] start_state;
+
     public void Start()
     {
+        start_state = init4dState();
         currentTeam = 0;
         setCurrentTeamUI();
         teamHealthbarColorUpdate();
@@ -342,7 +345,7 @@ public class gameManagerScript : MonoBehaviour
     //    return state;
     //}
 
-    public int[][][][] start_state = new int[10][][][];
+    
     public int[][][][] boardToState()
     {
         int[][][][] state = new int[10][][][];
@@ -354,7 +357,7 @@ public class gameManagerScript : MonoBehaviour
                 state[i][j] = new int[2][];
                 for (int k = 0; k < 2; k++)
                 {
-                    state[i][j][k] = new int[2];
+                    state[i][j][k] = new int[3];
                     state[i][j][k][0] = 0;
                 }
             }
@@ -371,6 +374,11 @@ public class gameManagerScript : MonoBehaviour
             int int_type = intType(tile.GetComponent<UnitScript>().unitName);
 
             state[x][y][0][0] = int_type * -1;
+
+            int healthPoint = tile.GetComponent<UnitScript>().currentHealthPoints;
+            state[x][y][0][1] = healthPoint;
+            int att = tile.GetComponent<UnitScript>().attackDamage;
+            state[x][y][0][2] = att;
         }
 
         for (int i = 0; i < team2.transform.childCount; i++)
@@ -382,6 +390,11 @@ public class gameManagerScript : MonoBehaviour
             int int_type = intType(tile.GetComponent<UnitScript>().unitName);
 
             state[x][y][0][0] = int_type;
+
+            int healthPoint = tile.GetComponent<UnitScript>().currentHealthPoints;
+            state[x][y][0][1] = healthPoint;
+            int att = tile.GetComponent<UnitScript>().attackDamage;
+            state[x][y][0][2] = att;
         }
 
         //return state
@@ -390,11 +403,10 @@ public class gameManagerScript : MonoBehaviour
         sb.Append("{\n");
         for (int i = 0; i < 10; i++)
         {
-            Debug.Log("cek loop 1");
+            
             sb.Append("{");
             for (int j = 0; j < 10; j++)
             {
-                Debug.Log("i: " + i + " , j: " + j);
                 sb.Append("{{" + state[i][j][0][0] + "},{}}, \t");
             }
             sb.Append("}\n");
@@ -998,5 +1010,24 @@ public class gameManagerScript : MonoBehaviour
         displayWinnerUI.enabled = true;
         displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Winner!");
 
+    }
+    // Helper function untuk initialize 4d state
+    private int[][][][] init4dState()
+    {
+        int[][][][] state = new int[10][][][];
+        for (int i = 0; i < 10; i++)
+        {
+            state[i] = new int[10][][];
+            for (int j = 0; j < 10; j++)
+            {
+                state[i][j] = new int[2][];
+                for (int k = 0; k < 2; k++)
+                {
+                    state[i][j][k] = new int[2];
+                    state[i][j][k][0] = 0;
+                }
+            }
+        }
+        return state;
     }
 }

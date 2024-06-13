@@ -1,12 +1,11 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using 
+using System.Collections.Generic; 
 using UnityEngine;
 
 public class tempTempMinimax : MonoBehaviour
 {
     private const int MaxDepth = 3;
-    private tempGenerateAllState generate;
+    [SerializeField] tempGenerateAllState generate;
 
     
     // Start is called before the first frame update
@@ -21,35 +20,50 @@ public class tempTempMinimax : MonoBehaviour
         
     }
 
-    public int MinimaxAlgorithm(int[][][][] state, int depth, bool maximizingPlayer, int[][] map, int startUnitAmount)
+    public int[][][][] MinimaxAlgorithm(int[][][][] state, int depth, bool maximizingPlayer, int[][] map, int startUnitAmount)
     {
-        if (depth == 0)
+        
+        if (depth == 0 )
         {
-            return EvaluateBoard(state);
+            return state; // Return the current state at leaf nodes or terminal states
         }
+
+        int[][][][] bestState = null; //null
 
         if (maximizingPlayer)
         {
             int maxEval = int.MinValue;
             List<int[][][][]> allStatesMax = generate.generateAllStateMax(state, map, startUnitAmount);
+            Debug.Log("jumlah all max state: " + allStatesMax.Count);
             foreach (var childState in allStatesMax)
             {
-                int eval = MinimaxAlgorithm(childState, depth - 1, false, map, startUnitAmount);
-                maxEval = Mathf.Max(maxEval, eval);
+                int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, false, map, startUnitAmount);
+                int eval = EvaluateBoard(evalState);
+                if (eval > maxEval)
+                {
+                    maxEval = eval;
+                    bestState = childState;
+                }
             }
-            return maxEval;
         }
         else
         {
             int minEval = int.MaxValue;
             List<int[][][][]> allStatesMin = generate.generateAllStateMin(state, map, startUnitAmount);
+            Debug.Log("jumlah all min state: " + allStatesMin.Count);
             foreach (var childState in allStatesMin)
             {
-                int eval = MinimaxAlgorithm(childState, depth - 1, true, map, startUnitAmount);
-                minEval = Mathf.Min(minEval, eval);
+                int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, true, map, startUnitAmount);
+                int eval = EvaluateBoard(evalState);
+                if (eval < minEval)
+                {
+                    minEval = eval;
+                    bestState = childState;
+                }
             }
-            return minEval;
         }
+
+        return bestState;
     }
 
     private bool IsGameOver(int[][][][] state)
@@ -58,27 +72,113 @@ public class tempTempMinimax : MonoBehaviour
         return false;
     }
 
+    //private int EvaluateBoard(int[][][][] state)
+    //{
+    //    // Implement your board evaluation logic here.
+    //    int score = 0;
+    //    for (int y = 0; y < state.Length; y++)
+    //    {
+    //        for (int x = 0; x < state[y].Length; x++)
+    //        {
+    //            int unitType = state[y][x][0][0];
+    //            int unitHP = state[y][x][0][1];
+    //            if (unitType > 0)
+    //            {
+    //                score += unitHP; // Positive score for AI units
+    //            }
+    //            else if (unitType < 0)
+    //            {
+    //                score -= unitHP; // Negative score for Human units
+    //            }
+    //        }
+    //    }
+    //    return score;
+    //}
+
     private int EvaluateBoard(int[][][][] state)
     {
-        // Implement your board evaluation logic here.
         int score = 0;
-        // Example: Evaluate based on material count
+
+        // Iterate through the board and evaluate each unit
         for (int y = 0; y < state.Length; y++)
         {
             for (int x = 0; x < state[y].Length; x++)
             {
                 int unitType = state[y][x][0][0];
                 int unitHP = state[y][x][0][1];
-                if (unitType > 0)
+                int unitAttack = state[y][x][0][2];
+
+                if (unitType != 0) // If there is a unit. If not, no
                 {
-                    score += unitHP; // Positive score for AI units
-                }
-                else if (unitType < 0)
-                {
-                    score -= unitHP; // Negative score for Human units
+                    int unitScore = 0;
+
+                    string unitName = GetUnitName(unitType);
+
+                    // Calculate the unit's score based on its type
+                    if (string.Equals(unitName, "Giga Mungus"))
+                    {
+                        unitScore = (unitHP + unitAttack) * 10;
+                    }
+                    else if (string.Equals(unitName, "Skeleton Archer") || string.Equals(unitName, "Skeleton Archer Bald"))
+                    {
+                        unitScore = (unitHP + unitAttack) * 2;
+                    }
+                    else
+                    {
+                        unitScore = unitHP + unitAttack;
+                    }
+
+                    // Add to the total score based on whether the unit belongs to AI or Human
+                    if (unitType > 0) // AI unit
+                    {
+                        score += unitScore;
+                    }
+                    else if (unitType < 0) // Human unit
+                    {
+                        score -= unitScore;
+                    }
                 }
             }
         }
+
         return score;
+    }
+
+    private string GetUnitName(int unitType)
+    {
+        // Implement logic to return unit name based on its type
+        switch (unitType)
+        {
+            case 1:
+                return "Giga Mungus"; // Example type for Giga Mungus
+            case 2:
+                return "Skeleton Archer"; // Example type for Skeleton Archer
+            case 3:
+                return "Skeleton Archer Bald"; // Example type for Skeleton Archer Bald
+            case 4:
+                return "Skeleton Soldier"; // Example type for Skeleton Soldier
+            default:
+                return "Unknown";
+        }
+    }
+
+    // Helper function untuk initialize 4d state
+    private int[][][][] init4dState()
+    {
+        int[][][][] state = new int[10][][][];
+        for (int i = 0; i < 10; i++)
+        {
+            state[i] = new int[10][][];
+            for (int j = 0; j < 10; j++)
+            {
+                state[i][j] = new int[2][];
+                for (int k = 0; k < 2; k++)
+                {
+                    state[i][j][k] = new int[2];
+                    state[i][j][k][0] = 0;
+                }
+            }
+        }
+        return state;
     }
 }
