@@ -86,6 +86,15 @@ public class UnitScript : MonoBehaviour
     public List<Node> pathForMovement = null;
     public bool completedMovement = false;
 
+    [Header("SFX ~Adi")]
+    [SerializeField] SoundManager soundManager;
+    [SerializeField] AudioClip unitSelectSFX; // Note: AI tidak usah dimasukin unit select SFX
+    // [SerializeField] AudioClip unitMoveSFX; // Note: Ini harus dari tilemapscript :')
+    [SerializeField] AudioClip unitAttackSelectSFX;
+    [SerializeField] AudioClip unitAttackSFX;
+    [SerializeField] AudioClip unitDeathSFX;
+
+
     private void Awake()
     {
 
@@ -163,10 +172,16 @@ public class UnitScript : MonoBehaviour
         }
         else if (i == 1)
         {
+            if (unitSelectSFX != null) {
+                soundManager.PlaySFX(unitSelectSFX);
+            }
             unitMoveState = movementStates.Selected;
         }
         else if (i == 2)
         {
+            if (unitAttackSelectSFX != null) {
+                soundManager.PlaySFX(unitAttackSelectSFX);
+            }
             unitMoveState = movementStates.Moved;
         }
         else if (i == 3)
@@ -208,6 +223,9 @@ public class UnitScript : MonoBehaviour
     {
         if (holder2D.activeSelf)
         {
+            if (unitDeathSFX != null) {
+                soundManager.PlaySFX(unitDeathSFX);
+            }
             StartCoroutine(fadeOut());
             StartCoroutine(checkIfRoutinesRunning());
            
@@ -350,5 +368,10 @@ public class UnitScript : MonoBehaviour
     public void setDieAnimation()
     {
         animator.SetTrigger("dieTrigger");
+    }
+
+    // SFX
+    public void PlayAttackSFX() {
+        soundManager.PlaySFX(unitAttackSFX);
     }
 }

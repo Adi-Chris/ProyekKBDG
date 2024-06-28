@@ -11,6 +11,9 @@ public class battleManagerScript : MonoBehaviour
     public gameManagerScript GMS;
    //This is used to check if the battle has been finished
     private bool battleStatus;
+
+    // SFX
+    public SoundManager soundManager;
     
     //In: two 'unit' game Objects the initiator is the unit that initiated the attack and the recipient is the receiver
     //Out: void - units take damage or are destroyed if the hp threshold is <= 
@@ -29,6 +32,7 @@ public class battleManagerScript : MonoBehaviour
             GameObject tempParticle = Instantiate( recipientUnit.GetComponent<UnitScript>().damagedParticle,recipient.transform.position, recipient.transform.rotation);
             Destroy(tempParticle, 2f);
             recipientUnit.dealDamage(initiatorAtt);
+            initiatorUnit.PlayAttackSFX();
             if (checkIfDead(recipient))
             {
                 //Set to null then remove, if the gameObject is destroyed before its removed it will not check properly
@@ -41,7 +45,7 @@ public class battleManagerScript : MonoBehaviour
                 return;
             }
 
-           
+            recipientUnit.PlayAttackSFX();
             initiatorUnit.dealDamage(recipientAtt);
             if (checkIfDead(initiator))
             {
@@ -59,6 +63,7 @@ public class battleManagerScript : MonoBehaviour
             GameObject tempParticle = Instantiate(recipientUnit.GetComponent<UnitScript>().damagedParticle, recipient.transform.position, recipient.transform.rotation);
             Destroy(tempParticle, 2f);
            
+            initiatorUnit.PlayAttackSFX();
             recipientUnit.dealDamage(initiatorAtt);
             if (checkIfDead(recipient))
             {

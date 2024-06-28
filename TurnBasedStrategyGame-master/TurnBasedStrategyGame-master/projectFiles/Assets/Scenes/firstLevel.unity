@@ -353,6 +353,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: b2527d30dbae3494aa5b2f00c3530a65, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
 --- !u!1 &154266422
@@ -747,6 +772,31 @@ PrefabInstance:
       propertyPath: y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: a5920e1c0fbc3a74485560b8e785a908, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4, type: 3}
 --- !u!4 &348131148 stripped
@@ -1127,6 +1177,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 8857ee3e94e43ff47bf7415f7ced456c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
 --- !u!1 &533756626
@@ -1374,6 +1449,31 @@ PrefabInstance:
       propertyPath: unitName
       value: Skeleton Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!1 &625585328
@@ -1614,6 +1714,7 @@ GameObject:
   - component: {fileID: 723124753}
   - component: {fileID: 723124752}
   - component: {fileID: 723124751}
+  - component: {fileID: 723124754}
   m_Layer: 5
   m_Name: endTurnButton
   m_TagString: Untagged
@@ -1695,6 +1796,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1821686799}
+        m_MethodName: PlayButtonClickSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &723124752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1731,6 +1843,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723124749}
   m_CullTransparentMesh: 0
+--- !u!114 &723124754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723124749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1821686799}
+          m_MethodName: PlayButtonHoverSFX
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &730018643 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6143460823710994928, guid: c2ed526b5fd4fa54689a090c14f45c5b,
@@ -2204,6 +2344,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!4 &799689732 stripped
@@ -2304,6 +2469,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!1 &825087355
@@ -2688,6 +2878,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!1 &952169793
@@ -2801,7 +3016,8 @@ Transform:
   m_LocalRotation: {x: 0.5, y: -0, z: -0, w: 0.8660254}
   m_LocalPosition: {x: 5, y: 7.2, z: -1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1821686797}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
@@ -2827,9 +3043,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 59ddacb6cec284d11a76d2d31f37fa01, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 39e0e87d5e954a34ea54f59497dd66cf, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -3005,6 +3221,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: b2527d30dbae3494aa5b2f00c3530a65, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
 --- !u!4 &1020173835 stripped
@@ -3394,6 +3635,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 91ad9943040c36749826035908c8307c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4, type: 3}
 --- !u!1 &1214710550
@@ -3588,6 +3854,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 8857ee3e94e43ff47bf7415f7ced456c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
 --- !u!4 &1259692543 stripped
@@ -4222,6 +4513,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: a5920e1c0fbc3a74485560b8e785a908, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4, type: 3}
 --- !u!1 &1438215311
@@ -4971,6 +5287,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: d9ab5bc97aeb97e44bc724bdabab2d18, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ed526b5fd4fa54689a090c14f45c5b, type: 3}
 --- !u!1 &1660917953
@@ -5229,6 +5570,7 @@ MonoBehaviour:
   redUIMat: {fileID: 2100000, guid: 85e00487abc670e44960f0fd630bcb73, type: 2}
   blueUIMat: {fileID: 2100000, guid: f6f8a66a326f3da4c90841b31c0435b3, type: 2}
   tempMinMax: {fileID: 1667033357}
+  soundManager: {fileID: 1821686799}
 --- !u!114 &1667033355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5243,6 +5585,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CSS: {fileID: 963194231}
   GMS: {fileID: 1667033356}
+  soundManager: {fileID: 1821686799}
 --- !u!114 &1667033356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5289,6 +5632,7 @@ MonoBehaviour:
   AITurnStarted: 0
   amountOfEnemyAI: 0
   amountOfEnemyAIDoneMove: 0
+  soundManager: {fileID: 1821686799}
 --- !u!114 &1667033357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5412,6 +5756,31 @@ PrefabInstance:
       propertyPath: unitName
       value: Skeleton Soldier
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!1 &1727739035
@@ -5579,6 +5948,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 91ad9943040c36749826035908c8307c, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4, type: 3}
 --- !u!1001 &1774800055
@@ -5668,6 +6062,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 29fcf0e081c9c9d4680d5f8cc4400bab, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ed526b5fd4fa54689a090c14f45c5b, type: 3}
 --- !u!1 &1780963486
@@ -5792,6 +6211,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!4 &1804923761 stripped
@@ -5800,6 +6244,176 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1788546060}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1821686796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1821686797}
+  - component: {fileID: 1821686798}
+  - component: {fileID: 1821686799}
+  m_Layer: 10
+  m_Name: SoundManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1821686797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821686796}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1821686798
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821686796}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1821686799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821686796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bb3cc4e0ccf40d4d823cc9fa6659d62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgmAudioSource: {fileID: 963194232}
+  sfxAudioSource: {fileID: 1821686798}
+  humanSelectSFX: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+  humanMoveSFX: {fileID: 8300000, guid: 881b1492c2c65ad4aa6e42021ff22b3f, type: 3}
+  skeleMoveSFX: {fileID: 8300000, guid: 31b9826f6425c1b45a18d919038a9861, type: 3}
+  meleeAttackSelectSFX: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25,
+    type: 3}
+  rangedAttackSelectSFX: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111,
+    type: 3}
+  meleeAttackSFX: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+  rangedAttackSFX: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+  humanGigaMungusDeathSFX: {fileID: 8300000, guid: a5920e1c0fbc3a74485560b8e785a908,
+    type: 3}
+  humanSoldierDeathSFX: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7,
+    type: 3}
+  humanArcherDeathSFX: {fileID: 8300000, guid: 8857ee3e94e43ff47bf7415f7ced456c, type: 3}
+  humanBaldArcherDeathSFX: {fileID: 8300000, guid: 29fcf0e081c9c9d4680d5f8cc4400bab,
+    type: 3}
+  skeleGigaMungusDeathSFX: {fileID: 8300000, guid: 91ad9943040c36749826035908c8307c,
+    type: 3}
+  skeleSoldierDeathSFX: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9,
+    type: 3}
+  skeleArcherDeathSFX: {fileID: 8300000, guid: b2527d30dbae3494aa5b2f00c3530a65, type: 3}
+  skeleBaldArcherDeathSFX: {fileID: 8300000, guid: d9ab5bc97aeb97e44bc724bdabab2d18,
+    type: 3}
+  cancelMoveSFX: {fileID: 8300000, guid: 6d9aa9835f3a3eb41b3d4562e7925592, type: 3}
+  gameWinSFX: {fileID: 8300000, guid: 7a3032235070809498009a9ef8a522ca, type: 3}
+  gameLoseSFX: {fileID: 8300000, guid: 2794e8693fcf8754fb99fccf2eb5c19a, type: 3}
+  buttonHoverSFX: {fileID: 8300000, guid: 450467668f8c55242ade84cb872e9707, type: 3}
+  buttonClickSFX: {fileID: 8300000, guid: 2d1361a971d45f744965a1662658dba9, type: 3}
 --- !u!1 &1835422796
 GameObject:
   m_ObjectHideFlags: 0
@@ -5979,6 +6593,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!1 &1912780014
@@ -6143,6 +6782,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: d9ab5bc97aeb97e44bc724bdabab2d18, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ed526b5fd4fa54689a090c14f45c5b, type: 3}
 --- !u!1 &1953487008
@@ -6535,6 +7199,31 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 81aa3c981dd7c444083bc481b066d111, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: e0adaf7805252c244beb8d24a130bf93, type: 3}
+    - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 29fcf0e081c9c9d4680d5f8cc4400bab, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2ed526b5fd4fa54689a090c14f45c5b, type: 3}
 --- !u!1 &2072643984
@@ -6721,6 +7410,31 @@ PrefabInstance:
       propertyPath: teamNum
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bdf9ffe1174844994823ea6aea5a8e, type: 3}
 --- !u!4 &2121566876 stripped

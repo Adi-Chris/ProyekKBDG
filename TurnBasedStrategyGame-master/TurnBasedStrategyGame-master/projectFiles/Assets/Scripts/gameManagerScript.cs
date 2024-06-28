@@ -79,6 +79,8 @@ public class gameManagerScript : MonoBehaviour
 
     public int[][][][] start_state;
 
+    [SerializeField] SoundManager soundManager;
+
     public void Start()
     {
         start_state = init4dState();
@@ -957,7 +959,7 @@ public class gameManagerScript : MonoBehaviour
         {
             displayWinnerUI.enabled = true;
             displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 2 has won!");
-
+            
 
         }
         else if (ifGigaMungusRemain(team2))
@@ -986,14 +988,14 @@ public class gameManagerScript : MonoBehaviour
         {
             displayWinnerUI.enabled = true;
             displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 2 has won!");
-
+            soundManager.PlayGameLoseSFX();
 
         }
         else if (ifGigaMungusRemain(team2))
         {
             displayWinnerUI.enabled = true;
             displayWinnerUI.GetComponentInChildren<TextMeshProUGUI>().SetText("Player 1 has won!");
-
+            soundManager.PlayGameWinSFX();
 
         }
 

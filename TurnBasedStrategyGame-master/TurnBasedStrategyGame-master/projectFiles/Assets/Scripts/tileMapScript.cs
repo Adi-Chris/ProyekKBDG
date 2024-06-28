@@ -91,7 +91,9 @@ public class tileMapScript : MonoBehaviour
 
     private int[][] map;
 
+    [Header("Scripts")]
     [SerializeField] tempTempMinimax tempMinMax;
+    [SerializeField] SoundManager soundManager;
     private void Start()
     {
         tempState = init4dState();
@@ -336,8 +338,22 @@ public class tileMapScript : MonoBehaviour
     public void moveUnit()
     {
         if (selectedUnit != null)
-        {
+        {   
             selectedUnit.GetComponent<UnitScript>().MoveNextTile();
+
+            // SFX
+            int teamNum = selectedUnit.GetComponent<UnitScript>().teamNum;
+            switch (teamNum) {
+                case 0:
+                    soundManager.PlayHumanMoveSFX();
+                    break;
+                case 1:
+                    soundManager.PlaySkeleMoveSFX();
+                    break;
+                default:
+                    Debug.LogError("Team Num not found, cannot play move sfx");
+                    break;
+            }
         }
     }
 
@@ -725,6 +741,7 @@ public class tileMapScript : MonoBehaviour
             {
                 disableHighlightUnitRange();
                 disableUnitUIRoute();
+                soundManager.PlayCancelMoveSFX();
                 selectedUnit.GetComponent<UnitScript>().setMovementState(0);
 
 
@@ -752,6 +769,7 @@ public class tileMapScript : MonoBehaviour
                 selectedUnit.GetComponent<UnitScript>().setMovementState(0);
                 selectedUnit = null;
                 unitSelected = false;
+                soundManager.PlayCancelMoveSFX();
             }
         }
     }
@@ -1673,7 +1691,6 @@ public class tileMapScript : MonoBehaviour
         //test_state[tempX][tempY+1][0][0] = 1;
 
         Debug.Log("Current Team: " + GMS.currentTeam);
-        Debug.Log("Tes");
         // Asumsi AI selalu di team 2, alias player 2
         // TODO: Harus menunggu pergerakan Selected Unit selesai, baru masuk next condition di for. Lalu end turnnya di akhir ketika selesai childCount
         GMS.amountOfEnemyAIDoneMove = 0;
@@ -1706,7 +1723,6 @@ public class tileMapScript : MonoBehaviour
                 
                 if (selectTileToMoveTo(targetTileX, targetTileY))
                 {
-                    Debug.Log("tesssssss");
                     //selectedSound.Play();
                     Debug.Log("movement path has been located");
                     unitSelectedPreviousX = selectedUnit.GetComponent<UnitScript>().x;
