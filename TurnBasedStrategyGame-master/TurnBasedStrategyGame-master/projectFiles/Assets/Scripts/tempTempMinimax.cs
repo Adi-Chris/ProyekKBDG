@@ -1,5 +1,6 @@
 ﻿using System.Collections;
-using System.Collections.Generic; 
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class tempTempMinimax : MonoBehaviour
@@ -34,7 +35,7 @@ public class tempTempMinimax : MonoBehaviour
         {
             int maxEval = int.MinValue;
             List<int[][][][]> allStatesMax = generate.generateAllStateMax(state, map, startUnitAmount);
-            Debug.Log("jumlah all max state: " + allStatesMax.Count);
+            // Debug.Log("jumlah all max state: " + allStatesMax.Count);
             foreach (var childState in allStatesMax)
             {
                 int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, false, map, startUnitAmount);
@@ -43,6 +44,21 @@ public class tempTempMinimax : MonoBehaviour
                 {
                     maxEval = eval;
                     bestState = childState;
+        //             StringBuilder sb = new StringBuilder();
+        // sb.Append("{\n");
+        // for (int i = 0; i < 10; i++)
+        // {
+            
+        //     sb.Append("{");
+        //     for (int j = 0; j < 10; j++)
+        //     {
+        //         sb.Append("{{" + bestState[i][j][0][0] + "},{"+ bestState[i][j][0][1] + ", " + bestState[i][j][0][2] + "}}\t");
+        //     }
+        //     sb.Append("}\n");
+        // }
+        // sb.Append("\n}");
+        // Debug.Log("Best State:");
+        // Debug.Log(sb.ToString());
                 }
             }
         }
@@ -50,7 +66,7 @@ public class tempTempMinimax : MonoBehaviour
         {
             int minEval = int.MaxValue;
             List<int[][][][]> allStatesMin = generate.generateAllStateMin(state, map, startUnitAmount);
-            Debug.Log("jumlah all min state: " + allStatesMin.Count);
+            // Debug.Log("jumlah all min state: " + allStatesMin.Count);
             foreach (var childState in allStatesMin)
             {
                 int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, true, map, startUnitAmount);
@@ -59,6 +75,21 @@ public class tempTempMinimax : MonoBehaviour
                 {
                     minEval = eval;
                     bestState = childState;
+        //             StringBuilder sb = new StringBuilder();
+        // sb.Append("{\n");
+        // for (int i = 0; i < 10; i++)
+        // {
+            
+        //     sb.Append("{");
+        //     for (int j = 0; j < 10; j++)
+        //     {
+        //         sb.Append("{{" + bestState[i][j][0][0] + "},{"+ bestState[i][j][0][1] + ", " + bestState[i][j][0][2] + "}}\t");
+        //     }
+        //     sb.Append("}\n");
+        // }
+        // sb.Append("\n}");
+        // Debug.Log("Best State:");
+        // Debug.Log(sb.ToString());
                 }
             }
         }

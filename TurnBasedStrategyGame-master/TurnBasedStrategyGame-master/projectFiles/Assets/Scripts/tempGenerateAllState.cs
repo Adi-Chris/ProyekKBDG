@@ -97,7 +97,7 @@ public class tempGenerateAllState : MonoBehaviour
                     {
                         // Generate semua kemungkinan gerakan, berdasarkan unitnya
                         HashSet<Tuple<int, int>> possibleMovement = generatePossibleMovementMax(j, i, startState, map);
-                        Debug.Log("PossibeleMove Max: " + possibleMovement.Count);
+                        // Debug.Log("PossibeleMove Max: " + possibleMovement.Count);
                         // cek tiap possible movement, bisa attack kemana aja, dan terjadi apa setelah attack. Masuk state baru
                         foreach (Tuple<int, int> tuple in possibleMovement)
                         {
@@ -109,13 +109,13 @@ public class tempGenerateAllState : MonoBehaviour
                             // Jika pergerakan bukan ke diri sendiri
                             if (((yMoveTo == i) && (xMoveTo == j)) == false)
                             {
-                                Debug.Log(xMoveTo + " " + yMoveTo);
+                                // Debug.Log(xMoveTo + " " + yMoveTo);
                                 // Pindahkan unit ke tempat bergeraknya
                                 for (int k = 0; k < startState[i][j].Length; k++)
                                 {
                                     // Create a new array and copy the elements from the original array
                                     stateAfterMove[yMoveTo][xMoveTo][k] = new int[startState[i][j][k].Length];
-                                    Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[yMoveTo][xMoveTo][k].Length);
+                                    Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[i][j][k].Length);
                                 }
                                 // Pindahkan HP dan attack power
                                 stateAfterMove[yMoveTo][xMoveTo][0][1] = startState[i][j][0][1];
@@ -168,44 +168,44 @@ public class tempGenerateAllState : MonoBehaviour
             }
         }
 
-        Debug.Log("jumlah successor: " + successorStates.Count);
+        // Debug.Log("jumlah successor: " + successorStates.Count);
 
-        // Debug successor states
-        foreach (var state in successorStates)
-        {
-            Debug.Log("State");
-            // sumbu y
-            for (int a = 0; a < state.Length; a++)
-            {
-                string rowLog = "";
-                // sumbu x
-                for (int b = 0; b < state[a].Length; b++)
-                {
-                    if (state[a][b][0][0] != 0)
-                    {
-                        rowLog += "[(" + state[a][b][0][0] + ", HP: " + state[a][b][0][1] + ", Atk:" + state[a][b][0][2] + ") ";
-                    }
-                    else
-                    {
-                        rowLog += "[(0, 0), ()]";
-                    }
+        // // Debug successor states
+        // foreach (var state in successorStates)
+        // {
+        //     Debug.Log("State");
+        //     // sumbu y
+        //     for (int a = 0; a < state.Length; a++)
+        //     {
+        //         string rowLog = "";
+        //         // sumbu x
+        //         for (int b = 0; b < state[a].Length; b++)
+        //         {
+        //             if (state[a][b][0][0] != 0)
+        //             {
+        //                 rowLog += "[(" + state[a][b][0][0] + ", HP: " + state[a][b][0][1] + ", Atk:" + state[a][b][0][2] + ") ";
+        //             }
+        //             else
+        //             {
+        //                 rowLog += "[(0, 0), ()]";
+        //             }
 
 
-                    if (state[a][b][1].Length > 0)
-                    {
+        //             if (state[a][b][1].Length > 0)
+        //             {
 
-                        rowLog += "(" + state[a][b][1][0] + ", ";
-                        rowLog += "(" + state[a][b][1][1] + ")]    ";
-                    }
-                    else
-                    {
-                        rowLog += "()]    ";
-                    }
+        //                 rowLog += "(" + state[a][b][1][0] + ", ";
+        //                 rowLog += "(" + state[a][b][1][1] + ")]    ";
+        //             }
+        //             else
+        //             {
+        //                 rowLog += "()]    ";
+        //             }
 
-                }
-                Debug.Log(rowLog);
-            }
-        }
+        //         }
+        //         Debug.Log(rowLog);
+        //     }
+        // }
 
         return successorStates;
     }
@@ -335,11 +335,11 @@ public class tempGenerateAllState : MonoBehaviour
         }
 
         // Output HashSet contents
-        foreach (var tuple in movementPatternIndex)
-        {
-            Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
-        }
-        Debug.Log("~~");
+        // foreach (var tuple in movementPatternIndex)
+        // {
+        //     Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
+        // }
+        // Debug.Log("~~");
 
         // Lakukan BFS selama costnya tidak melebihi unit moveSpeed. Tiap tile masuk tilesinMoveSpeedRangeIndex
         // Gunanya BFS adalah memastikan unitnya bisa berjalan menuju ke tile tertentu, karena tile berisi unit musuh tidak bisa dilangkahi
@@ -472,12 +472,12 @@ public class tempGenerateAllState : MonoBehaviour
         tilesInMoveSpeedRangeIndex.IntersectWith(movementPatternIndex);
 
         // Hanya untuk debug
-        Debug.Log("tilesInMoveSpeedRangeIndex");
-        foreach (var tuple in tilesInMoveSpeedRangeIndex)
-        {
-            Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
-        }
-        Debug.Log("~~");
+        // Debug.Log("tilesInMoveSpeedRangeIndex");
+        // foreach (var tuple in tilesInMoveSpeedRangeIndex)
+        // {
+        //     Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
+        // }
+        // Debug.Log("~~");
 
         // Return semua possible pergerakan
         return tilesInMoveSpeedRangeIndex;
@@ -606,12 +606,12 @@ public class tempGenerateAllState : MonoBehaviour
 
 
         // Output List contents
-        Debug.Log("Attack");
-        foreach (var tuple in attackPatternIndex)
-        {
-            Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
-        }
-        Debug.Log("~~");
+        // Debug.Log("Attack");
+        // foreach (var tuple in attackPatternIndex)
+        // {
+        //     Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
+        // }
+        // Debug.Log("~~");
 
         // Untuk semua attack pattern yang valid
         foreach (var tuple in attackPatternIndex)
@@ -836,13 +836,13 @@ public class tempGenerateAllState : MonoBehaviour
                             // Jika pergerakan bukan ke diri sendiri
                             if (((yMoveTo == i) && (xMoveTo == j)) == false)
                             {
-                                Debug.Log(xMoveTo + " " + yMoveTo);
+                                // Debug.Log(xMoveTo + " " + yMoveTo);
                                 // Pindahkan unit ke tempat bergeraknya
                                 for (int k = 0; k < startState[i][j].Length; k++)
                                 {
                                     // Create a new array and copy the elements from the original array
                                     stateAfterMove[yMoveTo][xMoveTo][k] = new int[startState[i][j][k].Length];
-                                    Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[yMoveTo][xMoveTo][k].Length);
+                                    Array.Copy(startState[i][j][k], stateAfterMove[yMoveTo][xMoveTo][k], startState[i][j][k].Length);
                                 }
                                 // Pindahkan HP dan attack power
                                 stateAfterMove[yMoveTo][xMoveTo][0][1] = startState[i][j][0][1];
@@ -894,41 +894,41 @@ public class tempGenerateAllState : MonoBehaviour
         }
 
         // Debug successor states
-        foreach (var state in successorStates)
-        {
-            Debug.Log("State");
-            // sumbu y
-            for (int a = 0; a < state.Length; a++)
-            {
-                string rowLog = "";
-                // sumbu x
-                for (int b = 0; b < state[a].Length; b++)
-                {
-                    if (state[a][b][0][0] != 0)
-                    {
-                        rowLog += "[(" + state[a][b][0][0] + ", HP: " + state[a][b][0][1] + ", Atk:" + state[a][b][0][2] + ") ";
-                    }
-                    else
-                    {
-                        rowLog += "[(0, 0), ()]";
-                    }
+        // foreach (var state in successorStates)
+        // {
+        //     Debug.Log("State");
+        //     // sumbu y
+        //     for (int a = 0; a < state.Length; a++)
+        //     {
+        //         string rowLog = "";
+        //         // sumbu x
+        //         for (int b = 0; b < state[a].Length; b++)
+        //         {
+        //             if (state[a][b][0][0] != 0)
+        //             {
+        //                 rowLog += "[(" + state[a][b][0][0] + ", HP: " + state[a][b][0][1] + ", Atk:" + state[a][b][0][2] + ") ";
+        //             }
+        //             else
+        //             {
+        //                 rowLog += "[(0, 0), ()]";
+        //             }
 
 
-                    if (state[a][b][1].Length > 0)
-                    {
+        //             if (state[a][b][1].Length > 0)
+        //             {
 
-                        rowLog += "(" + state[a][b][1][0] + ", ";
-                        rowLog += state[a][b][1][1] + ")]    ";
-                    }
-                    else
-                    {
-                        rowLog += "()]    ";
-                    }
+        //                 rowLog += "(" + state[a][b][1][0] + ", ";
+        //                 rowLog += state[a][b][1][1] + ")]    ";
+        //             }
+        //             else
+        //             {
+        //                 rowLog += "()]    ";
+        //             }
 
-                }
-                Debug.Log(rowLog);
-            }
-        }
+        //         }
+        //         Debug.Log(rowLog);
+        //     }
+        // }
 
         return successorStates;
     }
@@ -1061,11 +1061,11 @@ public class tempGenerateAllState : MonoBehaviour
 
 
         // Output HashSet contents
-        foreach (var tuple in movementPatternIndex)
-        {
-            Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
-        }
-        Debug.Log("~~");
+        // foreach (var tuple in movementPatternIndex)
+        // {
+        //     Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
+        // }
+        // Debug.Log("~~");
 
         // Lakukan BFS selama costnya tidak melebihi unit moveSpeed. Tiap tile masuk tilesinMoveSpeedRangeIndex
         // Gunanya BFS adalah memastikan unitnya bisa berjalan menuju ke tile tertentu, karena tile berisi unit musuh tidak bisa dilangkahi
@@ -1195,12 +1195,12 @@ public class tempGenerateAllState : MonoBehaviour
         tilesInMoveSpeedRangeIndex.IntersectWith(movementPatternIndex);
 
         // Hanya untuk debug
-        Debug.Log("tilesInMoveSpeedRangeIndex");
-        foreach (var tuple in tilesInMoveSpeedRangeIndex)
-        {
-            Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
-        }
-        Debug.Log("~~");
+        // Debug.Log("tilesInMoveSpeedRangeIndex");
+        // foreach (var tuple in tilesInMoveSpeedRangeIndex)
+        // {
+        //     Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
+        // }
+        // Debug.Log("~~");
 
         // Return semua possible pergerakan
         return tilesInMoveSpeedRangeIndex;
@@ -1303,12 +1303,12 @@ public class tempGenerateAllState : MonoBehaviour
 
 
         // Output List contents
-        Debug.Log("Attack");
-        foreach (var tuple in attackPatternIndex)
-        {
-            Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
-        }
-        Debug.Log("~~");
+        // Debug.Log("Attack");
+        // foreach (var tuple in attackPatternIndex)
+        // {
+        //     Debug.Log("(" + tuple.Item1 + ", " + tuple.Item2 + ")");
+        // }
+        // Debug.Log("~~");
 
         // Masukkan hasil ke successorStates
         foreach (var tuple in attackPatternIndex)
