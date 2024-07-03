@@ -1573,27 +1573,12 @@ public class tileMapScript : MonoBehaviour
 
             int int_type = GMS.intType(tile.GetComponent<UnitScript>().unitName);
 
-            if (this.tempState[x][y][0][0] == int_type){
-                this.tempState[x][y][0][0] = 0;
-                Debug.Log("mau jadi 0: " + x + " ; " + y);
-            } else {
+            if (this.tempState[x][y][0][0] != int_type || (this.tempState[x][y][1][0] != 0 && this.tempState[x][y][1][1] != 0)){
                 defaultIndex = i;
+            } else if (this.tempState[x][y][0][0] == int_type){
+                this.tempState[x][y][0][0] = 0;
             }
         }
-
-        StringBuilder sb = new StringBuilder();
-        sb.Append("{\n");
-        for (int i = 0; i < 10; i++)
-        {
-            sb.Append("{");
-            for (int j = 0; j < 10; j++){
-                sb.Append("{{" + this.tempState[i][j][0][0] + "},{}}, \t");
-            }
-            sb.Append("}\n");
-        }
-        sb.Append("\n}");
-        Debug.Log("BOARDDD Index AI to Move:");
-        Debug.Log(sb.ToString());
 
         return defaultIndex;
     }
@@ -1627,7 +1612,7 @@ public class tileMapScript : MonoBehaviour
         Debug.Log("BOARDDD AI Move Loc:");
         Debug.Log(sb.ToString());
 
-        int[] res = new int[] {-99,-99};
+        int[] res = new int[] {-99,-99, -99, -99};
 
         if (index < 0) {
             return res;
@@ -1638,6 +1623,12 @@ public class tileMapScript : MonoBehaviour
                 if (tempState[i][j][0][0] > 0 && tempState [i][j][0][0] < 5){
                     res[0] = j; //x
                     res[1] = i; //y
+
+                    if (tempState[i][j][1][0] != null){
+                    res[2] = tempState[i][j][1][0];
+                    res[3] = tempState[i][j][1][1];
+                    }
+                    
                     return res;
                 }
             }
@@ -1661,6 +1652,27 @@ public class tileMapScript : MonoBehaviour
 // {{{-4},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-4},{}}, 	}
 
 // }
+
+    private GameObject attTargetSearch(int x, int y){
+        GameObject target = null;
+        for (int i = 0; i < GMS.team1.transform.childCount; i++)
+        {
+            GameObject tile = GMS.team1.transform.GetChild(i).gameObject;
+            int xi = (int)tile.GetComponent<UnitScript>().x;
+            int yi = (int)tile.GetComponent<UnitScript>().y;
+
+            if (tile.name == "toonSkeleSoldier (2)"){
+                Debug.Log("var x: " + x + ", var y:" + y);
+                Debug.Log("toon x: " + xi + ", toon y:" + yi);
+            }
+    
+            if (xi == x && yi == y){
+                target = tile;
+                break;
+            }
+        }
+        return target;
+    }
         
     public void AITurn()
     {
@@ -1683,12 +1695,14 @@ public class tileMapScript : MonoBehaviour
         Debug.Log("BOARDDD masuk minmax:");
         Debug.Log(sb.ToString());
 
-        test_state = tempMinMax.MinimaxAlgorithm(GMS.boardToState(), 2, true, map, 10);
-        //int tempX = 2;
-        //int tempY = 4;
+        // test_state = tempMinMax.MinimaxAlgorithm(GMS.boardToState(), 2, true, map, 10);
+        int tempX = 2;    //testing
+        int tempY = 4;    //testing
 
-        //test_state[tempX][tempY][0][0] = 0;
-        //test_state[tempX][tempY+1][0][0] = 1;
+        // test_state[tempX][tempY][0][0] = 0;          //testing
+        // test_state[tempX][tempY+1][0][0] = 1;       //testing
+        test_state[tempX][tempY][1][0] = tempX+1; //testing
+        test_state[tempX][tempY][1][1] = tempY; //testing
 
         Debug.Log("Current Team: " + GMS.currentTeam);
         // Asumsi AI selalu di team 2, alias player 2
@@ -1699,6 +1713,7 @@ public class tileMapScript : MonoBehaviour
             int idx_r = indexAItoMove(test_state);
             Debug.Log("idx r: " + idx_r);
             selectedUnit = GMS.team2.transform.GetChild(idx_r).gameObject; // TODO: DISINI HARUS MILIH GetChild() keberapa. Kalau (5) ini yang musuh index ke 5
+            Debug.Log("nama unit 5: " + selectedUnit);
 
             int[] locationIdx = AIMoveLoc(idx_r);
 
@@ -1731,8 +1746,16 @@ public class tileMapScript : MonoBehaviour
                     selectedUnit.GetComponent<UnitScript>().setWalkingAnimation();
                     moveUnit();
 
+                    Debug.Log("sblm move");
                     StartCoroutine(moveUnitAndFinalize(targetTileX, targetTileY)); //TODO: Bagian Coroutine ini, ngecall coroutine lain. Jadi harus dibuat 1 coroutine besar kayaknya
                     //The moveUnit function calls a function on the unitScriptm when the movement is completed the finalization is called from that script.
+                    Debug.Log("sesudah move");
+                    if (locationIdx[2] != null && locationIdx[3] != null){
+                        GameObject unitClicked = attTargetSearch(locationIdx[3], 9+(-1*locationIdx[2]));
+                        Debug.Log("sblm attack");
+                        StartCoroutine(BMS.attack(selectedUnit, unitClicked));
+                        Debug.Log("sesudah attack");
+                    }
                 }
             }
             // //Finalize the movement
@@ -1760,9 +1783,6 @@ public class tileMapScript : MonoBehaviour
                 movementCostMap[x][y] = (int) tileTypes[tiles[i,j]].movementCost;
             }
         }
-        
-        
-        
 
         return movementCostMap;
     }
@@ -1786,3 +1806,32 @@ public class tileMapScript : MonoBehaviour
     return state;
 }
 }
+
+
+// {
+// {{{4},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{4},{}}, 	}
+// {{{0},{}}, 	{{3},{}}, 	{{0},{}}, 	{{2},{}}, 	{{0},{}}, 	{{1},{}}, 	{{2},{}}, 	{{0},{}}, 	{{3},{}}, 	{{0},{}}, 	}
+// {{{1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{1},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{-1},{}}, {{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	}
+// {{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	}
+// {{{-4},{}}, {{0},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-4},{}}, 	}
+
+// }
+
+// {
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	}
+// {{{-1},{}}, {{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-1},{}}, 	}
+// {{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-3},{}}, 	{{0},{}}, 	}
+// {{{-4},{}}, {{0},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-2},{}}, 	{{0},{}}, 	{{0},{}}, 	{{-4},{}}, 	}
+
+// }
