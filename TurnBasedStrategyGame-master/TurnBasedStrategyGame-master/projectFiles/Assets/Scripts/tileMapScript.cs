@@ -1428,7 +1428,7 @@ public class tileMapScript : MonoBehaviour
                                && tempSelectedUnit.GetComponent<UnitScript>().teamNum == GMS.currentTeam
                                )
                 {
-                    Debug.Log("V2 KEPLAY?");
+                    // Debug.Log("V2 KEPLAY?");
                     disableHighlightUnitRange();
                     //selectedSound.Play();
                     selectedUnit = tempSelectedUnit;
@@ -1537,7 +1537,6 @@ public class tileMapScript : MonoBehaviour
     {
         disableHighlightUnitRange();
         disableUnitUIRoute();
-        // TODO: Ini masih error ketika banyak musuhnya
         while (selectedUnit.GetComponent<UnitScript>().movementQueue.Count != 0)
         {
             yield return new WaitForEndOfFrame();
@@ -1661,16 +1660,18 @@ public class tileMapScript : MonoBehaviour
             int xi = (int)tile.GetComponent<UnitScript>().x;
             int yi = (int)tile.GetComponent<UnitScript>().y;
 
-            if (tile.name == "toonSkeleSoldier (2)"){
-                Debug.Log("var x: " + x + ", var y:" + y);
-                Debug.Log("toon x: " + xi + ", toon y:" + yi);
-            }
+            // if (tile.name == "toonSkeleSoldier (2)"){
+            //     Debug.Log("var x: " + x + ", var y:" + y);
+            //     Debug.Log("toon x: " + xi + ", toon y:" + yi);
+            // }
     
             if (xi == x && yi == y){
                 target = tile;
                 break;
             }
         }
+        Debug.LogError("Attacked Unit Not Found");
+        Debug.LogError("Attacked unit location: " + x + ", " + y);
         return target;
     }
         
@@ -1695,14 +1696,37 @@ public class tileMapScript : MonoBehaviour
         Debug.Log("BOARDDD masuk minmax:");
         Debug.Log(sb.ToString());
 
-        // test_state = tempMinMax.MinimaxAlgorithm(GMS.boardToState(), 2, true, map, 10);
-        int tempX = 2;    //testing
-        int tempY = 4;    //testing
+        test_state = tempMinMax.MinimaxAlgorithm(GMS.boardToState(), 2, true, map, 10);
+
+        sb = new StringBuilder();
+        sb.Append("{\n");
+        for (int i = 0; i < 10; i++)
+        {
+            
+            sb.Append("{");
+            for (int j = 0; j < 10; j++)
+            {
+                
+                sb.Append("{{" + test_state[i][j][0][0] + "},{");
+                Debug.Log(test_state[i][j][1].Length);
+                if (test_state[i][j][1].Length > 1) {
+                    sb.Append(test_state[i][j][1][0] + ", " + test_state[i][j][1][1] + "}}\t");
+                } else {
+                    sb.Append("}}\t");
+                }
+            }
+            sb.Append("}\n");
+        }
+        sb.Append("\n}");
+        Debug.Log("BOARDDD hasil minmax:");
+        Debug.Log(sb.ToString());
+        // int tempX = 2;    //testing
+        // int tempY = 4;    //testing
 
         // test_state[tempX][tempY][0][0] = 0;          //testing
         // test_state[tempX][tempY+1][0][0] = 1;       //testing
-        test_state[tempX][tempY][1][0] = tempX+1; //testing
-        test_state[tempX][tempY][1][1] = tempY; //testing
+        // test_state[tempX][tempY][1][0] = tempX+1; //testing
+        // test_state[tempX][tempY][1][1] = tempY; //testing
 
         Debug.Log("Current Team: " + GMS.currentTeam);
         // Asumsi AI selalu di team 2, alias player 2
@@ -1712,8 +1736,14 @@ public class tileMapScript : MonoBehaviour
         // {
             int idx_r = indexAItoMove(test_state);
             Debug.Log("idx r: " + idx_r);
+
+            if (idx_r == -99) {
+                GMS.endTurn();
+                return;
+            }
+
             selectedUnit = GMS.team2.transform.GetChild(idx_r).gameObject; // TODO: DISINI HARUS MILIH GetChild() keberapa. Kalau (5) ini yang musuh index ke 5
-            Debug.Log("nama unit 5: " + selectedUnit);
+            GameObject attackerUnit = selectedUnit;
 
             int[] locationIdx = AIMoveLoc(idx_r);
 
@@ -1751,9 +1781,11 @@ public class tileMapScript : MonoBehaviour
                     //The moveUnit function calls a function on the unitScriptm when the movement is completed the finalization is called from that script.
                     Debug.Log("sesudah move");
                     if (locationIdx[2] != null && locationIdx[3] != null){
-                        GameObject unitClicked = attTargetSearch(locationIdx[3], 9+(-1*locationIdx[2]));
+                        GameObject attackedUnit = attTargetSearch(locationIdx[3], 9+(-1*locationIdx[2]));
                         Debug.Log("sblm attack");
-                        StartCoroutine(BMS.attack(selectedUnit, unitClicked));
+                        Debug.Log("nama attacker: " + selectedUnit);
+                        Debug.Log("nama attacked: " + attackedUnit);
+                        BMS.battle(attackerUnit, attackedUnit);
                         Debug.Log("sesudah attack");
                     }
                 }
