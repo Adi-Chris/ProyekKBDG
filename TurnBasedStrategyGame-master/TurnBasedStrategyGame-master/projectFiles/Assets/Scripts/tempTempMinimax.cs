@@ -81,7 +81,30 @@ public class tempTempMinimax : MonoBehaviour
 
     private int EvaluateBoard(int[][][][] state)
     {
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{\n");
+        for (int i = 0; i < 10; i++)
+        {
+            
+            sb.Append("{");
+            for (int j = 0; j < 10; j++)
+            {
+                
+                sb.Append("{{" + state[i][j][0][0] + "},{");
+                if (state[i][j][1].Length > 1) {
+                    sb.Append(state[i][j][1][0] + ", " + state[i][j][1][1] + "}}\t");
+                } else {
+                    sb.Append("}}\t");
+                }
+            }
+            sb.Append("}\n");
+        }
+        sb.Append("\n}");
+        Debug.Log("BOARDDD masuk Eval:");
+        Debug.Log(sb.ToString());
+
         int score = 0;
+        sb = new StringBuilder();
 
         // Iterate through the board and evaluate each unit
         for (int y = 0; y < state.Length; y++)
@@ -91,6 +114,7 @@ public class tempTempMinimax : MonoBehaviour
                 int unitType = state[y][x][0][0];
                 int unitHP = state[y][x][0][1];
                 int unitAttack = state[y][x][0][2];
+                sb.Append(unitType + ", ");
 
                 if (unitType != 0) // If there is a unit. If not, no
                 {
@@ -117,7 +141,7 @@ public class tempTempMinimax : MonoBehaviour
                         // Add to the total score based on whether the unit belongs to AI or Human
                         if (unitType > 0) // AI unit
                         {
-                            score += unitScore/2;
+                            score += unitScore;
                         }
                         else if (unitType < 0) // Human unit
                         {
@@ -126,8 +150,9 @@ public class tempTempMinimax : MonoBehaviour
                     }
                 }
             }
+            sb.Append("\n");
         }
-        Debug.Log("Score: " + score);
+        Debug.Log("Score: " + score + "\n" + sb.ToString());
         return score;
     }
 
