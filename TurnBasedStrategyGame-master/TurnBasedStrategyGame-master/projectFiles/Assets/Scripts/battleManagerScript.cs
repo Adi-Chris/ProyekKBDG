@@ -173,7 +173,7 @@ public class battleManagerScript : MonoBehaviour
         
         unit.GetComponent<UnitScript>().setWaitIdleAnimation();
         unit.GetComponent<UnitScript>().wait();
-       
+        StartCoroutine(GMS.endTurnWithDelay());
         
     }
 

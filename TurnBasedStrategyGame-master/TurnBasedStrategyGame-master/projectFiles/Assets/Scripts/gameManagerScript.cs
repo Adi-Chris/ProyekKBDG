@@ -77,13 +77,13 @@ public class gameManagerScript : MonoBehaviour
     //
     tempGenerateAllState tempGenerateAllState;
 
-    public int[][][][] start_state;
+    // public int[][][][] start_state;
 
     [SerializeField] SoundManager soundManager;
 
     public void Start()
     {
-        start_state = init4dState();
+        // start_state = init4dState();
         currentTeam = 0;
         setCurrentTeamUI();
         teamHealthbarColorUpdate();
@@ -269,7 +269,33 @@ public class gameManagerScript : MonoBehaviour
     //Desc: ends the turn and plays the animation
     public void endTurn()
     {
-        start_state = boardToState();
+        // start_state = boardToState();
+        if (TMS.selectedUnit == null)
+        {
+            switchCurrentPlayer();
+            if (currentTeam == 1)
+            {
+                playerPhaseAnim.SetTrigger("slideLeftTrigger");
+                playerPhaseText.SetText("Player 2 Phase");
+                AITurnStarted = false;
+            }
+            else if (currentTeam == 0)
+            {
+                playerPhaseAnim.SetTrigger("slideRightTrigger");
+                playerPhaseText.SetText("Player 1 Phase");
+            }
+            teamHealthbarColorUpdate();
+            setCurrentTeamUI();
+        }
+    }
+
+    // Custom: ~Adi
+    // Delay sebelum endTurn agar tidak bug ketika memilih unit yang sedang die
+    public IEnumerator endTurnWithDelay()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        // start_state = boardToState();
         if (TMS.selectedUnit == null)
         {
             switchCurrentPlayer();

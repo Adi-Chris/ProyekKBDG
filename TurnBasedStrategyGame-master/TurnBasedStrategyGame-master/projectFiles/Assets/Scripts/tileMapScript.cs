@@ -1083,7 +1083,14 @@ public class tileMapScript : MonoBehaviour
                 {
                     if (!finalMovementHighlight.Contains(neighbour))
                     {
-                        cost[neighbour.x, neighbour.y] = costToEnterTile(neighbour.x, neighbour.y) + cost[n.x, n.y];
+                        if (cost[neighbour.x, neighbour.y] == 0) {
+                            cost[neighbour.x, neighbour.y] = costToEnterTile(neighbour.x, neighbour.y) + cost[n.x, n.y];
+                        } else {
+                            if (cost[neighbour.x, neighbour.y] > costToEnterTile(neighbour.x, neighbour.y) + cost[n.x, n.y]) {
+                                cost[neighbour.x, neighbour.y] = costToEnterTile(neighbour.x, neighbour.y) + cost[n.x, n.y];
+                            }
+                        }
+                        
                         //Debug.Log(cost[neighbour.x, neighbour.y]);
                         if (moveSpeed - cost[neighbour.x, neighbour.y] >= 0)
                         {
@@ -1103,12 +1110,13 @@ public class tileMapScript : MonoBehaviour
 
         HashSet<Node> resultMove = new HashSet<Node>();
         foreach (Node e in finalMovementHighlight) {
+            Debug.Log("finalMovementHighlight: " + e.x + ", " + e.y);
             if ((Mathf.Abs(unitInitialNode.x - e.x) == Mathf.Abs(unitInitialNode.y - e.y))){
                 resultMove.Add(e);
             }
         }
 
-        Debug.Log("The total amount of movable spaces for this unit is: " + finalMovementHighlight.Count);
+        Debug.Log("The total amount of movable spaces for this unit is: " + resultMove.Count);
         Debug.Log("We have used the function to calculate it this time");
         return resultMove;
     }
@@ -1546,8 +1554,14 @@ public class tileMapScript : MonoBehaviour
 
         // Finalize Option
         finalizeOption(x, y);
-        StartCoroutine(BMS.attack(attackerUnit, attackedUnit));
-        GMS.endTurn();
+
+        // Jika bukan menyerang diri sendiri (alias skip turn)
+        // Ketika menyerang diri sendiri, attackedUnit pasti null karena tidak ditemukan unit player yang sesuai koordinat attack
+        if (attackedUnit != null) {
+            StartCoroutine(BMS.attack(attackerUnit, attackedUnit));
+        } else {
+            GMS.endTurn();
+        }
     }
 
     // Gerakan musuh
@@ -1843,6 +1857,23 @@ public class tileMapScript : MonoBehaviour
                 movementCostMap[x][y] = (int) tileTypes[tiles[i,j]].movementCost;
             }
         }
+
+        // StringBuilder sb = new StringBuilder();
+        // sb.Append("{\n");
+        // for (int i = 0; i < 10; i++)
+        // {
+            
+        //     sb.Append("{");
+        //     for (int j = 0; j < 10; j++)
+        //     {
+                
+        //         sb.Append("{" + movementCostMap[i][j] + "} ");
+        //     }
+        //     sb.Append("}\n");
+        // }
+        // sb.Append("\n}");
+        // Debug.Log("Map:");
+        // Debug.Log(sb.ToString());
 
         return movementCostMap;
     }
