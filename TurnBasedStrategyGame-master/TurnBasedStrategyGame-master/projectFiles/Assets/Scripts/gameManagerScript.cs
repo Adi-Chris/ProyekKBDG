@@ -111,7 +111,7 @@ public class gameManagerScript : MonoBehaviour
             {
                 Debug.Log("Satuu");
                 AITurnStarted = true;
-                TMS.AITurn();
+                StartCoroutine(TMS.AITurn());
             }
 
             // if (TMS.selectedUnit.GetComponent<UnitScript>().unitMoveState == TMS.selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(2))

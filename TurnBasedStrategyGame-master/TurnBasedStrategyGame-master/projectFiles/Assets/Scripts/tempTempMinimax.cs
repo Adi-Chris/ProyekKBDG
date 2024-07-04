@@ -99,32 +99,35 @@ public class tempTempMinimax : MonoBehaviour
                     string unitName = GetUnitName(unitType);
 
                     // Calculate the unit's score based on its type
-                    if (string.Equals(unitName, "Giga Mungus"))
+                    if (unitHP > 0)
                     {
-                        unitScore = (unitHP + unitAttack) * 10;
-                    }
-                    else if (string.Equals(unitName, "Skeleton Archer") || string.Equals(unitName, "Skeleton Archer Bald"))
-                    {
-                        unitScore = (unitHP + unitAttack) * 2;
-                    }
-                    else
-                    {
-                        unitScore = unitHP + unitAttack;
-                    }
+                        if (string.Equals(unitName, "Giga Mungus"))
+                        {
+                            unitScore = (unitHP + unitAttack) * 10;
+                        }
+                        else if (string.Equals(unitName, "Skeleton Archer") || string.Equals(unitName, "Skeleton Archer Bald"))
+                        {
+                            unitScore = (unitHP + unitAttack) * 2;
+                        }
+                        else
+                        {
+                            unitScore = unitHP + unitAttack;
+                        }
 
-                    // Add to the total score based on whether the unit belongs to AI or Human
-                    if (unitType > 0) // AI unit
-                    {
-                        score += unitScore;
-                    }
-                    else if (unitType < 0) // Human unit
-                    {
-                        score -= unitScore;
+                        // Add to the total score based on whether the unit belongs to AI or Human
+                        if (unitType > 0) // AI unit
+                        {
+                            score += unitScore/2;
+                        }
+                        else if (unitType < 0) // Human unit
+                        {
+                            score -= unitScore;
+                        }
                     }
                 }
             }
         }
-
+        Debug.Log("Score: " + score);
         return score;
     }
 

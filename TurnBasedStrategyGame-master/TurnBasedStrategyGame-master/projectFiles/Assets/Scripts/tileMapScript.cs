@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using System.Text;
 using static System.Collections.IEnumerable;
+using System.Threading;
 
 public class tileMapScript : MonoBehaviour
 {
@@ -1728,19 +1729,17 @@ public class tileMapScript : MonoBehaviour
         return target;
     }
         
-    public void AITurn()
+    public IEnumerator AITurn()
     {
-        int [][][][] test_state = GMS.boardToState();
-        
+        int[][][][] test_state = GMS.boardToState();
+
         StringBuilder sb = new StringBuilder();
         sb.Append("{\n");
         for (int i = 0; i < 10; i++)
         {
-            
             sb.Append("{");
             for (int j = 0; j < 10; j++)
             {
-                
                 sb.Append("{{" + test_state[i][j][0][0] + "},{}}, \t");
             }
             sb.Append("}\n");
@@ -1749,21 +1748,41 @@ public class tileMapScript : MonoBehaviour
         Debug.Log("BOARDDD masuk minmax:");
         Debug.Log(sb.ToString());
 
-        test_state = tempMinMax.MinimaxAlgorithm(test_state, 3, true, map, 10, int.MinValue, int.MaxValue);
+        // Variables to handle thread result and completion status
+        bool isMinimaxComplete = false;
+        int[][][][] minimaxResult = null;
+
+        // Start the minimax algorithm in a new thread
+        Thread minimaxThread = new Thread(() =>
+        {
+            minimaxResult = tempMinMax.MinimaxAlgorithm(test_state, 3, true, map, 10, int.MinValue, int.MaxValue);
+            isMinimaxComplete = true;
+        });
+        minimaxThread.Start();
+
+        // Wait for the minimax algorithm to complete
+        while (!isMinimaxComplete)
+        {
+            yield return null; // Wait for the next frame
+        }
+
+        // Use the result of the minimax algorithm
+        test_state = minimaxResult;
 
         sb = new StringBuilder();
         sb.Append("{\n");
         for (int i = 0; i < 10; i++)
         {
-            
             sb.Append("{");
             for (int j = 0; j < 10; j++)
             {
-                
                 sb.Append("{{" + test_state[i][j][0][0] + "},{");
-                if (test_state[i][j][1].Length > 1) {
+                if (test_state[i][j][1].Length > 1)
+                {
                     sb.Append(test_state[i][j][1][0] + ", " + test_state[i][j][1][1] + "}}\t");
-                } else {
+                }
+                else
+                {
                     sb.Append("}}\t");
                 }
             }
@@ -1772,94 +1791,69 @@ public class tileMapScript : MonoBehaviour
         sb.Append("\n}");
         Debug.Log("BOARDDD hasil minmax:");
         Debug.Log(sb.ToString());
-        // int tempX = 2;    //testing
-        // int tempY = 4;    //testing
-
-        // test_state[tempX][tempY][0][0] = 0;          //testing
-        // test_state[tempX][tempY+1][0][0] = 1;       //testing
-        // test_state[tempX][tempY][1][0] = tempX+1; //testing
-        // test_state[tempX][tempY][1][1] = tempY; //testing
 
         Debug.Log("Current Team: " + GMS.currentTeam);
-        // Asumsi AI selalu di team 2, alias player 2
-        // TODO: Harus menunggu pergerakan Selected Unit selesai, baru masuk next condition di for. Lalu end turnnya di akhir ketika selesai childCount
         GMS.amountOfEnemyAIDoneMove = 0;
-        // for (int i = 0; i < GMS.team2.transform.childCount; i++)
-        // {
-            int idx_r = indexAItoMove(test_state);
-            Debug.Log("idx r: " + idx_r);
 
-            // Kalau gak nemu yang jalan ataupun nyerang, langsung skip
-            if (idx_r == -99) {
-                GMS.endTurn();
-                return;
-            }
+        int idx_r = indexAItoMove(test_state);
+        Debug.Log("idx r: " + idx_r);
 
-            selectedUnit = GMS.team2.transform.GetChild(idx_r).gameObject; // TODO: DISINI HARUS MILIH GetChild() keberapa. Kalau (5) ini yang musuh index ke 5
-            GameObject attackerUnit = selectedUnit;
+        if (idx_r == -99)
+        {
+            GMS.endTurn();
+            yield break;
+        }
 
-            int[] locationIdx = AIMoveLoc(idx_r);
+        selectedUnit = GMS.team2.transform.GetChild(idx_r).gameObject;
+        GameObject attackerUnit = selectedUnit;
 
-            int targetTileX = locationIdx[0];
-            int targetTileY = 9 + (-1* locationIdx[1]);
+        int[] locationIdx = AIMoveLoc(idx_r);
 
-            Debug.Log("index selected unit: " + idx_r);
+        int targetTileX = locationIdx[0];
+        int targetTileY = 9 + (-1 * locationIdx[1]);
 
-            Debug.Log("Loc Now X: " + selectedUnit.GetComponent<UnitScript>().x);
-            Debug.Log("Loc Now Y: " + selectedUnit.GetComponent<UnitScript>().y);
+        Debug.Log("index selected unit: " + idx_r);
 
-            Debug.Log("Target Tile X: " + targetTileX);
-            Debug.Log("Target Tile Y: " + targetTileY);
+        Debug.Log("Loc Now X: " + selectedUnit.GetComponent<UnitScript>().x);
+        Debug.Log("Loc Now Y: " + selectedUnit.GetComponent<UnitScript>().y);
 
-            //Move the unit
-            if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0)
+        Debug.Log("Target Tile X: " + targetTileX);
+        Debug.Log("Target Tile Y: " + targetTileY);
+
+        if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0)
+        {
+            Debug.Log("heyyy taegetttt: " + targetTileX + ", " + targetTileY);
+            Node nodeToCheck = graph[targetTileX, targetTileY];
+
+            mouseClickToSelectUnitV2(targetTileX, targetTileY, selectedUnit);
+
+            yield return StartCoroutine(aiPath(targetTileX, targetTileY));
+
+            if (selectTileToMoveTo(targetTileX, targetTileY))
             {
-                Debug.Log("heyyy taegetttt: " + targetTileX + ", " + targetTileY);
-                Node nodeToCheck = graph[targetTileX, targetTileY];
+                Debug.Log("movement path has been located");
+                unitSelectedPreviousX = selectedUnit.GetComponent<UnitScript>().x;
+                unitSelectedPreviousY = selectedUnit.GetComponent<UnitScript>().y;
+                previousOccupiedTile = selectedUnit.GetComponent<UnitScript>().tileBeingOccupied;
+                selectedUnit.GetComponent<UnitScript>().setWalkingAnimation();
+                moveUnit();
 
-                mouseClickToSelectUnitV2(targetTileX, targetTileY, selectedUnit);
-                
-                StartCoroutine(aiPath(targetTileX, targetTileY));
-                // waiter5();
-                // Thread.Sleep(5000);
-                // disableUnitUIRoute();
-                // GMS.unitPathExists=false;
-                
-                if (selectTileToMoveTo(targetTileX, targetTileY))
-                {
-                    //selectedSound.Play();
-                    Debug.Log("movement path has been located");
-                    unitSelectedPreviousX = selectedUnit.GetComponent<UnitScript>().x;
-                    unitSelectedPreviousY = selectedUnit.GetComponent<UnitScript>().y;
-                    previousOccupiedTile = selectedUnit.GetComponent<UnitScript>().tileBeingOccupied;
-                    selectedUnit.GetComponent<UnitScript>().setWalkingAnimation();
-                    moveUnit();
+                Debug.Log("sblm move");
+                GameObject attackedUnit = attTargetSearch(locationIdx[2], 9 + (-1 * locationIdx[3]));
+                Debug.Log("Att x board: " + locationIdx[2]);
+                Debug.Log("Att y board: " + (9 + (-1 * locationIdx[3])));
+                Debug.Log("sblm attack");
+                Debug.Log("nama attacker: " + selectedUnit);
+                Debug.Log("nama attacked: " + attackedUnit);
 
-                    Debug.Log("sblm move");
-                    // if (locationIdx[2] != null && locationIdx[3] != null){
-                        GameObject attackedUnit = attTargetSearch(locationIdx[2], 9+(-1*locationIdx[3]));
-                        Debug.Log("Att x board: " + locationIdx[2]);
-                        Debug.Log("Att y board: " + (9 + (-1*locationIdx[3])));
-                        Debug.Log("sblm attack");
-                        Debug.Log("nama attacker: " + selectedUnit);
-                        Debug.Log("nama attacked: " + attackedUnit);
-                        // BMS.battle(attackerUnit, attackedUnit);
-                        Debug.Log("sesudah attack");
-                    // }
-                    StartCoroutine(moveUnitAndFinalize(targetTileX, targetTileY, attackerUnit, attackedUnit)); //TODO: Bagian Coroutine ini, ngecall coroutine lain. Jadi harus dibuat 1 coroutine besar kayaknya
-                    //The moveUnit function calls a function on the unitScriptm when the movement is completed the finalization is called from that script.
-                    Debug.Log("sesudah move");
-                    
-                }
+                Debug.Log("sesudah attack");
+                yield return StartCoroutine(moveUnitAndFinalize(targetTileX, targetTileY, attackerUnit, attackedUnit));
+                Debug.Log("sesudah move");
             }
-            // //Finalize the movement
-            // if (selectedUnit.GetComponent<UnitScript>().unitMoveState == selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(2))
-            // {
-            //     Debug.Log("tes3");
-            //     finalizeOption(targetTileX, targetTileY);
-            // }
-        //}
+        }
+
         Debug.Log("Tes Akhir");
+        yield break;
     }
 
     public IEnumerator aiPath(int posx, int posy){
@@ -1898,7 +1892,7 @@ public class tileMapScript : MonoBehaviour
         }
         GMS.unitPathExists = true;
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(3);
     }
 
 

@@ -268,6 +268,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
+    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: m_Name
+      value: toonSkeleArcher (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: teamNum
@@ -353,30 +358,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcher (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
@@ -687,6 +687,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
+    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: m_Name
+      value: toonSkeleSoldierGigaMungus
+      objectReference: {fileID: 0}
     - target: {fileID: 6392410201379123322, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -761,11 +766,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleSoldierGigaMungus
       objectReference: {fileID: 0}
     - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
@@ -1113,11 +1113,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 3194674972223442058, guid: 5506f14b6e761904492bab2be1dd80fd,
+    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 827451e5fbbb67a43954aedb69a50885, type: 2}
+      propertyPath: m_Name
+      value: toonSkeleArcher (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: soundManager
@@ -1198,16 +1198,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcher (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 3194674973022981538, guid: 5506f14b6e761904492bab2be1dd80fd,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -1227,6 +1217,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194674972223442058, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 827451e5fbbb67a43954aedb69a50885, type: 2}
+    - target: {fileID: 3194674973022981538, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
@@ -1390,36 +1390,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitName
-      value: Skeleton Soldier
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -1480,6 +1450,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitName
+      value: Skeleton Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925669178094, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_SortingOrder
@@ -2306,31 +2306,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -2391,6 +2366,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925669178094, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_SortingOrder
@@ -2442,36 +2442,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: teamNum
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -2532,6 +2502,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: teamNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821926805037719, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2851,36 +2851,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: teamNum
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -2941,6 +2911,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: teamNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821926805037719, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3194,6 +3194,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
+    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: m_Name
+      value: toonSkeleArcher (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: teamNum
@@ -3279,30 +3284,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcher (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
@@ -3603,6 +3603,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
+    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: m_Name
+      value: toonSkeleSoldierGigaMungus (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6392410201379123322, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3677,16 +3687,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleSoldierGigaMungus (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
@@ -3832,11 +3832,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 3194674972223442058, guid: 5506f14b6e761904492bab2be1dd80fd,
+    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 827451e5fbbb67a43954aedb69a50885, type: 2}
+      propertyPath: m_Name
+      value: toonSkeleArcher
+      objectReference: {fileID: 0}
     - target: {fileID: 3194674972596997601, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: soundManager
@@ -3917,16 +3917,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3194674972596997603, guid: 5506f14b6e761904492bab2be1dd80fd,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcher
-      objectReference: {fileID: 0}
-    - target: {fileID: 3194674973022981538, guid: 5506f14b6e761904492bab2be1dd80fd,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 3194674973995354287, guid: 5506f14b6e761904492bab2be1dd80fd,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -3946,6 +3936,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.pageCount
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3194674972223442058, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 827451e5fbbb67a43954aedb69a50885, type: 2}
+    - target: {fileID: 3194674973022981538, guid: 5506f14b6e761904492bab2be1dd80fd,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5506f14b6e761904492bab2be1dd80fd, type: 3}
@@ -4501,6 +4501,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
+    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: m_Name
+      value: toonSkeleSoldierGigaMungus (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 6392410201379123322, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -4575,11 +4580,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleSoldierGigaMungus (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
@@ -5286,25 +5286,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      propertyPath: m_Name
+      value: toonSkeleArcherBald (3)
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994928, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -5361,10 +5346,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcherBald (3)
+      propertyPath: m_textInfo.characterCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -5755,36 +5755,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitName
-      value: Skeleton Soldier
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -5845,6 +5815,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitName
+      value: Skeleton Soldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925669178094, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_SortingOrder
@@ -5968,6 +5968,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
+    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
+        type: 3}
+      propertyPath: m_Name
+      value: toonSkeleSoldierGigaMungus (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 6392410201379123322, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -6043,11 +6048,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6392410202167415422, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
-        type: 3}
-      propertyPath: m_Name
-      value: toonSkeleSoldierGigaMungus (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 6392410202167415423, guid: e2588e9aa0e54bb4b8c02f8a9e83e0e4,
         type: 3}
       propertyPath: teamNum
@@ -6087,30 +6087,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460823319089584, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
+      propertyPath: m_Name
+      value: toonSkeleArcherBald (1)
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994928, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -6167,10 +6147,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcherBald (1)
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -6197,6 +6192,11 @@ PrefabInstance:
       propertyPath: unitDeathSFX
       value: 
       objectReference: {fileID: 8300000, guid: 29fcf0e081c9c9d4680d5f8cc4400bab, type: 3}
+    - target: {fileID: 6143460823319089584, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6143460824210903192, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
       propertyPath: m_Controller
@@ -6241,36 +6241,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: teamNum
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -6331,6 +6301,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: teamNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821926805037719, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -6628,31 +6628,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -6713,6 +6688,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 7cef2b4a5356a1c43b7e40a281777c87, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b31a9fd66a94ca48bd3eb1e05d8b5a7, type: 3}
     - target: {fileID: 43821925669178094, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_SortingOrder
@@ -6833,25 +6833,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
+      propertyPath: m_Name
+      value: toonSkeleArcherBald (2)
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994928, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -6908,10 +6893,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcherBald (2)
+      propertyPath: m_textInfo.characterCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -7255,30 +7255,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533756627}
     m_Modifications:
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143460823319089584, guid: c2ed526b5fd4fa54689a090c14f45c5b,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 4
+      propertyPath: m_Name
+      value: toonSkeleArcherBald
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994928, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -7335,10 +7315,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6143460823710994929, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
-      propertyPath: m_Name
-      value: toonSkeleArcherBald
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143460822480442557, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6143460823710994931, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
@@ -7365,6 +7360,11 @@ PrefabInstance:
       propertyPath: unitDeathSFX
       value: 
       objectReference: {fileID: 8300000, guid: 29fcf0e081c9c9d4680d5f8cc4400bab, type: 3}
+    - target: {fileID: 6143460823319089584, guid: c2ed526b5fd4fa54689a090c14f45c5b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6143460824210903192, guid: c2ed526b5fd4fa54689a090c14f45c5b,
         type: 3}
       propertyPath: m_Controller
@@ -7482,36 +7482,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1943374291}
     m_Modifications:
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: teamNum
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: soundManager
-      value: 
-      objectReference: {fileID: 1821686799}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitSelectSFX
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSelectSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitAttackSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
-    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
-        type: 3}
-      propertyPath: unitDeathSFX
-      value: 
-      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821925479923859, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_Name
@@ -7572,6 +7542,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: teamNum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: soundManager
+      value: 
+      objectReference: {fileID: 1821686799}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitSelectSFX
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSelectSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: ef792467c43fa7c4ebfbd2041b3b4a25, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitAttackSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 17eb3377798be23449a3223953b2f267, type: 3}
+    - target: {fileID: 43821925479923858, guid: b0bdf9ffe1174844994823ea6aea5a8e,
+        type: 3}
+      propertyPath: unitDeathSFX
+      value: 
+      objectReference: {fileID: 8300000, guid: 1eb9c871531991f40bc3bfdd34f95ed9, type: 3}
     - target: {fileID: 43821926805037719, guid: b0bdf9ffe1174844994823ea6aea5a8e,
         type: 3}
       propertyPath: m_textInfo.characterCount
