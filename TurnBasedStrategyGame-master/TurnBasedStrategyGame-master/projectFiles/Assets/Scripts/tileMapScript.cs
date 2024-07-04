@@ -1533,7 +1533,7 @@ public class tileMapScript : MonoBehaviour
 
     // CUSTOM ~Adi
     // move unit and finalize, dengan x dan y
-    public IEnumerator moveUnitAndFinalize(int x, int y)
+    public IEnumerator moveUnitAndFinalize(int x, int y, GameObject attackerUnit, GameObject attackedUnit)
     {
         disableHighlightUnitRange();
         disableUnitUIRoute();
@@ -1546,6 +1546,7 @@ public class tileMapScript : MonoBehaviour
 
         // Finalize Option
         finalizeOption(x, y);
+        StartCoroutine(BMS.attack(attackerUnit, attackedUnit));
         GMS.endTurn();
     }
 
@@ -1576,8 +1577,31 @@ public class tileMapScript : MonoBehaviour
                 defaultIndex = i;
             } else if (this.tempState[x][y][0][0] == int_type){
                 this.tempState[x][y][0][0] = 0;
+                Debug.Log(tile.name + " not move");
             }
         }
+
+        StringBuilder sb = new StringBuilder();
+        sb.Append("{\n");
+        for (int i = 0; i < 10; i++)
+        {
+            
+            sb.Append("{");
+            for (int j = 0; j < 10; j++)
+            {
+                
+                sb.Append("{{" + tempState[i][j][0][0] + "},{");
+                if (tempState[i][j][1].Length > 1) {
+                    sb.Append(tempState[i][j][1][0] + ", " + tempState[i][j][1][1] + "}}\t");
+                } else {
+                    sb.Append("}}\t");
+                }
+            }
+            sb.Append("}\n");
+        }
+        sb.Append("\n}");
+        Debug.Log("BOARDDD hasil IndexAIToMove:");
+        Debug.Log(sb.ToString());
 
         return defaultIndex;
     }
@@ -1603,7 +1627,12 @@ public class tileMapScript : MonoBehaviour
         {
             sb.Append("{");
             for (int j = 0; j < 10; j++){
-                sb.Append("{{" + this.tempState[i][j][0][0] + "},{}}, \t");
+                sb.Append("{{" + tempState[i][j][0][0] + "},{");
+                if (tempState[i][j][1].Length > 1) {
+                    sb.Append(tempState[i][j][1][0] + ", " + tempState[i][j][1][1] + "}}\t");
+                } else {
+                    sb.Append("}}\t");
+                }
             }
             sb.Append("}\n");
         }
@@ -1623,10 +1652,8 @@ public class tileMapScript : MonoBehaviour
                     res[0] = j; //x
                     res[1] = i; //y
 
-                    if (tempState[i][j][1][0] != null){
                     res[2] = tempState[i][j][1][0];
                     res[3] = tempState[i][j][1][1];
-                    }
                     
                     return res;
                 }
@@ -1670,8 +1697,6 @@ public class tileMapScript : MonoBehaviour
                 break;
             }
         }
-        Debug.LogError("Attacked Unit Not Found");
-        Debug.LogError("Attacked unit location: " + x + ", " + y);
         return target;
     }
         
@@ -1696,7 +1721,7 @@ public class tileMapScript : MonoBehaviour
         Debug.Log("BOARDDD masuk minmax:");
         Debug.Log(sb.ToString());
 
-        test_state = tempMinMax.MinimaxAlgorithm(GMS.boardToState(), 2, true, map, 10);
+        test_state = tempMinMax.MinimaxAlgorithm(test_state, 2, true, map, 10);
 
         sb = new StringBuilder();
         sb.Append("{\n");
@@ -1708,7 +1733,6 @@ public class tileMapScript : MonoBehaviour
             {
                 
                 sb.Append("{{" + test_state[i][j][0][0] + "},{");
-                Debug.Log(test_state[i][j][1].Length);
                 if (test_state[i][j][1].Length > 1) {
                     sb.Append(test_state[i][j][1][0] + ", " + test_state[i][j][1][1] + "}}\t");
                 } else {
@@ -1737,6 +1761,7 @@ public class tileMapScript : MonoBehaviour
             int idx_r = indexAItoMove(test_state);
             Debug.Log("idx r: " + idx_r);
 
+            // Kalau gak nemu yang jalan ataupun nyerang, langsung skip
             if (idx_r == -99) {
                 GMS.endTurn();
                 return;
@@ -1777,17 +1802,20 @@ public class tileMapScript : MonoBehaviour
                     moveUnit();
 
                     Debug.Log("sblm move");
-                    StartCoroutine(moveUnitAndFinalize(targetTileX, targetTileY)); //TODO: Bagian Coroutine ini, ngecall coroutine lain. Jadi harus dibuat 1 coroutine besar kayaknya
-                    //The moveUnit function calls a function on the unitScriptm when the movement is completed the finalization is called from that script.
-                    Debug.Log("sesudah move");
-                    if (locationIdx[2] != null && locationIdx[3] != null){
-                        GameObject attackedUnit = attTargetSearch(locationIdx[3], 9+(-1*locationIdx[2]));
+                    // if (locationIdx[2] != null && locationIdx[3] != null){
+                        GameObject attackedUnit = attTargetSearch(locationIdx[2], 9+(-1*locationIdx[3]));
+                        Debug.Log("Att x board: " + locationIdx[2]);
+                        Debug.Log("Att y board: " + (9 + (-1*locationIdx[3])));
                         Debug.Log("sblm attack");
                         Debug.Log("nama attacker: " + selectedUnit);
                         Debug.Log("nama attacked: " + attackedUnit);
-                        BMS.battle(attackerUnit, attackedUnit);
+                        // BMS.battle(attackerUnit, attackedUnit);
                         Debug.Log("sesudah attack");
-                    }
+                    // }
+                    StartCoroutine(moveUnitAndFinalize(targetTileX, targetTileY, attackerUnit, attackedUnit)); //TODO: Bagian Coroutine ini, ngecall coroutine lain. Jadi harus dibuat 1 coroutine besar kayaknya
+                    //The moveUnit function calls a function on the unitScriptm when the movement is completed the finalization is called from that script.
+                    Debug.Log("sesudah move");
+                    
                 }
             }
             // //Finalize the movement
