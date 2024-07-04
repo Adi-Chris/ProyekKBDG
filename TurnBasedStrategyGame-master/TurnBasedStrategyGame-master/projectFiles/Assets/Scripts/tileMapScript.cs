@@ -91,6 +91,8 @@ public class tileMapScript : MonoBehaviour
 
     private int[][] map;
 
+    private bool mustAttack = false;
+
     [Header("Scripts")]
     [SerializeField] tempTempMinimax tempMinMax;
     [SerializeField] SoundManager soundManager;
@@ -161,6 +163,8 @@ public class tileMapScript : MonoBehaviour
         {
             if (selectedUnit != null)
             {
+                mustAttack = false;
+
                 if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0 && selectedUnit.GetComponent<UnitScript>().combatQueue.Count == 0)
                 {
                     if (selectedUnit.GetComponent<UnitScript>().unitMoveState != selectedUnit.GetComponent<UnitScript>().getMovementStateEnum(3))
@@ -397,6 +401,8 @@ public class tileMapScript : MonoBehaviour
             Debug.Log("clicked the same tile that the unit is standing on");
             currentPath = new List<Node>();
             selectedUnit.GetComponent<UnitScript>().path = currentPath;
+
+            mustAttack = true;
 
             return;
         }
@@ -668,12 +674,16 @@ public class tileMapScript : MonoBehaviour
 
                     if (unitOnTile == selectedUnit)
                     {
-                        disableHighlightUnitRange();
+                        // TODO: Disini harus checking, kalau same unit dan dia barusan move ke diri sendiri, tidak boleh
+                        if (!mustAttack) {
+                            disableHighlightUnitRange();
                         Debug.Log("ITS THE SAME UNIT JUST WAIT");
                         selectedUnit.GetComponent<UnitScript>().wait();
                         selectedUnit.GetComponent<UnitScript>().setWaitIdleAnimation();
                         selectedUnit.GetComponent<UnitScript>().setMovementState(3);
                         deselectUnit();
+                        }
+                        
 
 
                     }
@@ -699,12 +709,16 @@ public class tileMapScript : MonoBehaviour
 
                 if (unitClicked == selectedUnit)
                 {
-                    disableHighlightUnitRange();
+                    // TODO: Disini harus checking, kalau same unit dan dia barusan move ke diri sendiri, tidak boleh
+                    if (!mustAttack) {
+                        disableHighlightUnitRange();
                     Debug.Log("ITS THE SAME UNIT JUST WAIT");
                     selectedUnit.GetComponent<UnitScript>().wait();
                     selectedUnit.GetComponent<UnitScript>().setWaitIdleAnimation();
                     selectedUnit.GetComponent<UnitScript>().setMovementState(3);
                     deselectUnit();
+                    }
+                    
 
                 }
                 else if (unitClicked.GetComponent<UnitScript>().teamNum != selectedUnit.GetComponent<UnitScript>().teamNum && attackableTiles.Contains(graph[unitX, unitY]))
