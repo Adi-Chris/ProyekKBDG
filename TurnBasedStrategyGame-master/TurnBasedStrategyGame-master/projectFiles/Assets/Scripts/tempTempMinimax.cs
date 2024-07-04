@@ -8,7 +8,6 @@ public class tempTempMinimax : MonoBehaviour
     private const int MaxDepth = 3;
     [SerializeField] tempGenerateAllState generate;
 
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,47 +17,35 @@ public class tempTempMinimax : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public int[][][][] MinimaxAlgorithm(int[][][][] state, int depth, bool maximizingPlayer, int[][] map, int startUnitAmount)
+    public int[][][][] MinimaxAlgorithm(int[][][][] state, int depth, bool maximizingPlayer, int[][] map, int startUnitAmount, int alpha, int beta)
     {
-        
-        if (depth == 0 )
+        if (depth == 0)
         {
             return state; // Return the current state at leaf nodes or terminal states
         }
 
-        int[][][][] bestState = null; //null
+        int[][][][] bestState = null;
 
         if (maximizingPlayer)
         {
             int maxEval = int.MinValue;
             List<int[][][][]> allStatesMax = generate.generateAllStateMax(state, map, startUnitAmount);
-            // Debug.Log("jumlah all max state: " + allStatesMax.Count);
             foreach (var childState in allStatesMax)
             {
-                int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, false, map, startUnitAmount);
+                int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, false, map, startUnitAmount, alpha, beta);
                 int eval = EvaluateBoard(evalState);
                 if (eval > maxEval)
                 {
                     maxEval = eval;
                     bestState = childState;
-        //             StringBuilder sb = new StringBuilder();
-        // sb.Append("{\n");
-        // for (int i = 0; i < 10; i++)
-        // {
-            
-        //     sb.Append("{");
-        //     for (int j = 0; j < 10; j++)
-        //     {
-        //         sb.Append("{{" + bestState[i][j][0][0] + "},{"+ bestState[i][j][0][1] + ", " + bestState[i][j][0][2] + "}}\t");
-        //     }
-        //     sb.Append("}\n");
-        // }
-        // sb.Append("\n}");
-        // Debug.Log("Best State:");
-        // Debug.Log(sb.ToString());
+                }
+                alpha = Mathf.Max(alpha, eval);
+                if (beta <= alpha)
+                {
+                    break; // Beta cut-off
                 }
             }
         }
@@ -66,30 +53,19 @@ public class tempTempMinimax : MonoBehaviour
         {
             int minEval = int.MaxValue;
             List<int[][][][]> allStatesMin = generate.generateAllStateMin(state, map, startUnitAmount);
-            // Debug.Log("jumlah all min state: " + allStatesMin.Count);
             foreach (var childState in allStatesMin)
             {
-                int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, true, map, startUnitAmount);
+                int[][][][] evalState = MinimaxAlgorithm(childState, depth - 1, true, map, startUnitAmount, alpha, beta);
                 int eval = EvaluateBoard(evalState);
                 if (eval < minEval)
                 {
                     minEval = eval;
                     bestState = childState;
-        //             StringBuilder sb = new StringBuilder();
-        // sb.Append("{\n");
-        // for (int i = 0; i < 10; i++)
-        // {
-            
-        //     sb.Append("{");
-        //     for (int j = 0; j < 10; j++)
-        //     {
-        //         sb.Append("{{" + bestState[i][j][0][0] + "},{"+ bestState[i][j][0][1] + ", " + bestState[i][j][0][2] + "}}\t");
-        //     }
-        //     sb.Append("}\n");
-        // }
-        // sb.Append("\n}");
-        // Debug.Log("Best State:");
-        // Debug.Log(sb.ToString());
+                }
+                beta = Mathf.Min(beta, eval);
+                if (beta <= alpha)
+                {
+                    break; // Alpha cut-off
                 }
             }
         }
@@ -102,29 +78,6 @@ public class tempTempMinimax : MonoBehaviour
         // Implement logic to determine if the game is over.
         return false;
     }
-
-    //private int EvaluateBoard(int[][][][] state)
-    //{
-    //    // Implement your board evaluation logic here.
-    //    int score = 0;
-    //    for (int y = 0; y < state.Length; y++)
-    //    {
-    //        for (int x = 0; x < state[y].Length; x++)
-    //        {
-    //            int unitType = state[y][x][0][0];
-    //            int unitHP = state[y][x][0][1];
-    //            if (unitType > 0)
-    //            {
-    //                score += unitHP; // Positive score for AI units
-    //            }
-    //            else if (unitType < 0)
-    //            {
-    //                score -= unitHP; // Negative score for Human units
-    //            }
-    //        }
-    //    }
-    //    return score;
-    //}
 
     private int EvaluateBoard(int[][][][] state)
     {
