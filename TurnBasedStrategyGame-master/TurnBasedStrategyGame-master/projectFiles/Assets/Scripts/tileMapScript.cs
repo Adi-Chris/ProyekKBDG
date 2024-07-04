@@ -1735,7 +1735,7 @@ public class tileMapScript : MonoBehaviour
         Debug.Log("BOARDDD masuk minmax:");
         Debug.Log(sb.ToString());
 
-        test_state = tempMinMax.MinimaxAlgorithm(test_state, 4, true, map, 10, int.MinValue, int.MaxValue);
+        test_state = tempMinMax.MinimaxAlgorithm(test_state, 3, true, map, 10, int.MinValue, int.MaxValue);
 
         sb = new StringBuilder();
         sb.Append("{\n");

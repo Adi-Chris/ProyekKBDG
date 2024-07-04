@@ -59,7 +59,7 @@ public class tempGenerateAllState : MonoBehaviour
         // Debug.Log(sb.ToString());
         
         List<int[][][][]> successorStates = new List<int[][][][]>();
-        int unitAlreadyGenerated = 0;
+        // int unitAlreadyGenerated = 0;
 
         // int[y][x][z][a]
         // y menyatakan sumbu kebawah dari grid map
@@ -90,7 +90,7 @@ public class tempGenerateAllState : MonoBehaviour
                 if (startState[i][j][0][0] > 0)
                 {
                     // Jika ada unit milik AI (karena unit > 0)
-                    unitAlreadyGenerated++;
+                    // unitAlreadyGenerated++;
 
                     // Cek apakah unit ini masih hidup (HP > 0)
                     if (startState[i][j][0][1] > 0)
@@ -103,6 +103,7 @@ public class tempGenerateAllState : MonoBehaviour
                         {
                             int xMoveTo = tuple.Item1;
                             int yMoveTo = tuple.Item2;
+                            bool mustAttack = false;
 
                             // Copy start state
                             int[][][][] stateAfterMove = generate4dState(startState);
@@ -128,6 +129,11 @@ public class tempGenerateAllState : MonoBehaviour
                                 stateAfterMove[i][j][1] = new int[] { }; // Reset attack unit
 
                                 //successorStates.Add(stateAfterMove);
+                            } else {
+                                // Debug.LogWarning("Move to self, must attack later!");
+                                // Debug.LogWarning(i + " = " + yMoveTo);
+                                // Debug.LogWarning(j + " = " + xMoveTo);
+                                mustAttack = true;
                             }
 
                             // // Debug 
@@ -153,7 +159,7 @@ public class tempGenerateAllState : MonoBehaviour
                             // }
 
 
-                            generatePossibleAttackMax(xMoveTo, yMoveTo, stateAfterMove, successorStates, map);
+                            generatePossibleAttackMax(xMoveTo, yMoveTo, stateAfterMove, successorStates, map, mustAttack);
                         }
                     }
 
@@ -510,7 +516,8 @@ public class tempGenerateAllState : MonoBehaviour
     }
 
 
-    void generatePossibleAttackMax(int unitPosX, int unitPosY, int[][][][] stateAfterMove, List<int[][][][]> successorStates, int[][] map)
+    // Note: mustAttack diset true ketika tidak berjalan. Jadi jika sudah tidak berjalan, harus menyerang
+    void generatePossibleAttackMax(int unitPosX, int unitPosY, int[][][][] stateAfterMove, List<int[][][][]> successorStates, int[][] map, bool mustAttack = false)
     {
         // Tuple<int, int>
         // tuple.Item1 dan tuple.Item2 berformat (g, h) yaitu posisi x dan posisi y di grid map yang bisa dituju oleh unit
@@ -527,7 +534,9 @@ public class tempGenerateAllState : MonoBehaviour
             case 1:
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                }
                 // Atas
                 AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, -1, stateAfterMove, map);
                 // Bawah
@@ -541,7 +550,9 @@ public class tempGenerateAllState : MonoBehaviour
                 // Archer
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                }
                 // Atas
                 AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, -2, stateAfterMove, map);
                 // Kanan Atas
@@ -563,7 +574,9 @@ public class tempGenerateAllState : MonoBehaviour
                 // GigaMungus
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                } 
                 // Atas
                 AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, -1, stateAfterMove, map);
                 // Bawah
@@ -577,7 +590,9 @@ public class tempGenerateAllState : MonoBehaviour
                 // BaldArcher
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                }
                 // Kiri
                 AddAttackPatternTilesMax(attackPatternIndex, unitPosX, unitPosY, -3, 0, stateAfterMove, map);
                 // Kiri atas
@@ -787,7 +802,7 @@ public class tempGenerateAllState : MonoBehaviour
     {
 
         List<int[][][][]> successorStates = new List<int[][][][]>();
-        int unitAlreadyGenerated = 0;
+        // int unitAlreadyGenerated = 0;
 
         // int[y][x][z][a]
         // y menyatakan sumbu kebawah dari grid map
@@ -818,7 +833,7 @@ public class tempGenerateAllState : MonoBehaviour
                 if (startState[i][j][0][0] < 0)
                 {
                     // Jika ada unit milik Human (karena unit < 0)
-                    unitAlreadyGenerated++;
+                    // unitAlreadyGenerated++;
                     // Cek apakah unit ini masih hidup (HP > 0)
                     if (startState[i][j][0][1] > 0)
                     {
@@ -830,6 +845,7 @@ public class tempGenerateAllState : MonoBehaviour
                         {
                             int xMoveTo = tuple.Item1;
                             int yMoveTo = tuple.Item2;
+                            bool mustAttack = false;
 
                             // Copy start state
                             int[][][][] stateAfterMove = generate4dState(startState);
@@ -852,6 +868,11 @@ public class tempGenerateAllState : MonoBehaviour
                                 stateAfterMove[i][j][0][1] = 0; // Reset HP
                                 stateAfterMove[i][j][0][2] = 0; // Reset Attack power
                                 stateAfterMove[i][j][1] = new int[] { }; // Reset attack unit
+                            } else {
+                                // Debug.LogWarning("Move to self, must attack later!");
+                                // Debug.LogWarning(i + " = " + yMoveTo);
+                                // Debug.LogWarning(j + " = " + xMoveTo);
+                                mustAttack = true;
                             }
 
                             // // Debug 
@@ -877,7 +898,7 @@ public class tempGenerateAllState : MonoBehaviour
                             // }
 
 
-                            generatePossibleAttackMin(xMoveTo, yMoveTo, stateAfterMove, successorStates, map);
+                            generatePossibleAttackMin(xMoveTo, yMoveTo, stateAfterMove, successorStates, map, mustAttack);
                         }
 
                     }
@@ -1207,7 +1228,7 @@ public class tempGenerateAllState : MonoBehaviour
 
     }
 
-    void generatePossibleAttackMin(int unitPosX, int unitPosY, int[][][][] stateAfterMove, List<int[][][][]> successorStates, int[][] map)
+    void generatePossibleAttackMin(int unitPosX, int unitPosY, int[][][][] stateAfterMove, List<int[][][][]> successorStates, int[][] map, bool mustAttack = false)
     {
         // Tuple<int, int>
         // tuple.Item1 dan tuple.Item2 berformat (g, h) yaitu posisi x dan posisi y di grid map yang bisa dituju oleh unit
@@ -1224,7 +1245,9 @@ public class tempGenerateAllState : MonoBehaviour
             case -1:
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                }
                 // Atas
                 AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, -1, stateAfterMove, map);
                 // Bawah
@@ -1238,7 +1261,9 @@ public class tempGenerateAllState : MonoBehaviour
                 // Archer
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                }
                 // Atas
                 AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, -2, stateAfterMove, map);
                 // Kanan Atas
@@ -1260,7 +1285,9 @@ public class tempGenerateAllState : MonoBehaviour
                 // GigaMungus
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                }
                 // Atas
                 AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, -1, stateAfterMove, map);
                 // Bawah
@@ -1274,7 +1301,9 @@ public class tempGenerateAllState : MonoBehaviour
                 // BaldArcher
                 // Add possible tile
                 // Tile ini sendiri
-                AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                if (!mustAttack) {
+                    AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, 0, 0, stateAfterMove, map, true);
+                }
                 // Kiri
                 AddAttackPatternTilesMin(attackPatternIndex, unitPosX, unitPosY, -3, 0, stateAfterMove, map);
                 // Kiri atas
