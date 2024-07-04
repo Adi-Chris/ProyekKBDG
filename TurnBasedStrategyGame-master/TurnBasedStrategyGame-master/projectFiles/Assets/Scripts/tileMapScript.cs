@@ -1819,6 +1819,12 @@ public class tileMapScript : MonoBehaviour
 
                 mouseClickToSelectUnitV2(targetTileX, targetTileY, selectedUnit);
                 
+                StartCoroutine(aiPath(targetTileX, targetTileY));
+                // waiter5();
+                // Thread.Sleep(5000);
+                // disableUnitUIRoute();
+                // GMS.unitPathExists=false;
+                
                 if (selectTileToMoveTo(targetTileX, targetTileY))
                 {
                     //selectedSound.Play();
@@ -1855,6 +1861,46 @@ public class tileMapScript : MonoBehaviour
         //}
         Debug.Log("Tes Akhir");
     }
+
+    public IEnumerator aiPath(int posx, int posy){
+        GMS.unitPathToCursor = GMS.generateCursorRouteTo(posx, posy);
+
+        int rtx = posx;
+        int rty = posy;
+        Debug.Log("pos x: " + posx);
+        Debug.Log("pos y: " + posy);
+
+        if (GMS.unitPathToCursor.Count != 0)
+        {
+            for (int i = 0; i < GMS.unitPathToCursor.Count; i++)
+            {
+                int nodeX = GMS.unitPathToCursor[i].x;
+                int nodeY = GMS.unitPathToCursor[i].y;
+
+                if (i == 0)
+                {
+                    GameObject quadToUpdate = quadOnMapForUnitMovementDisplay[nodeX, nodeY];
+                    quadToUpdate.GetComponent<Renderer>().material = GMS.UICursor;
+                }
+                else if (i != 0 && (i + 1) != GMS.unitPathToCursor.Count)
+                {
+                    //This is used to set the indicator for tiles excluding the first/last tile
+                    GMS.setCorrectRouteWithInputAndOutput(nodeX, nodeY, i);
+                }
+                else if (i == GMS.unitPathToCursor.Count - 1)
+                {
+                    //This is used to set the indicator for the final tile;
+                    GMS.setCorrectRouteFinalTile(nodeX, nodeY, i);
+                }
+
+                quadOnMapForUnitMovementDisplay[nodeX, nodeY].GetComponent<Renderer>().enabled = true;
+            }
+        }
+        GMS.unitPathExists = true;
+
+        yield return new WaitForSeconds(5);
+    }
+
 
     public int[][] GridMovementCostTo2DArray() {
         // Assume grid is 10x10

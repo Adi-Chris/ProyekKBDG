@@ -54,7 +54,7 @@ public class gameManagerScript : MonoBehaviour
 
     //Variables for unitPotentialMovementRoute
     List<Node> currentPathForUnitRoute;
-    List<Node> unitPathToCursor;
+    public List<Node> unitPathToCursor;
 
     public bool unitPathExists;
 
