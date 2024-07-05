@@ -117,7 +117,7 @@ public class tempTempMinimax : MonoBehaviour
                         // Add to the total score based on whether the unit belongs to AI or Human
                         if (unitType > 0) // AI unit
                         {
-                            score += unitScore/2;
+                            score += unitScore;
                         }
                         else if (unitType < 0) // Human unit
                         {
