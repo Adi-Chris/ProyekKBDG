@@ -1606,31 +1606,8 @@ public class tileMapScript : MonoBehaviour
                 defaultIndex = i;
             } else if (this.tempState[x][y][0][0] == int_type){
                 this.tempState[x][y][0][0] = 0;
-                Debug.Log(tile.name + " not move");
             }
         }
-
-        StringBuilder sb = new StringBuilder();
-        sb.Append("{\n");
-        for (int i = 0; i < 10; i++)
-        {
-            
-            sb.Append("{");
-            for (int j = 0; j < 10; j++)
-            {
-                
-                sb.Append("{{" + tempState[i][j][0][0] + "},{");
-                if (tempState[i][j][1].Length > 1) {
-                    sb.Append(tempState[i][j][1][0] + ", " + tempState[i][j][1][1] + "}}\t");
-                } else {
-                    sb.Append("}}\t");
-                }
-            }
-            sb.Append("}\n");
-        }
-        sb.Append("\n}");
-        Debug.Log("BOARDDD hasil IndexAIToMove:");
-        Debug.Log(sb.ToString());
 
         return defaultIndex;
     }
@@ -1650,25 +1627,6 @@ public class tileMapScript : MonoBehaviour
 // }
 
     private int[] AIMoveLoc(int index){
-        StringBuilder sb = new StringBuilder();
-        sb.Append("{\n");
-        for (int i = 0; i < 10; i++)
-        {
-            sb.Append("{");
-            for (int j = 0; j < 10; j++){
-                sb.Append("{{" + tempState[i][j][0][0] + "},{");
-                if (tempState[i][j][1].Length > 1) {
-                    sb.Append(tempState[i][j][1][0] + ", " + tempState[i][j][1][1] + "}}\t");
-                } else {
-                    sb.Append("}}\t");
-                }
-            }
-            sb.Append("}\n");
-        }
-        sb.Append("\n}");
-        Debug.Log("BOARDDD AI Move Loc:");
-        Debug.Log(sb.ToString());
-
         int[] res = new int[] {-99,-99, -99, -99};
 
         if (index < 0) {
@@ -1733,21 +1691,6 @@ public class tileMapScript : MonoBehaviour
     {
         int[][][][] test_state = GMS.boardToState();
 
-        StringBuilder sb = new StringBuilder();
-        sb.Append("{\n");
-        for (int i = 0; i < 10; i++)
-        {
-            sb.Append("{");
-            for (int j = 0; j < 10; j++)
-            {
-                sb.Append("{{" + test_state[i][j][0][0] + "},{}}, \t");
-            }
-            sb.Append("}\n");
-        }
-        sb.Append("\n}");
-        Debug.Log("BOARDDD masuk minmax:");
-        Debug.Log(sb.ToString());
-
         // Variables to handle thread result and completion status
         bool isMinimaxComplete = false;
         int[][][][] minimaxResult = null;
@@ -1769,34 +1712,9 @@ public class tileMapScript : MonoBehaviour
         // Use the result of the minimax algorithm
         test_state = minimaxResult;
 
-        sb = new StringBuilder();
-        sb.Append("{\n");
-        for (int i = 0; i < 10; i++)
-        {
-            sb.Append("{");
-            for (int j = 0; j < 10; j++)
-            {
-                sb.Append("{{" + test_state[i][j][0][0] + "},{");
-                if (test_state[i][j][1].Length > 1)
-                {
-                    sb.Append(test_state[i][j][1][0] + ", " + test_state[i][j][1][1] + "}}\t");
-                }
-                else
-                {
-                    sb.Append("}}\t");
-                }
-            }
-            sb.Append("}\n");
-        }
-        sb.Append("\n}");
-        Debug.Log("BOARDDD hasil minmax:");
-        Debug.Log(sb.ToString());
-
-        Debug.Log("Current Team: " + GMS.currentTeam);
         GMS.amountOfEnemyAIDoneMove = 0;
 
         int idx_r = indexAItoMove(test_state);
-        Debug.Log("idx r: " + idx_r);
 
         if (idx_r == -99)
         {
@@ -1812,17 +1730,8 @@ public class tileMapScript : MonoBehaviour
         int targetTileX = locationIdx[0];
         int targetTileY = 9 + (-1 * locationIdx[1]);
 
-        Debug.Log("index selected unit: " + idx_r);
-
-        Debug.Log("Loc Now X: " + selectedUnit.GetComponent<UnitScript>().x);
-        Debug.Log("Loc Now Y: " + selectedUnit.GetComponent<UnitScript>().y);
-
-        Debug.Log("Target Tile X: " + targetTileX);
-        Debug.Log("Target Tile Y: " + targetTileY);
-
         if (selectedUnit.GetComponent<UnitScript>().movementQueue.Count == 0)
         {
-            Debug.Log("heyyy taegetttt: " + targetTileX + ", " + targetTileY);
             Node nodeToCheck = graph[targetTileX, targetTileY];
 
             mouseClickToSelectUnitV2(targetTileX, targetTileY, selectedUnit);
@@ -1831,28 +1740,17 @@ public class tileMapScript : MonoBehaviour
 
             if (selectTileToMoveTo(targetTileX, targetTileY))
             {
-                Debug.Log("movement path has been located");
                 unitSelectedPreviousX = selectedUnit.GetComponent<UnitScript>().x;
                 unitSelectedPreviousY = selectedUnit.GetComponent<UnitScript>().y;
                 previousOccupiedTile = selectedUnit.GetComponent<UnitScript>().tileBeingOccupied;
                 selectedUnit.GetComponent<UnitScript>().setWalkingAnimation();
                 moveUnit();
 
-                Debug.Log("sblm move");
                 GameObject attackedUnit = attTargetSearch(locationIdx[2], 9 + (-1 * locationIdx[3]));
-                Debug.Log("Att x board: " + locationIdx[2]);
-                Debug.Log("Att y board: " + (9 + (-1 * locationIdx[3])));
-                Debug.Log("sblm attack");
-                Debug.Log("nama attacker: " + selectedUnit);
-                Debug.Log("nama attacked: " + attackedUnit);
 
-                Debug.Log("sesudah attack");
                 yield return StartCoroutine(moveUnitAndFinalize(targetTileX, targetTileY, attackerUnit, attackedUnit));
-                Debug.Log("sesudah move");
             }
         }
-
-        Debug.Log("Tes Akhir");
         yield break;
     }
 
@@ -1861,8 +1759,6 @@ public class tileMapScript : MonoBehaviour
 
         int rtx = posx;
         int rty = posy;
-        Debug.Log("pos x: " + posx);
-        Debug.Log("pos y: " + posy);
 
         if (GMS.unitPathToCursor.Count != 0)
         {

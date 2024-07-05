@@ -109,7 +109,6 @@ public class gameManagerScript : MonoBehaviour
         {
             if (!AITurnStarted)
             {
-                Debug.Log("Satuu");
                 AITurnStarted = true;
                 StartCoroutine(TMS.AITurn());
             }
@@ -397,8 +396,6 @@ public class gameManagerScript : MonoBehaviour
             int x = 9 + (-1 * (int)tile.GetComponent<UnitScript>().y);
             int y = (int)tile.GetComponent<UnitScript>().x;
 
-            Debug.Log("item team1 ke-" + (i + 1) + ": x(" + x + ") y(" + y + ")");
-
             int int_type = intType(tile.GetComponent<UnitScript>().unitName);
 
             state[x][y][0][0] = int_type * -1;
@@ -426,22 +423,6 @@ public class gameManagerScript : MonoBehaviour
         }
 
         //return state
-
-        StringBuilder sb = new StringBuilder();
-        sb.Append("{\n");
-        for (int i = 0; i < 10; i++)
-        {
-            
-            sb.Append("{");
-            for (int j = 0; j < 10; j++)
-            {
-                sb.Append("{{" + state[i][j][0][0] + "},{}}, \t");
-            }
-            sb.Append("}\n");
-        }
-        sb.Append("\n}");
-        Debug.Log("BOARDDD:");
-        Debug.Log(sb.ToString());
 
         return state;
     }
